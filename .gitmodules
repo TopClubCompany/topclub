@@ -1,0 +1,3 @@
+[submodule "protected/modules/ycm"]
+	path = protected/modules/ycm
+	url = https://github.com/shults/ycm.git
