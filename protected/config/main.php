@@ -3,6 +3,7 @@
 return array(
 	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 	'name' => 'TopClub Reserve',
+	'language' => 'ru',
 	'preload' => array('log'),
 	'import' => array(
 		'application.models.*',
@@ -30,8 +31,11 @@ return array(
 					)
 				),
 				array(
-					'label' => 'zalupa',
-					'model' => 'zalupa',
+					'label' => 'Настройки',
+					'url' => '#',
+					'items' => array(
+						array('label' => 'Языки', 'model' => 'Languages')
+					)
 				),
 			),
 			'uploadCreate' => true,
