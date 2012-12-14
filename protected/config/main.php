@@ -1,65 +1,86 @@
 <?php
+
 return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'TopClub Reserve',
-	'preload'=>array('log'),
-	'import'=>array(
+	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
+	'name' => 'TopClub Reserve',
+	'preload' => array('log'),
+	'import' => array(
 		'application.models.*',
 		'application.components.*',
 	),
-	'modules'=>array(
-		'ycm'=>array(
-            'username'=>'admin',
-            'password'=>'12345',
-            'registerModels'=>array(
-                'application.models.*',
-            ),
-            'uploadCreate'=>true, 
-            'redactorUpload'=>true,
-        ),
+	'modules' => array(
+		'ycm' => array(
+			'username' => 'admin',
+			'password' => '12345',
+			'registerModels' => array(
+				'application.models.*',
+			),
+			'menuItems' => array(
+				array(
+					'label' => 'Каталог',
+					'items' => array(
+						array(
+							'label' => 'Места',
+							'model' => 'Places'
+						),
+						array(
+							'label' => 'Кухни',
+							'model' => 'Kitchens',
+						)
+					)
+				),
+				array(
+					'label' => 'zalupa',
+					'model' => 'zalupa',
+				),
+			),
+			'uploadCreate' => true,
+			'redactorUpload' => true,
+			'defaultModel' => 'Places'
+		),
 	),
-	'components'=>array(
-		'user'=>array(
-			'allowAutoLogin'=>true,
+	'components' => array(
+		'user' => array(
+			'allowAutoLogin' => true,
 		),
 		// uncomment the following to enable URLs in path-format
-		
-		'urlManager'=>array(
-			'urlFormat'=>'path',
+
+		'urlManager' => array(
+			'urlFormat' => 'path',
 			'showScriptName' => false,
-			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+			'rules' => array(
+				'<controller:\w+>/<id:\d+>' => '<controller>/view',
+				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 			),
 		),
-		'db'=>array(
+		'db' => array(
 			'connectionString' => 'mysql:host=localhost;dbname=reserveyii',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '1111',
 			'charset' => 'utf8',
 		),
-		'errorHandler'=>array(
-			'errorAction'=>'site/error',
+		'errorHandler' => array(
+			'errorAction' => 'site/error',
 		),
-		'log'=>array(
-			'class'=>'CLogRouter',
-			'routes'=>array(
+		'log' => array(
+			'class' => 'CLogRouter',
+			'routes' => array(
 				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
+					'class' => 'CFileLogRoute',
+					'levels' => 'error, warning',
 				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
+			// uncomment the following to show log messages on web pages
+			/*
+			  array(
+			  'class'=>'CWebLogRoute',
+			  ),
+			 */
 			),
 		),
 	),
-	'params'=>array(
-		'adminEmail'=>'yarikkotsur@gmail.com',
+	'params' => array(
+		'adminEmail' => 'yarikkotsur@gmail.com',
 	),
 );
