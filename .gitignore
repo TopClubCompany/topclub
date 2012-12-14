@@ -1,7 +1,7 @@
 assets/
-!assets/js/
-!assets/img/
-!assets/css/
+!assets/js/*
+!assets/img/*
+!assets/css/*
 images/
 protected/runtime/
 themes/classic/views/
