@@ -103,7 +103,7 @@ class Kitchens extends CActiveRecord {
 		);
 	}
 
-	public function tabForm() {
+	public function tabedForm() {
 		$languages = Languages::model()->enabled()->findAll();
 		$tabForm = array();
 		foreach ($languages as $language) {
