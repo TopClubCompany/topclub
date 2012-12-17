@@ -22,6 +22,12 @@ class Kitchens extends CActiveRecord {
 		);
 	}
 	
+	public function beforeSave() {
+		print_r($_POST);
+		die;
+		return false;
+	}
+
 	public function attributeLabels() {
 		return array(
 			'kitchen_id' => Yii::t('ycmfields', 'id'),
@@ -55,13 +61,14 @@ class Kitchens extends CActiveRecord {
 
 	public function search() {
 		return new CActiveDataProvider($this, array(
-			
-		));
+				));
 	}
 
 	public function attributeWidgets() {
 		return array(
-			array('slug', 'textField')
+			array('slug', 'textField'),
+			array('desc.name', 'textField'),
+			array('desc.description', 'wysiwyg'),
 		);
 	}
 
@@ -83,18 +90,35 @@ class Kitchens extends CActiveRecord {
 			),
 		);
 	}
-	
+
 	public function defaultScope() {
 		return array(
-			
 		);
 	}
-	
+
 	public function relations() {
 		return array(
 			'desc' => array(self::HAS_MANY, 'KitchensDesc', array('kitchen_id' => 'kitchen_id'), 'order' => 'lang ASC'),
 			'desc_ru' => array(self::HAS_ONE, 'KitchensDesc', array('kitchen_id' => 'kitchen_id'), 'condition' => 'language_id=1')
 		);
+	}
+
+	public function tabForm() {
+		$languages = Languages::model()->enabled()->findAll();
+		$tabForm = array();
+		foreach ($languages as $language) {
+			if (!$model = KitchensDesc::model()->find('kitchen_id=:kitchen_id AND language_id=:language_id', array(':language_id' => $language->language_id, ':kitchen_id' => $this->kitchen_id)))
+				$model = KitchensDesc::model();
+			$tabForm[$language->name] = array(
+				'model' => $model,
+				'attributes' => array(
+					'language_id',
+					'name',
+					'description',
+				),
+			);
+		}
+		return $tabForm;
 	}
 
 }

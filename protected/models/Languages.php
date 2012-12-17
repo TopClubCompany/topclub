@@ -2,16 +2,11 @@
 
 class Languages extends CActiveRecord {
 
-	public $language_id,
-			$slug,
-			$name,
-			$enabled,
-			$default;
 	public $adminNames = array('Языки', 'язык', 'Языки'); // admin interface, singular, plural
 	public $downloadExcel = false; // Download Excel
 	public $downloadMsCsv = false; // Download MS CSV
 	public $downloadCsv = false;
-	
+
 	/**
 	 * 
 	 * @param String $className
@@ -20,13 +15,9 @@ class Languages extends CActiveRecord {
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
-	
-	function behaviors() {
-		return array(
-			'file' => array(
-				'class' => 'application.modules.ycm.behaviors.FileBehavior',
-			),
-		);
+
+	public function init() {
+		return parent::init();
 	}
 
 	public function attributeLabels() {
@@ -38,13 +29,13 @@ class Languages extends CActiveRecord {
 			'default' => 'Язык по-умолчанию'
 		);
 	}
-	
+
 	public function attributeWidgets() {
 		return array(
 			array('slug', 'textField'),
 			array('name', 'textField'),
 			array('enabled', 'boolean'),
-			array('default', 'wysiwyg')
+			array('default', 'boolean'),
 		);
 	}
 
@@ -53,7 +44,7 @@ class Languages extends CActiveRecord {
 			array('slug,name', 'required'),
 			array('slug', 'unique', 'attributeName' => 'slug'),
 			array('slug', 'match', 'pattern' => '/[a-z]{2,3}/i'),
-			array('enabled, default', 'safe')
+			array('default,enabled', 'safe'),
 		);
 	}
 
@@ -95,6 +86,14 @@ class Languages extends CActiveRecord {
 					'filter' => false
 				)
 			),
+		);
+	}
+
+	public function scopes() {
+		return array(
+			'enabled' => array(
+				'condition' => 'enabled=1'
+			)
 		);
 	}
 
