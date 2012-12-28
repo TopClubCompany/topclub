@@ -2,11 +2,6 @@
 
 class Languages extends CActiveRecord {
 
-	public $adminNames = array('Языки', 'язык', 'Языки'); // admin interface, singular, plural
-	public $downloadExcel = false; // Download Excel
-	public $downloadMsCsv = false; // Download MS CSV
-	public $downloadCsv = false;
-
 	/**
 	 * 
 	 * @param String $className
@@ -14,10 +9,6 @@ class Languages extends CActiveRecord {
 	 */
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
-	}
-
-	public function init() {
-		return parent::init();
 	}
 
 	public function attributeLabels() {

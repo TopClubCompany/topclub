@@ -2,7 +2,7 @@
 
 return array(
 	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-	'name' => 'TopClub Reserve',
+	'name' => 'TopClub',
 	'language' => 'ru',
 	'preload' => array('log'),
 	'import' => array(
@@ -25,8 +25,8 @@ return array(
 							'model' => 'Places'
 						),
 						array(
-							'label' => 'Кухни',
-							'model' => 'Kitchens',
+							'label' => 'Категории',
+							'url' => array('PlacesCategories/index')
 						)
 					)
 				),
@@ -34,7 +34,10 @@ return array(
 					'label' => 'Настройки',
 					'url' => '#',
 					'items' => array(
-						array('label' => 'Языки', 'model' => 'Languages')
+						array(
+							'label' => 'Языки',
+							'url' => array('Languages/index')
+						)
 					)
 				),
 			),
@@ -44,11 +47,6 @@ return array(
 		),
 	),
 	'components' => array(
-		'user' => array(
-			'allowAutoLogin' => true,
-		),
-		// uncomment the following to enable URLs in path-format
-
 		'urlManager' => array(
 			'urlFormat' => 'path',
 			'showScriptName' => false,
@@ -59,11 +57,13 @@ return array(
 			),
 		),
 		'db' => array(
-			'connectionString' => 'mysql:host=localhost;dbname=reserveyii',
+			'connectionString' => 'mysql:host=localhost;dbname=topclubyii',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '1111',
 			'charset' => 'utf8',
+			'enableProfiling' => true,
+			'enableParamLogging' => true,
 		),
 		'errorHandler' => array(
 			'errorAction' => 'site/error',
@@ -75,12 +75,9 @@ return array(
 					'class' => 'CFileLogRoute',
 					'levels' => 'error, warning',
 				),
-			// uncomment the following to show log messages on web pages
-			/*
-			  array(
-			  'class'=>'CWebLogRoute',
-			  ),
-			 */
+				array(
+					'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+				)
 			),
 		),
 	),
