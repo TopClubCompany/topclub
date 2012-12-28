@@ -26,7 +26,21 @@ class LanguagesController extends AdminController {
 	}
 
 	public function actionEdit() {
-		$this->render('edit');
+		if ($language_id = (int) $_GET[''] ?: null) {
+			$LanguageModel = LanguageModel::model()->findByPk($language_id);
+		} else {
+			$LanguageModel = new LanguageModel();
+		}
+		if ($_POST['Languages']) {
+			$LanguageModel->attributes = $_POST['Languages'];
+			if ($LanguageModel->validate()) {
+				
+			}
+			//Yii::app()->end();
+		}
+		$this->render('edit', array(
+			'model' => $LanguageModel
+		));
 	}
 
 }

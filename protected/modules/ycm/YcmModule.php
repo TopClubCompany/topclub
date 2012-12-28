@@ -174,7 +174,7 @@ class YcmModule extends CWebModule {
 	 * @param object $model Model
 	 * @param string $attribute Model attribute
 	 */
-	public function createWidget($form, $model, $attribute) {
+	public function createActiveWidget($form, $model, $attribute) {
 		$lang = Yii::app()->language;
 		if ($lang == 'en_us') {
 			$lang = 'en';
@@ -701,6 +701,26 @@ class YcmModule extends CWebModule {
 			}
 		}
 		return false;
+	}
+	
+	public function getButtons() {
+		$buttons = array();
+		if (Yii::app()->controller->buttons && !empty(Yii::app()->controller->buttons)) {
+			$buttons = Yii::app()->controller->buttons;
+		} else if (Yii::app()->controller->action->id == 'add' || Yii::app()->controller->action->id == 'edit') {
+			$buttons = Yii::app()->controller->getFormButtons();
+		} else if (Yii::app()->controller->action->id == 'index') {
+			$buttons = Yii::app()->controller->getIndexButtons();
+		}
+		$html = '';
+		foreach ($buttons as $button) {
+			$html .= Yii::app()->controller->widget('bootstrap.widgets.TbButton', $button, true);
+		}
+		if (!$html)
+			return null;
+		else {
+			return Yii::app()->controller->renderPartial($this->name . '.views._module._buttons', array('html' => $html), true);
+		}
 	}
 
 }

@@ -23,8 +23,44 @@ class AdminController extends CController {
 	 */
 	public $breadcrumbs = array();
 
+	/**
+	 * 
+	 */
+	public $buttons = array();
+
 	public function filters() {
 		return array('accessControl');
+	}
+
+	public function getIndexButtons() {
+		return array(
+			array(
+				'type' => 'primary',
+				'label' => Yii::t('YcmModule.ycm', 'Create'),
+				'url' => array(Yii::app()->controller->id . '/add'),
+			)
+		);
+	}
+
+	public function getFormButtons() {
+		return array(
+			array(
+				'buttonType' => 'submit',
+				'type' => 'primary',
+				'label' => Yii::t('YcmModule.ycm', 'Save'),
+				'htmlOptions' => array('name' => '_save', 'style' => 'margin-left:10px;')
+			),
+			array(
+				'buttonType' => 'submit',
+				'label' => Yii::t('YcmModule.ycm', 'Save and add another'),
+				'htmlOptions' => array('name' => '_addanother', 'style' => 'margin-left:10px;')
+			),
+			array(
+				'buttonType' => 'submit',
+				'label' => Yii::t('YcmModule.ycm', 'Save and continue editing'),
+				'htmlOptions' => array('name' => '_continue', 'style' => 'margin-left:10px;')
+			),
+		);
 	}
 
 }

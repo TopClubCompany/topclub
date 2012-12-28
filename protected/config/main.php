@@ -83,5 +83,5 @@ return array(
 	),
 	'params' => array(
 		'adminEmail' => 'yarikkotsur@gmail.com',
-	),
+	)
 );

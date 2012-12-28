@@ -1,5 +1,5 @@
-<pre>
-	<?
-		print_r(Yii::app()->user->role);
-	?>
-</pre>
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
+	'dataProvider' => Languages::model()->search()
+)); ?>
+
+<?php echo $this->module->getButtons(); ?>
