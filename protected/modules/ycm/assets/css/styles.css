@@ -31,3 +31,15 @@ body {
 .ui-timepicker-div dl dd.ui_tpicker_time {
 	padding-top: 0;
 }
+
+.red {
+	color: #900;
+}
+
+.green {
+	color: #090;
+}
+
+.blue {
+	color: #009;
+}

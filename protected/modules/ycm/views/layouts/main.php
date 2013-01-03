@@ -1,11 +1,3 @@
-<?php
-/* @var $this AdminController */
-
-$cs = Yii::app()->clientScript;
-$baseUrl = $this->module->assetsUrl;
-$cs->registerCoreScript('jquery');
-$cs->registerCssFile($baseUrl . '/css/styles.css');
-?>
 <!DOCTYPE html>
 <html lang="<?php echo Yii::app()->language; ?>">
 	<head>

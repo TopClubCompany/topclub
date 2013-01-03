@@ -21,6 +21,12 @@ class LanguageModel extends CActiveRecord {
 			'order' => 'Порядок отображения'
 		);
 	}
+	
+	public function beforeSave() {
+		if ($this->default == 1)
+			$this->updateAll(array('default' => 0));
+		return parent::beforeSave();
+	}
 
 	public function attributeWidgets() {
 		return array(

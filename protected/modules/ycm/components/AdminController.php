@@ -28,10 +28,6 @@ class AdminController extends CController {
 	 */
 	public $buttons = array();
 
-	public function filters() {
-		return array('accessControl');
-	}
-
 	public function getIndexButtons() {
 		return array(
 			array(
@@ -48,19 +44,27 @@ class AdminController extends CController {
 				'buttonType' => 'submit',
 				'type' => 'primary',
 				'label' => Yii::t('YcmModule.ycm', 'Save'),
-				'htmlOptions' => array('name' => '_save', 'style' => 'margin-left:10px;')
+				'htmlOptions' => array('name' => '_save', 'value' => '1', 'style' => 'margin-left:10px;')
 			),
 			array(
 				'buttonType' => 'submit',
 				'label' => Yii::t('YcmModule.ycm', 'Save and add another'),
-				'htmlOptions' => array('name' => '_addanother', 'style' => 'margin-left:10px;')
+				'htmlOptions' => array('name' => '_addanother', 'value' => '1', 'style' => 'margin-left:10px;')
 			),
 			array(
 				'buttonType' => 'submit',
 				'label' => Yii::t('YcmModule.ycm', 'Save and continue editing'),
-				'htmlOptions' => array('name' => '_continue', 'style' => 'margin-left:10px;')
+				'htmlOptions' => array('name' => '_continue', 'value' => '1', 'style' => 'margin-left:10px;')
 			),
 		);
+	}
+
+	public function init() {
+		$cs = Yii::app()->clientScript;
+		$baseUrl = $this->module->assetsUrl;
+		$cs->registerCoreScript('jquery');
+		$cs->registerCssFile($baseUrl . '/css/styles.css');
+		parent::init();
 	}
 
 }
