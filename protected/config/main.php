@@ -16,31 +16,7 @@ return array(
 			'registerModels' => array(
 				'application.models.*',
 			),
-			'menuItems' => array(
-				array(
-					'label' => 'Каталог',
-					'items' => array(
-						array(
-							'label' => 'Места',
-							'model' => 'Places'
-						),
-						array(
-							'label' => 'Категории',
-							'url' => array('PlacesCategories/index')
-						)
-					)
-				),
-				array(
-					'label' => 'Настройки',
-					'url' => '#',
-					'items' => array(
-						array(
-							'label' => 'Языки',
-							'url' => array('Languages/index')
-						)
-					)
-				),
-			),
+			'menuItems' => require dirname(__FILE__) . '/_ycm_menu_items.php',
 			'uploadCreate' => true,
 			'redactorUpload' => true,
 			'defaultModel' => 'Places'

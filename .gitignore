@@ -3,5 +3,6 @@
 !./assets/img/*
 !./assets/css/*
 images/
+!protected/runtime
 protected/runtime/
 themes/classic/views/
