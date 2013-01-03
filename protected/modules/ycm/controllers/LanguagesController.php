@@ -29,6 +29,9 @@ class LanguagesController extends AdminController {
 	}
 
 	public function actionIndex() {
+		$this->breadcrumbs = array(
+			Yii::t('YcmModule.languages', 'Languages')
+		);
 		$render = $_GET['ajax'] ? 'renderPartial' : 'render';
 		$this->$render('index');
 	}
@@ -38,10 +41,21 @@ class LanguagesController extends AdminController {
 	}
 
 	public function actionEdit() {
+		$actionName = strtolower($this->action->id);
 		if ($language_id = (int) $_GET['language_id'] ? : null) {
 			$LanguageModel = LanguageModel::model()->findByPk($language_id);
 		} else {
 			$LanguageModel = new LanguageModel();
+		}
+		
+		$this->breadcrumbs = array(
+			Yii::t('YcmModule.languages', 'Languages') => array('Languages/index'),
+		);
+		
+		if ($actionName == 'add') {
+			$this->breadcrumbs[] = Yii::t('YcmModule.languages', 'Add language');
+		} else {
+			$this->breadcrumbs[] = Yii::t('YcmModule.languages', 'Edit language');
 		}
 		if ($_POST['LanguageModel']) {
 			$LanguageModel->attributes = $_POST['LanguageModel'];
