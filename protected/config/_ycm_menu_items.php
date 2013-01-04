@@ -14,7 +14,6 @@ return array(
 			),
 			array(
 				'label' => 'Фильтры',
-				//'url' => array('Filters/index'),
 				'items' => array(
 					array(
 						'label' => 'Все фильтры',
@@ -23,6 +22,10 @@ return array(
 					array(
 						'label' => 'Добавить фильтр',
 						'url' => array('Filters/add'),
+					),
+					array(
+						'label' => 'Все свойства фильтров',
+						'url' => array('FiltersValues/index'),
 					),
 				)
 			)

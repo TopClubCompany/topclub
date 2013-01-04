@@ -7,7 +7,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 		array(
 			'name' => 'desc_' . $lang . '.name',
 			'type' => 'raw',
-			'value' => 'CHtml::link($data->desc_' . $lang . '->name, array("Filters/edit", "filter_id" => $data->filter_id))'
+			'value' => 'CHtml::link($data->desc_' . $lang . '->name, array("FiltersValues/index", "filter_id" => $data->filter_id))'
 		),
 		array(
 			'name' => 'desc_' . $lang . '.description',
@@ -15,7 +15,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 		'url',
 		array(
 			'class'=>'CButtonColumn',
-			'template' => '{update}{delete}',
+			'template' => '{view}{update}{delete}',
+			'viewButtonUrl' => 'CHtml::normalizeUrl(array("FiltersValues/index", "filter_id" => $data->filter_id))',
 			'updateButtonUrl' => 'CHtml::normalizeUrl(array("Filters/edit", "filter_id" => $data->filter_id))',
 			'deleteButtonUrl' => 'CHtml::normalizeUrl(array("Filters/delete", "filter_id" => $data->filter_id))',
 		),
