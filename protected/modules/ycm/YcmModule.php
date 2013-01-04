@@ -168,6 +168,74 @@ class YcmModule extends CWebModule {
 	}
 
 	/**
+	 * 
+	 * @param type $type
+	 * @param type $params
+	 * @return mixed
+	 */
+	public function createWidget($_params = array()) {
+		$params = array(
+			'return' => false,
+			'type' => 'textField',
+			'attribute' => null,
+			'value' => null,
+			'label' => null,
+			'model' => null,
+			'formElementName' => null
+		);
+		$params = array_merge($params, $_params);
+
+		if (!$params['attribute'])
+			throw new CException('Параметр "attribute" не указан при вызове ' . __METHOD__);
+
+		$params['formElementName'] = !$params['formElementName'] ? $params['attribute'] : $params['formElementName'];
+
+		if ($params['model'] && is_string($params['model'])) {
+			$params['model'] = new $params['model'];
+		} else {
+			if (!is_object($params['model'])) {
+				$params['model'] = null;
+			}
+		}
+
+		if (!$params['label']) {
+			if ($params['model']) {
+				$params['label'] = $params['model']->getAttributeLabel($params['attribute']);
+			} else {
+				$params['label'] = $params['attribute'];
+			}
+		}
+
+		switch ($params['type']) {
+			case 'wysiwyg':
+				$params['options'] = array(
+					'name' => $params['formElementName'],
+					'options' => array(
+						'lang' => Yii::app()->getLanguage(),
+						'buttons' => array(
+							'formatting', '|', 'bold', 'italic', 'deleted', '|',
+							'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
+							'image', 'link', '|', 'html',
+						),
+					),
+				);
+				if ($params['return'])
+					return Yii::app()->controller->renderPartial($this->name . '.views._module._wysiwyg', $params, $params['return']);
+				else
+					Yii::app()->controller->renderPartial($this->name . '.views._module._wysiwyg', $params, $params['return']);
+				break;
+
+			case 'textField':
+			default:
+				if ($params['return'])
+					return Yii::app()->controller->renderPartial($this->name . '.views._module._textField', $params, $params['return']);
+				else
+					Yii::app()->controller->renderPartial($this->name . '.views._module._textField', $params, $params['return']);
+				break;
+		}
+	}
+
+	/**
 	 * Create TbActiveForm widget.
 	 *
 	 * @param TbActiveForm $form
@@ -702,7 +770,7 @@ class YcmModule extends CWebModule {
 		}
 		return false;
 	}
-	
+
 	public function getButtons() {
 		$buttons = array();
 		if (Yii::app()->controller->buttons && !empty(Yii::app()->controller->buttons)) {
