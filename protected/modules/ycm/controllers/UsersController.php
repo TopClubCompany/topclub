@@ -29,6 +29,9 @@ class UsersController extends AdminController {
 	}
 
 	public function actionIndex() {
+		$this->breadcrumbs = array(
+			Yii::t('YcmModule.users', 'users')
+		);
 		$render = $_GET['ajax'] ? 'renderPartial' : 'render';
 		$this->$render('index');
 	}
@@ -38,12 +41,26 @@ class UsersController extends AdminController {
 	}
 
 	public function actionEdit() {
-	if ($user_id = (int) $_GET['user_id'] ? : null) {
-			$UsersModel = UsersModel::model()->findByPk($user_id);
-		} else {
-			$UsersModel = new UsersModel();
+		$actionId = strtolower(Yii::app()->controller->action->id);
+		$this->breadcrumbs = array(
+			Yii::t('YcmModule.users', 'users') => array('users/index'),
+		);
+		if ($actionId == 'add') {
+			$this->breadcrumbs = array_merge($this->breadcrumbs, array(
+				Yii::t('YcmModule.users', 'add_user')
+			));
+		} else if ($actionId == 'edit') {
+			$this->breadcrumbs = array_merge($this->breadcrumbs, array(
+				Yii::t('YcmModule.users', 'edit_user')
+			));
 		}
-        if ($_POST['UsersModel']) {
+		if ($user_id = (int) $_GET['user_id'] ? : null) {
+			$UsersModel = UsersModel::model()->findByPk($user_id);
+			unset($UsersModel->password);
+		} else {
+			$UsersModel = new UsersModel('formsubmit');
+		}
+		if ($_POST['UsersModel']) {
 			$UsersModel->attributes = $_POST['UsersModel'];
 			if ($UsersModel->validate()) {
 				$UsersModel->save(false);
@@ -63,9 +80,9 @@ class UsersController extends AdminController {
 			'model' => $UsersModel
 		));
 	}
-    
-    public function actionDelete(){
-        if ($user_id = (int) $_GET['user_id'] ?: null) {
+
+	public function actionDelete() {
+		if ($user_id = (int) $_GET['user_id'] ? : null) {
 			if (!$um = UsersModel::model()->findByPk($user_id)) {
 				throw new CHttpException(404);
 			}

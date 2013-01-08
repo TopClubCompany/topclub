@@ -36,7 +36,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=topclubyii',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => '1111',
+			'password' => '',
 			'charset' => 'utf8',
 			'enableProfiling' => true,
 			'enableParamLogging' => true,
@@ -56,6 +56,20 @@ return array(
 				)
 			),
 		),
+		'mailer' => array(
+			'class' => 'application.extensions.mailer.EMailer',
+			'transportType' => 'smtp',
+			'transportOptions' => array(
+				'host'=>'smtp.gmail.com',
+				'username'=>'tolyamba@topclub.kiev.ua',
+				'password'=>'Mykhalkiv89',
+				'port'=>'465',
+				'encryption'=>'ssl'
+			),
+			'viewPath' => 'application.views.mail',
+			'logging' => true,
+			'dryRun' => false
+		 ),
 	),
 	'params' => array(
 		'adminEmail' => 'yarikkotsur@gmail.com',

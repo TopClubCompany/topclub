@@ -7,13 +7,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'username',
         'first_name',
         'last_name',
-        'location',
-		'email',
-        'phone',
-        'vk_id',
-        'fb_id',
-        'tw_id',
-		array(
+       array(
 			'class'=>'CButtonColumn',
 			'template' => '{update}{delete}',
 			'updateButtonUrl' => 'CHtml::normalizeUrl(array("users/edit", "user_id" => $data->user_id))',
