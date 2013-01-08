@@ -15,7 +15,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=topclubyii',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => '',
+			'password' => '1111',
 			'charset' => 'utf8',
 		),
 		'log'=>array(

@@ -21,7 +21,7 @@ class m121228_143719_create_table_languages extends CDbMigration {
 		
 		$this->insert('languages', array(
 			'code' => 'ua',
-			'name' => 'Укр. мова.',
+			'name' => 'Українська',
 			'default' => 0,
 			'enabled' => 1
 		));
@@ -35,7 +35,7 @@ class m121228_143719_create_table_languages extends CDbMigration {
 		
 		$this->insert('languages', array(
 			'code' => 'ch',
-			'name' => 'China',
+			'name' => 'Китайский',
 			'default' => 0,
 			'enabled' => 0
 		));
