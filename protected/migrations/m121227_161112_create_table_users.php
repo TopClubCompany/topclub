@@ -20,10 +20,26 @@ class m121227_161112_create_table_users extends CDbMigration {
 		
 		$this->insert('users', array(
 			'role' => 'administrator',
-			'username' => 'root',
+			'username' => 'root@root.ua',
 			'password' => md5('root'),
 			'first_name' => 'root',
 			'last_name' => 'root',
+		));
+		
+		$this->insert('users', array(
+			'role' => 'moderator',
+			'username' => 'moderator@root.ua',
+			'password' => md5('moderator'),
+			'first_name' => 'moderator',
+			'last_name' => 'moderator',
+		));
+		
+		$this->insert('users', array(
+			'role' => 'editor',
+			'username' => 'editor@root.ua',
+			'password' => md5('editor'),
+			'first_name' => 'editor',
+			'last_name' => 'editor',
 		));
 	}
 
