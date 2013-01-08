@@ -13,6 +13,7 @@ class m121228_143719_create_table_languages extends CDbMigration {
 		), ' ENGINE=InnoDB COLLATE=utf8_general_ci');
 		
 		$this->insert('languages', array(
+			'language_id' => 1,
 			'code' => 'ru',
 			'name' => 'Русский',
 			'default' => 1,
@@ -20,6 +21,7 @@ class m121228_143719_create_table_languages extends CDbMigration {
 		));
 		
 		$this->insert('languages', array(
+			'language_id' => 2,
 			'code' => 'ua',
 			'name' => 'Українська',
 			'default' => 0,
@@ -27,6 +29,7 @@ class m121228_143719_create_table_languages extends CDbMigration {
 		));
 		
 		$this->insert('languages', array(
+			'language_id' => 3,
 			'code' => 'en',
 			'name' => 'English',
 			'default' => 0,
@@ -34,6 +37,7 @@ class m121228_143719_create_table_languages extends CDbMigration {
 		));
 		
 		$this->insert('languages', array(
+			'language_id' => 4,
 			'code' => 'ch',
 			'name' => 'Китайский',
 			'default' => 0,
