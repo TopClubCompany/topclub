@@ -11,6 +11,7 @@ class m121227_161112_create_table_users extends CDbMigration {
 			'first_name' => 'VARCHAR(50) NOT NULL',
 			'last_name' => 'VARCHAR(50) NOT NULL',
 			'location' => 'VARCHAR(50)',
+			'email' => 'VARCHAR(50)',
 			'photo_file_name' => 'CHAR(100)', // md5(microtime()) . '.' . $extension
 			'phone' => 'VARCHAR(15)',
 			'vk_id' => 'BIGINT UNSIGNED UNIQUE',

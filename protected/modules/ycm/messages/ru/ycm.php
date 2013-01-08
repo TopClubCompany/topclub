@@ -25,7 +25,7 @@ return array(
 	'CSV' => 'CSV',
 	'Changes saved.' => 'Изменения сохранены',
 	'Changes saved. You can add a new entry.' => 'Изменения сохранены. Вы можете добавить новую запись.',
-	'Choose {name}' => 'Choose {name}',
+	'Choose {name}' => 'Выберите {name}',
 	'Could not create folder "{dir}". Make sure "uploads" folder is writable.' => 'Could not create folder "{dir}". Make sure "uploads" folder is writable.',
 	'Could not create upload folder "{dir}".' => 'Could not create upload folder "{dir}".',
 	'Could not delete entry "{name}" with an ID "{pk}".' => '',

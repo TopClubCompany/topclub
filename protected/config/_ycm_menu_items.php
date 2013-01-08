@@ -39,6 +39,20 @@ return array(
 				'label' => 'Языки',
 				'url' => array('Languages/index')
 			)
-		)
+		)		
+	),
+	array(
+		'label' => 'Пользователи',
+		'url' => '#',
+		'items' => array(
+			array(
+				'label' => 'Все',
+				'url' => array('users/index')
+			),
+			array(
+				'label' => 'Добавить',
+				'url' => array('users/add')
+			)
+		)		
 	),
 );
