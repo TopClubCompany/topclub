@@ -34,6 +34,9 @@ class AdminController extends CController {
 				'type' => 'primary',
 				'label' => Yii::t('YcmModule.ycm', 'Create'),
 				'url' => array(Yii::app()->controller->id . '/add'),
+				'htmlOptions' => array(
+					'id' => 'create-button'
+				)
 			)
 		);
 	}

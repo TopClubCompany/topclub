@@ -437,7 +437,7 @@ class YcmModule extends CWebModule {
 
 			case 'dropDown':
 				echo $form->dropDownListRow($model, $attribute, $this->getAttributeChoices($model, $attribute), array(
-					'empty' => Yii::t('YcmModule.ycm', 'Choose {name}', array('{name}' => $model->getAttributeLabel($attribute))
+						'empty' => Yii::t('YcmModule.ycm', 'Choose {name}', array('{name}' => $model->getAttributeLabel($attribute))
 					),
 					'class' => 'span5')
 				);
