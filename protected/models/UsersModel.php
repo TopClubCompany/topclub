@@ -63,15 +63,11 @@ class UsersModel extends CActiveRecord {
 				$this->password = md5($this->password);
 		}
 		if (isset($this->password) && $this->password != '') {
-			$this->checkPassword();
+			$this->password = md5($this->password);
 		}
 		return parent::beforeSave();
 	}
 	
-	private function checkPassword() {
-		
-	}
-
 	public function attributeWidgets() {
 		return array(
 			array('user_id', 'textField'),
