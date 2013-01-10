@@ -26,23 +26,42 @@ class FiltersValuesModel extends CActiveRecord {
 			'filter_id' => Yii::t('YcmModule.filters', 'Filter'),
 		);
 	}
-	
+
 	public function attributeWidgets() {
 		return array(
 			array('url', 'textField'),
 			array('filter_id', 'dropDown'),
 		);
 	}
-	
+
 	public function filter_idChoices() {
 		return CHtml::listData(FiltersModel::model()->findAll(), 'filter_id', 'url');
 	}
-	
+
 	public function rules() {
 		return array(
-			array('filter_id', 'safe'),
+			array('value_id, filter_id', 'safe'),
 			array('url', 'required')
 		);
+	}
+
+	public function relations() {
+		$languageRelations = array();
+		foreach (LanguageModel::model()->enabled()->findAll() as $language) {
+			$languageRelations[$language->code] = array(
+				self::HAS_ONE,
+				'FiltersValuesDescModel',
+				array('value_id' => 'value_id'),
+				'condition' => 'language_id=:language_id',
+				'params' => array(
+					':language_id' => (int) $language->language_id
+				)
+			);
+		}
+
+		return array_merge(array(
+					'filter' => array(self::BELONGS_TO, 'FiltersModel', array('filter_id' => 'filter_id')),
+						), $languageRelations);
 	}
 
 	public function search() {
@@ -53,12 +72,29 @@ class FiltersValuesModel extends CActiveRecord {
 				$criteria->addCondition('filter_id=:filter_id');
 				$criteria->params = array_merge($criteria->params, array(
 					':filter_id' => $filter_id
-				));
+						));
 			}
 		}
 		return new CActiveDataProvider($this, array(
 					'criteria' => $criteria
 				));
+	}
+
+	/*public function defaultScope() {
+		if ($lang === null)
+			$lang = Yii::app()->getLanguage();
+		return array(
+			'with' => $lang
+		);
+	}*/
+
+	public function lang($lang = null) {
+		if ($lang === null)
+			$lang = Yii::app()->getLanguage();
+		$this->getDbCriteria()->mergeWith(array(
+			'with' => $lang
+		));
+		return $this;
 	}
 
 }

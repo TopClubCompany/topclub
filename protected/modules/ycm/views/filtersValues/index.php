@@ -24,10 +24,16 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 			'name' => 'value_id',
 			'filter' => false
 		),
+		/*array(
+			'name' => 'value_id',
+			'value' => '$data->' . $lang . '->name'
+		),*/
 		array(
 			'name' => 'filter_id',
 			'filter' => CHtml::activeDropDownList($FiltersValuesModel, 'filter_id',  array('' => Yii::t('YcmModule.filters', '-=Select Filter=-')) + CHtml::listData(FiltersModel::model()->findAll(), 'filter_id', 'desc_' . $lang . '.name')),
-		)
+			'value' => '$data->filter->desc_' . $lang . '->name'
+		),
+		
 	)
 ));
 echo $this->module->getButtons();
