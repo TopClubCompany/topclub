@@ -47,21 +47,29 @@ class FiltersValuesModel extends CActiveRecord {
 
 	public function relations() {
 		$languageRelations = array();
-		foreach (LanguageModel::model()->enabled()->findAll() as $language) {
+		$languages = LanguageModel::model()->enabled()->findAll();
+		foreach ($languages as $language) {
 			$languageRelations[$language->code] = array(
 				self::HAS_ONE,
 				'FiltersValuesDescModel',
 				array('value_id' => 'value_id'),
 				'condition' => 'language_id=:language_id',
 				'params' => array(
-					':language_id' => (int) $language->language_id
+					':language_id' => $language->language_id
 				)
 			);
 		}
-
+		
 		return array_merge(array(
-					'filter' => array(self::BELONGS_TO, 'FiltersModel', array('filter_id' => 'filter_id')),
-						), $languageRelations);
+			'filter' => array(self::BELONGS_TO, 'FiltersModel', array('filter_id' => 'filter_id')),
+		),
+				$languageRelations);
+		
+		/*echo '<pre>';
+		print_r(array_merge(array(
+				'filter' => array(self::BELONGS_TO, 'FiltersModel', array('filter_id' => 'filter_id')),
+				), $languageRelations));*/
+		//	DIE;
 	}
 
 	public function search() {
