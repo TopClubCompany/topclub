@@ -1,19 +1,12 @@
 <?php
 
-class UsersTopclubCommand extends CConsoleCommand {
+class ImportCommand extends CConsoleCommand {
 
-	public function actionIndex() {
-		$connection = new CDbConnection('mysql:host=89.184.69.32;dbname=topclub_3', 'u_sequel_pro', '900dBrPP');
-		$e = $connection->active = true;
+	public function actionUsers() {
 		$q = "SELECT em.member_id, em.facebook_connect_user_id, em.vk_id, em.group_id,  em.password, em.email, em.location, em.bday_d, em.bday_m, em.bday_y, em.avatar_filename, em.photo_filename, em.ip_address, em.join_date, emd.m_field_id_1 AS twitter, emd.m_field_id_3 AS sex, emd.m_field_id_4 AS last_name, emd.m_field_id_6 AS about_tc, emd.m_field_id_7 AS status, emd.m_field_id_9 AS facebook, emd.m_field_id_10 AS city, emd.m_field_id_11 AS vkontakte, emd.m_field_id_12 AS phone, emd.m_field_id_15 AS first_name FROM  `exp_members` AS em JOIN exp_member_data AS emd ON em.member_id=emd.member_id WHERE rest_discounts != 1 ORDER BY em.member_id";
-		$users = $connection->createCommand($q)->queryAll();
-		/* for($i=0; $i< count($dataReader);$i++)
-		  print_r($dataReader[$i]); */
+		$users = Yii::app()->db2->createCommand($q)->queryAll();
 		$i = 0;
-		//while(($row=$dataReader->read())!==false) { … }
-		// используем foreach для построчного обхода данных
 		foreach ($users as $user) {
-			//print_r($row['password']);
 			if (!$first_name = $user['first_name'])
 				$first_name = '-';
 			if (!$last_name = $user['last_name'])
@@ -45,18 +38,20 @@ class UsersTopclubCommand extends CConsoleCommand {
 					'location' => $user["location"],
 					'vk_id' => $vk,
 					'fb_id' => $fb,
-					//'tw_id' => $tw,
 					'birth' => $user["bday_y"] . "-" . $user["bday_m"] . "-" . $user["bday_d"],
 					'sex' => $sex,
 					'ip_address' => $user["ip_address"],
 					'join_date' => $user["join_date"],
 					'status' => $user["status"]
 				));
+				$i++;
+				echo "User #{$i} imported\n";
 			}
 		}
-		// получаем все строки разом в виде массива
-		//$rows=$dataReader->readAll();
-		//~/topclub.loc/htdocs/protected $ ./yiic userstopclub index
+	}
+	
+	public function actionKitchens() {
+		echo "Begin importing kitchens ...\n";
 	}
 
 }
