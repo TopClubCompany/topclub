@@ -18,6 +18,14 @@ return array(
 			'password' => '',
 			'charset' => 'utf8',
 		),
+		'db2'=>array(
+			'class'=>'CDbConnection',
+			'connectionString' => 'mysql:host=89.184.69.32;dbname=topclub_3',
+			'emulatePrepare' => true,
+			'username' => 'u_sequel_pro',
+			'password' => '900dBrPP',
+			'charset' => 'utf8',
+		),
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(

@@ -41,6 +41,15 @@ return array(
 			'enableProfiling' => true,
 			'enableParamLogging' => true,
 		),
+		'cache'=>array(
+            'class'=>'system.caching.CMemCache',
+            'servers'=>array(
+                //array('host'=>'localost', 'port'=>11211, 'weight'=>60),
+                //array('host'=>'localost', 'port'=>11211, 'weight'=>40),
+				array('host'=>'localhost', 'port'=>11211),
+            ),
+			'useMemcached' => true,
+        ),
 		'errorHandler' => array(
 			'errorAction' => 'site/error',
 		),

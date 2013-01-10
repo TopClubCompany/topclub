@@ -38,6 +38,10 @@ return array(
 			array(
 				'label' => 'Языки',
 				'url' => array('Languages/index')
+			),
+			array(
+				'label' => 'Мой профиль',
+				'url' => array('profile/edit')
 			)
 		)		
 	),

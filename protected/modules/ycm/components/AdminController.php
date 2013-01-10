@@ -61,7 +61,7 @@ class AdminController extends CController {
 			),
 		);
 	}
-
+	
 	public function init() {
 		$cs = Yii::app()->clientScript;
 		$baseUrl = $this->module->assetsUrl;
