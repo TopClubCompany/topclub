@@ -6,3 +6,4 @@ images/
 !protected/runtime
 protected/runtime/
 themes/classic/views/
+protected/config/_main_db.php

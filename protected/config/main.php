@@ -32,24 +32,19 @@ return array(
 				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 			),
 		),
-		'db' => array(
-			'connectionString' => 'mysql:host=localhost;dbname=topclubyii',
+		'db' => array_merge(array(
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
 			'charset' => 'utf8',
 			'enableProfiling' => true,
 			'enableParamLogging' => true,
-		),
-		'cache'=>array(
-            'class'=>'system.caching.CMemCache',
-            'servers'=>array(
-                //array('host'=>'localost', 'port'=>11211, 'weight'=>60),
-                //array('host'=>'localost', 'port'=>11211, 'weight'=>40),
-				array('host'=>'localhost', 'port'=>11211),
-            ),
+				), include(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_main_db.php')),
+		'cache' => array(
+			'class' => 'system.caching.CMemCache',
+			'servers' => array(
+				array('host' => 'localhost', 'port' => 11211),
+			),
 			'useMemcached' => true,
-        ),
+		),
 		'errorHandler' => array(
 			'errorAction' => 'site/error',
 		),
@@ -69,16 +64,16 @@ return array(
 			'class' => 'application.extensions.mailer.EMailer',
 			'transportType' => 'smtp',
 			'transportOptions' => array(
-				'host'=>'smtp.gmail.com',
-				'username'=>'tolyamba@topclub.kiev.ua',
-				'password'=>'Mykhalkiv89',
-				'port'=>'465',
-				'encryption'=>'ssl'
+				'host' => 'smtp.gmail.com',
+				'username' => 'tolyamba@topclub.kiev.ua',
+				'password' => 'Mykhalkiv89',
+				'port' => '465',
+				'encryption' => 'ssl'
 			),
 			'viewPath' => 'application.views.mail',
 			'logging' => true,
 			'dryRun' => false
-		 ),
+		),
 	),
 	'params' => array(
 		'adminEmail' => 'yarikkotsur@gmail.com',
