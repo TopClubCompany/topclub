@@ -790,5 +790,4 @@ class YcmModule extends CWebModule {
 			return Yii::app()->controller->renderPartial($this->name . '.views._module._buttons', array('html' => $html), true);
 		}
 	}
-
 }

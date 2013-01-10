@@ -58,4 +58,5 @@ return array(
 	'Save and add another' => 'Сохранить и создать еще',
 	'Save and continue editing'=> 'Сохранить и продолжать редактировать',
 	'Username' => 'Имя пользователя',
+	'Update' => 'Обновить',
 );

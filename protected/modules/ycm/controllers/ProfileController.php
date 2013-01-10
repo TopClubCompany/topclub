@@ -22,7 +22,8 @@ class ProfileController extends AdminController {
 			)
 		);
 	}
-
+	
+	
 	/*public function actionIndex() {
 		$this->breadcrumbs = array(
 			Yii::t('YcmModule.profile', 'my_profile')
@@ -41,30 +42,34 @@ class ProfileController extends AdminController {
 			Yii::t('YcmModule.profile', 'my_profile') => array('profile/edit'),
 		);
 		
+		$this->buttons = array(
+			array(
+				'buttonType' => 'submit',
+				'label' => Yii::t('YcmModule.ycm', 'Update'),
+				'url' => array(Yii::app()->controller->id . '/edit'),
+				'htmlOptions' => array('name' => '_update', 'value' => '1', 'style' => 'margin-left:10px;')
+			)
+		);
 		
 		$user_id = Yii::app()->user->id;
-		$ProfileModel = ProfileModel::model()->findByPk($user_id);
-		$ProfileModel->setScenario('formsubmit');
-		unset($ProfileModel->password);
-		
-		if ($_POST['ProfileModel']) {
-			$ProfileModel->attributes = $_POST['ProfileModel'];
-			if ($ProfileModel->validate()) {
-				$ProfileModel->save(false);
-				if ($_POST['_save']) {
-					$redirect = array('profile/index');
-				} else if ($_POST['_addanother']) {
-					$redirect = array('profile/add');
-				} else if ($_POST['_continue']) {
-					$redirect = array('profile/edit', 'user_id' => $ProfileModel->user_id);
-				} else {
-					$redirect = array('profile/index');
+		$UsersModel = UsersModel::model()->findByPk($user_id);
+		$UsersModel->setScenario('formupdate');
+		unset($UsersModel->password);
+		if ($_POST['UsersModel']) {
+			$UsersModel->attributes = $_POST['UsersModel'];
+
+			if ($UsersModel->validate()) {
+				
+				$UsersModel->save(false);
+				var_dump($_POST['_update']);
+				if ($_POST['_update']) {
+					$redirect = array('profile/edit');
 				}
 				$this->redirect($redirect);
 			}
 		}
 		$this->render('edit', array(
-			'model' => $ProfileModel
+			'model' => $UsersModel
 		));
 	}
 }

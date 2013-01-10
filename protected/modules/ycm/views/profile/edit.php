@@ -1,11 +1,11 @@
 <?php
+
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id' => get_class($model) . '-id-form',
 	'type' => 'horizontal',
 	'inlineErrors' => false,
 	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 		));
-$this->module->createActiveWidget($form, $model, 'role');
 $this->module->createActiveWidget($form, $model, 'username');
 $this->module->createActiveWidget($form, $model, 'first_name');
 $this->module->createActiveWidget($form, $model, 'last_name');
