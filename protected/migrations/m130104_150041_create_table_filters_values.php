@@ -6,8 +6,7 @@ class m130104_150041_create_table_filters_values extends CDbMigration {
 		$this->createTable('filters_values', array(
 			'value_id' => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
 			'filter_id' => 'INT UNSIGNED NOT NULL',
-			'url' => 'VARCHAR(50) NOT NULL',
-			'old_id' => 'INT UNSIGNED'
+			'url' => 'VARCHAR(50) NOT NULL'
 				), 'ENGINE=InnoDB COLLATE=utf8_general_ci');
 
 		$this->createIndex('filter_id', 'filters_values', 'filter_id');

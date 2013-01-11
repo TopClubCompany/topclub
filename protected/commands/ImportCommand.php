@@ -60,13 +60,13 @@ class ImportCommand extends CConsoleCommand {
 		$command = Yii::app()->db->createCommand();
 		foreach ($kitchens as $kitchen) {
 			$command->insert('filters_values', array(
-				'old_id' => $kitchen['cat_id'],
+				'value_id' => $kitchen['cat_id'],
 				'filter_id' => 1,
 				'url' => $kitchen['cat_url_title']
 			));
-			$id = Yii::app()->db->getLastInsertID();
+			//$id = Yii::app()->db->getLastInsertID();
 			$command->insert('filters_values_desc', array(
-				'value_id' => $id,
+				'value_id' => $kitchen['cat_id'],
 				'language_id' => 1,
 				'name' => $kitchen['cat_name'],
 				'description' => $kitchen['cat_description']
