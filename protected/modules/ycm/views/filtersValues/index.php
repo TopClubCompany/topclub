@@ -29,8 +29,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 		),
 		array(
 			'name' => 'filter_id',
-			'filter' => CHtml::activeDropDownList($FiltersValuesModel, 'filter_id',  array('' => Yii::t('YcmModule.filters', '-=Select Filter=-')) + CHtml::listData(FiltersModel::model()->findAll(), 'filter_id', 'desc_' . $lang . '.name')),
-			'value' => '$data->filter->desc_' . $lang . '->name'
+			'filter' => CHtml::activeDropDownList($FiltersValuesModel, 'filter_id',  array('' => Yii::t('YcmModule.filters', '-=Select Filter=-')) + CHtml::listData(FiltersModel::model()->findAll(), 'filter_id', $lang . '.name')),
+			'value' => '$data->filter->' . $lang . '->name'
 		),
 	)
 ));

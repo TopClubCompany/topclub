@@ -27,6 +27,10 @@ return array(
 						'label' => 'Все свойства фильтров',
 						'url' => array('FiltersValues/index'),
 					),
+					array(
+						'label' => 'Добавить свойство фильтра',
+						'url' => array('FiltersValues/add'),
+					),
 				)
 			)
 		)

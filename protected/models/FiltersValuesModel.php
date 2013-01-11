@@ -41,7 +41,8 @@ class FiltersValuesModel extends CActiveRecord {
 	public function rules() {
 		return array(
 			array('value_id, filter_id', 'safe'),
-			array('url', 'required')
+			array('url', 'required'),
+			array('filter_id', 'required', on => 'add_filter_value')
 		);
 	}
 
@@ -62,14 +63,7 @@ class FiltersValuesModel extends CActiveRecord {
 		
 		return array_merge(array(
 			'filter' => array(self::BELONGS_TO, 'FiltersModel', array('filter_id' => 'filter_id')),
-		),
-				$languageRelations);
-		
-		/*echo '<pre>';
-		print_r(array_merge(array(
-				'filter' => array(self::BELONGS_TO, 'FiltersModel', array('filter_id' => 'filter_id')),
-				), $languageRelations));*/
-		//	DIE;
+		),	$languageRelations);
 	}
 
 	public function search() {
@@ -80,12 +74,12 @@ class FiltersValuesModel extends CActiveRecord {
 				$criteria->addCondition('filter_id=:filter_id');
 				$criteria->params = array_merge($criteria->params, array(
 					':filter_id' => $filter_id
-						));
+				));
 			}
 		}
 		return new CActiveDataProvider($this, array(
-					'criteria' => $criteria
-				));
+			'criteria' => $criteria
+		));
 	}
 
 	/*public function defaultScope() {

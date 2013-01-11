@@ -1,16 +1,17 @@
 <?php
 $lang = Yii::app()->getLanguage();
+
 $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider' => FiltersModel::model()->search(),
 	'columns' => array(
 		'filter_id',
 		array(
-			'name' => 'desc_' . $lang . '.name',
+			'name' => $lang . '.name',
 			'type' => 'raw',
-			'value' => 'CHtml::link($data->desc_' . $lang . '->name, array("FiltersValues/index", "FiltersValuesModel[filter_id]" => $data->filter_id))'
+			'value' => 'CHtml::link($data->' . $lang . '->name, array("FiltersValues/index", "FiltersValuesModel[filter_id]" => $data->filter_id))'
 		),
 		array(
-			'name' => 'desc_' . $lang . '.description',
+			'name' => $lang . '.description',
 		),
 		'url',
 		array(

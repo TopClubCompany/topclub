@@ -39,7 +39,7 @@ class FiltersController extends AdminController {
 					} else {
 						$FiltersDescModel = FiltersDescModel::model()->find('filter_id=:filter_id AND language_id=:language_id', array(':filter_id' => $FiltersModel->filter_id, ':language_id' => $language->language_id));
 					}
-					$FiltersDescModel->attributes = array_merge($_POST['desc_' . $language->code], array(
+					$FiltersDescModel->attributes = array_merge($_POST[$language->code], array(
 						'language_id' => $language->language_id,
 						'filter_id' => $FiltersModel->filter_id,
 							));
@@ -64,7 +64,7 @@ class FiltersController extends AdminController {
 			$tabs[] = array(
 				'active' => $key == 0 ? true : false,
 				'label' => $language->name,
-				'content' => $this->renderPartial('_edit_desc', array('langCode' => $language->code, 'model' => $FiltersModel->{'desc_' . $language->code}), true),
+				'content' => $this->renderPartial('_edit_desc', array('langCode' => $language->code, 'model' => $FiltersModel->{$language->code}), true),
 			);
 		}
 

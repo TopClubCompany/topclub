@@ -7,5 +7,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ));
 $this->module->createActiveWidget($form, $FiltersValuesModel, 'url');
 $this->module->createActiveWidget($form, $FiltersValuesModel, 'filter_id');
-$this->endWidget();
+$this->widget('bootstrap.widgets.TbTabs', array(
+	'type'=>'tabs',
+	'tabs' => $tabs
+));
 echo $this->module->getButtons();
+$this->endWidget();

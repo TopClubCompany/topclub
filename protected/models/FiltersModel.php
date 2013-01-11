@@ -30,7 +30,7 @@ class FiltersModel extends CActiveRecord {
 		$languages = LanguageModel::model()->enabled()->findAll();
 		$_lang_relations = array();
 		foreach ($languages as $language) {
-			$_lang_relations['desc_' . $language->code] = array(
+			$_lang_relations[$language->code] = array(
 				self::HAS_ONE,
 				'FiltersDescModel',
 				array(
@@ -49,7 +49,7 @@ class FiltersModel extends CActiveRecord {
 		if ($lang === null)
 			$lang = Yii::app()->getLanguage();
 		$this->getDbCriteria()->mergeWith(array(
-			'with' => 'desc_' . $lang
+			'with' => $lang
 		));
 		return $this;
 	}

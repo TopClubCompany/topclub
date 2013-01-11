@@ -1,15 +1,16 @@
 <?php
+
 $this->module->createWidget(array(
 	'formElementName' => $langCode . '[name]',
 	'value' => $model->name,
 	'attribute' => 'name',
-	'model' => 'FiltersDescModel'
+	'model' => 'FiltersValuesDescModel'
 ));
 
 $this->module->createWidget(array(
 	'formElementName' => $langCode . '[description]',
 	'value' => $model->description,
 	'attribute' => 'description',
-	'model' => FiltersDescModel::model(),
+	'model' => FiltersValuesDescModel::model(),
 	'type' => 'wysiwyg'
 ));
