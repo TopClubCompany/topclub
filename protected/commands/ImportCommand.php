@@ -123,5 +123,108 @@ class ImportCommand extends CConsoleCommand {
 		}
 		echo "END importing places!!!\n";
 	}
-
+	
+	public function actionArticles() {
+		$q = "SELECT ecd.entry_id, author_id, title, url_title, ecd.field_id_20 AS pub_txt, ecd.field_id_21 AS pub_image, ecd.field_id_22 AS sub_header, ecd.field_id_34 AS video_type, ip_address, ect.status, year, month, day FROM exp_channel_data AS ecd JOIN exp_channel_titles AS ect ON ecd.entry_id = ect.entry_id WHERE ecd.channel_id = 2 ORDER BY ecd.entry_id";
+		$articles = Yii::app()->db2->createCommand($q)->queryAll();
+		$i = 0;
+		echo "Begin importing articles ...\n";
+		$command = Yii::app()->db->createCommand();
+		foreach ($articles as $article) {
+			$command->insert('articles', array(
+				'article_id' => $article['entry_id'],
+				'author_id' => $article['author_id'],
+				'title' => $article['title'],
+				'url_title' => $article['url_title'],
+				'pub_txt' => $article['pub_txt'],
+				'pub_image' => $article['pub_image'],
+				'sub_header' => $article['sub_header'],
+				'video_type' => $article['video_type'],
+				'ip_address' => $article['ip_address'],
+				'pub_date' => $article['year']."-".$article['month']."-".$article['day'],
+				'status' => $article['status']
+			));
+			$i++;
+			echo "Article #{$i} imported\n";
+		}
+		echo "END importing articles!!!\n";
+	}
+	
+	public function actionEvents() {
+		$q = "SELECT ecd.entry_id, ecd.field_id_26 AS event_desc, ecd.field_id_27 AS event_entrance_male, ecd.field_id_28 AS event_entrance_female, ecd.field_id_30 AS event_place, ecd.field_id_37 AS event_img, ecd.field_id_38 AS event_alternative_place, ecd.field_id_39 AS event_alternative_place_details, author_id, ip_address, title, url_title, status, year, month, day FROM exp_channel_data AS ecd JOIN exp_channel_titles AS ect ON ecd.entry_id = ect.entry_id WHERE ecd.channel_id = 4 ORDER BY ecd.entry_id";
+		$events = Yii::app()->db2->createCommand($q)->queryAll();
+		$i = 0;
+		echo "Begin importing events ...\n";
+		$command = Yii::app()->db->createCommand();
+		foreach ($events as $event) {
+			$command->insert('events', array(
+				'event_id' => $event['entry_id'],
+				'author_id' => $event['author_id'],
+				'title' => $event['title'],
+				'url_title' => $event['url_title'],
+				'event_desc' => $event['event_desc'],
+				'event_place' => $event['event_place'],
+				'event_alternative_place' => $event['event_alternative_place'],
+				'event_alternative_place_details' => $event['event_alternative_place_details'],
+				'event_entrance_male' => $event['event_entrance_male'],
+				'event_entrance_female' => $event['event_entrance_female'],
+				'event_img' => $event['event_img'],
+				'ip_address' => $event['ip_address'],
+				'event_date' => $event['year']."-".$event['month']."-".$event['day'],
+				'status' => $event['status']
+			));
+			$i++;
+			echo "Event #{$i} imported\n";
+		}
+		echo "END importing events!!!\n";
+	}
+	
+	public function actionAlbums() {
+		$q = "SELECT ecd.entry_id, author_id, title, url_title, ecd.field_id_45 AS photo_place, ecd.field_id_46 AS album_cover, ecd.field_id_57 AS albumEvent, ip_address, ect.status, year, month, day FROM exp_channel_data AS ecd JOIN exp_channel_titles AS ect ON ecd.entry_id = ect.entry_id WHERE ecd.channel_id = 11 ORDER BY ecd.entry_id";
+		$albums = Yii::app()->db2->createCommand($q)->queryAll();
+		$i = 0;
+		echo "Begin importing albums ...\n";
+		$command = Yii::app()->db->createCommand();
+		foreach ($albums as $album) {
+			$command->insert('albums', array(
+				'album_id' => $album['entry_id'],
+				'author_id' => $album['author_id'],
+				'title' => $album['title'],
+				'url_title' => $album['url_title'],
+				'photo_place' => $album['photo_place'],
+				'album_cover' => $album['album_cover'],
+				'albumEvent' => $album['albumEvent'],
+				'ip_address' => $album['ip_address'],
+				'album_date' => $album['year']."-".$album['month']."-".$album['day'],
+				'status' => $album['status']
+			));
+			$i++;
+			echo "Album #{$i} imported\n";
+		}
+		echo "END importing albums!!!\n";
+	}
+	
+	public function actionPhotos() {
+		$q = "SELECT ecd.entry_id, (SELECT rel_child_id FROM `exp_relationships` WHERE rel_id = ecd.field_id_44) AS album_id, author_id, ecd.field_id_53 AS title, url_title, ecd.field_id_43 AS photoPath, ip_address, ect.status, year, month, day FROM exp_channel_data AS ecd JOIN exp_channel_titles AS ect ON ecd.entry_id = ect.entry_id WHERE ecd.channel_id = 6 ORDER BY ecd.entry_id";
+		$photos = Yii::app()->db2->createCommand($q)->queryAll();
+		$i = 0;
+		echo "Begin importing photos ...\n";
+		$command = Yii::app()->db->createCommand();
+		foreach ($photos as $photo) {
+			$command->insert('photos', array(
+				'photo_id' => $photo['entry_id'],
+				'album_id' => $photo['album_id'],
+				'author_id' => $photo['author_id'],
+				'title' => $photo['title'],
+				'url_title' => $photo['url_title'],
+				'photoPath' => $photo['photoPath'],
+				'ip_address' => $photo['ip_address'],
+				'album_date' => $photo['year']."-".$photo['month']."-".$photo['day'],
+				'status' => $photo['status']
+			));
+			$i++;
+			echo "Photo #{$i} imported\n";
+		}
+		echo "END importing photos!!!\n";
+	}
 }
