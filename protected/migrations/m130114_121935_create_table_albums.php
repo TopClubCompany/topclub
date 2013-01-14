@@ -21,6 +21,6 @@ class m130114_121935_create_table_albums extends CDbMigration
 	public function down()
 	{
 		$this->dropTable("albums");
-		return false;
+		return true;
 	}
 }

@@ -20,6 +20,6 @@ class m130114_122018_create_table_photos extends CDbMigration
 	public function down()
 	{
 		$this->dropTable("photos");
-		return false;
+		return true;
 	}
 }

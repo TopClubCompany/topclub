@@ -22,6 +22,6 @@ class m130114_083308_create_table_articles extends CDbMigration
 	public function down()
 	{
 		$this->dropTable('articles');
-		return false;
+		return true;
 	}
 }
