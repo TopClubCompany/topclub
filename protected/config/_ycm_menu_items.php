@@ -13,6 +13,10 @@ return array(
 				'url' => array('PlacesCategories/index')
 			),
 			array(
+				'label' => 'Альбомы',
+				'url' => array('Albums/index')
+			),
+			array(
 				'label' => 'Фильтры',
 				'items' => array(
 					array(
