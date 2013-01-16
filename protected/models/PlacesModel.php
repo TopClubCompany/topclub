@@ -1,5 +1,15 @@
 <?php
-class Places extends CActiveRecord {
+class PlacesModel extends CActiveRecord {
+	
+	/**
+	 * 
+	 * @param string $className
+	 * @return PlacesModel
+	 */
+	public static function model($className = __CLASS__) {
+		return parent::model($className);
+	}
+	
 	public function tableName() {
 		return 'places';
 	}
