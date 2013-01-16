@@ -28,7 +28,7 @@ class ImportCommand extends CConsoleCommand {
 			} else {
 				$command = Yii::app()->db->createCommand();
 				$command->insert('users', array(
-					'old_user_id' => $user['member_id'],
+					'user_id' => $user['member_id'],
 					'role' => 'user',
 					'username' => $user['email'],
 					'first_name' => $first_name,
@@ -180,7 +180,7 @@ class ImportCommand extends CConsoleCommand {
 	}
 	
 	public function actionAlbums() {
-		$q = "SELECT ecd.entry_id, author_id, title, url_title, ecd.field_id_45 AS photo_place, ecd.field_id_46 AS album_cover, ecd.field_id_57 AS albumEvent, ip_address, ect.status, year, month, day FROM exp_channel_data AS ecd JOIN exp_channel_titles AS ect ON ecd.entry_id = ect.entry_id WHERE ecd.channel_id = 11 ORDER BY ecd.entry_id";
+		$q = "SELECT ecd.entry_id, author_id, title, url_title, (SELECT rel_child_id FROM `exp_relationships` WHERE rel_id = ecd.field_id_45) AS place_id, ecd.field_id_46 AS album_cover, ecd.field_id_57 AS albumEvent, ip_address, ect.status, year, month, day FROM exp_channel_data AS ecd JOIN exp_channel_titles AS ect ON ecd.entry_id = ect.entry_id WHERE ecd.channel_id = 11 ORDER BY ecd.entry_id";
 		$albums = Yii::app()->db2->createCommand($q)->queryAll();
 		$i = 0;
 		echo "Begin importing albums ...\n";
@@ -191,7 +191,7 @@ class ImportCommand extends CConsoleCommand {
 				'author_id' => $album['author_id'],
 				'title' => $album['title'],
 				'url_title' => $album['url_title'],
-				'photo_place' => $album['photo_place'],
+				'place_id' => $album['place_id'],
 				'album_cover' => $album['album_cover'],
 				'albumEvent' => $album['albumEvent'],
 				'ip_address' => $album['ip_address'],
