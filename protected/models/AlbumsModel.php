@@ -55,10 +55,7 @@ class AlbumsModel extends CActiveRecord {
 		return array(
 			array('status','required'),
 			array('url_title', 'unique', 'attributeName' => 'url_title'),
-			array('title, url_title, place_id, album_cover, albumEvent, status', 'safe')/*,
-			array('password, password_repeat', 'required', 'on' => array('formsubmit')),
-			array('phone', 'match', 'pattern' => '/\d{12}/'),
-			array('last_name, location', 'match', 'pattern' => '/[a-zа-я_-]/i')*/
+			array('title, url_title, place_id, album_cover, albumEvent, status', 'safe')
 		);
 	}
 	
