@@ -4,6 +4,39 @@ class SeedCommand extends CConsoleCommand {
 	public function actionTestData (){
 		$command = Yii::app()->db->createCommand();
 		
+		echo "Insert tests languages ...\n";
+		$command->insert('languages', array(
+			'language_id' => 1,
+			'code' => 'ru',
+			'name' => 'Русский',
+			'default' => 1,
+			'enabled' => 1
+		));
+		
+		$command->insert('languages', array(
+			'language_id' => 2,
+			'code' => 'ua',
+			'name' => 'Українська',
+			'default' => 0,
+			'enabled' => 1
+		));
+		
+		$command->insert('languages', array(
+			'language_id' => 3,
+			'code' => 'en',
+			'name' => 'English',
+			'default' => 0,
+			'enabled' => 1
+		));
+		
+		$command->insert('languages', array(
+			'language_id' => 4,
+			'code' => 'ch',
+			'name' => 'Китайский',
+			'default' => 0,
+			'enabled' => 0
+		));
+		
 		echo "Insert tests users ...\n";
 		$command->insert('users', array(
 			'role' => 'administrator',
@@ -100,41 +133,7 @@ class SeedCommand extends CConsoleCommand {
 			'name' => 'jkafjkahsdfjhajkl',
 			'description' => 'jhdfskl;hafhajklh'
 		));
-		die();
-		
-		echo "Insert tests languages ...\n";
-		$command->insert('languages', array(
-			'language_id' => 1,
-			'code' => 'ru',
-			'name' => 'Русский',
-			'default' => 1,
-			'enabled' => 1
-		));
-		
-		$command->insert('languages', array(
-			'language_id' => 2,
-			'code' => 'ua',
-			'name' => 'Українська',
-			'default' => 0,
-			'enabled' => 1
-		));
-		
-		$command->insert('languages', array(
-			'language_id' => 3,
-			'code' => 'en',
-			'name' => 'English',
-			'default' => 0,
-			'enabled' => 1
-		));
-		
-		$command->insert('languages', array(
-			'language_id' => 4,
-			'code' => 'ch',
-			'name' => 'Китайский',
-			'default' => 0,
-			'enabled' => 0
-		));
-		
+				
 		echo "Insert tests filters_values ...\n";
 		$command->insert('filters_values', array(
 			'value_id' => 1,
