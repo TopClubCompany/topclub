@@ -6,7 +6,7 @@ return array(
 		'items' => array(
 			array(
 				'label' => 'Места',
-				'model' => 'Places'
+				'url' => array('Places/index')
 			),
 			array(
 				'label' => 'Категории',

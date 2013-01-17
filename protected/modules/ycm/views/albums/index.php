@@ -11,7 +11,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 			),
 			'value' => function ($data){
 				return preg_replace("/{filedir_1}/","http://topclub.ua/images/sized/images/uploads/", $data->album_cover);
-	
 			}
 		),
 		'album_id',

@@ -18,6 +18,11 @@ class SiteController extends Controller
 			'page'=>array(
 				'class'=>'CViewAction',
 			),
+			'upload'=>array(
+                'class'=>'xupload.actions.XUploadAction',
+                'path' =>Yii::app() -> getBasePath() . "/../uploads",
+                'publicPath' => Yii::app() -> getBaseUrl() . "/uploads",
+            ),
 		);
 	}
 
@@ -29,7 +34,9 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		Yii::import("xupload.models.XUploadForm");
+        $model = new XUploadForm;
+        $this -> render('index', array('model' => $model, ));
 	}
 
 	/**

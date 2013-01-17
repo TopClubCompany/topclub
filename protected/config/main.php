@@ -9,6 +9,9 @@ return array(
 		'application.models.*',
 		'application.components.*',
 	),
+	'aliases' => array(
+		'xupload' => 'application.modules.ycm.extensions.xupload'
+	),
 	'modules' => array(
 		'ycm' => array(
 			'username' => 'admin',

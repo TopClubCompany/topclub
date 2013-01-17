@@ -105,19 +105,60 @@ class ImportCommand extends CConsoleCommand {
 				'lng' => $place['lng'],
 				'order_discount' => $place['order_discount'],
 				'order_discount_banket' => $place['order_discount_banket'],
-				'photo1' => $place['photo1'],
-				'photo2' => $place['photo2'],
-				'photo3' => $place['photo3'],
-				'photo4' => $place['photo4'],
-				'photo5' => $place['photo5'],
-				'photo6' => $place['photo6'],
-				'photo7' => $place['photo7'],
-				'photo8' => $place['photo8'],
-				'photo9' => $place['photo9'],
-				'photo10' => $place['photo10'],
 				'search_mistakes' => $place['search_mistakes'],
 				'closed' => $place['closed']
 			));
+			if($place['photo1'] != '')
+			$command->insert('places_photo', array(
+				'place_id' => $place['entry_id'],
+				'filename' => $place['photo1'],
+			));
+			if($place['photo2'] != '')
+			$command->insert('places_photo', array(
+				'place_id' => $place['entry_id'],
+				'filename' => $place['photo2'],
+			));
+			if($place['photo3'] != '')
+			$command->insert('places_photo', array(
+				'place_id' => $place['entry_id'],
+				'filename' => $place['photo3'],
+			));
+			if($place['photo4'] != '')
+			$command->insert('places_photo', array(
+				'place_id' => $place['entry_id'],
+				'filename' => $place['photo4'],
+			));
+			if($place['photo5'] != '')
+			$command->insert('places_photo', array(
+				'place_id' => $place['entry_id'],
+				'filename' => $place['photo5'],
+			));
+			if($place['photo6'] != '')
+			$command->insert('places_photo', array(
+				'place_id' => $place['entry_id'],
+				'filename' => $place['photo6'],
+			));
+			if($place['photo7'] != '')
+			$command->insert('places_photo', array(
+				'place_id' => $place['entry_id'],
+				'filename' => $place['photo7'],
+			));
+			if($place['photo8'] != '')
+			$command->insert('places_photo', array(
+				'place_id' => $place['entry_id'],
+				'filename' => $place['photo8'],
+			));
+			if($place['photo9'] != '')
+			$command->insert('places_photo', array(
+				'place_id' => $place['entry_id'],
+				'filename' => $place['photo9'],
+			));
+			if($place['photo10'] != '')
+			$command->insert('places_photo', array(
+				'place_id' => $place['entry_id'],
+				'filename' => $place['photo10'],
+			));		
+			
 			$i++;
 			echo "Place #{$i} imported\n";
 		}
@@ -198,6 +239,9 @@ class ImportCommand extends CConsoleCommand {
 				'album_date' => $album['year']."-".$album['month']."-".$album['day'],
 				'status' => $album['status']
 			));
+			//create directory for each album
+			//mkdir("../uploads/albums/".$album['url_title'], 0644);
+			
 			$i++;
 			echo "Album #{$i} imported\n";
 		}
