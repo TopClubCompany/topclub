@@ -3,12 +3,12 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider' => PlacesModel::model()->search(),
 	'columns' => array(
 		'place_id',
-		'title',
-		array(
+		//'title',
+		/*array(
 			'name' => 'address',
 			'type' => 'raw',
 			'value' => '$data->street . " ". $data->street_number '
-		),
+		),*/
 		array(
 			'name' => 'website',
 			'type' => 'raw',
