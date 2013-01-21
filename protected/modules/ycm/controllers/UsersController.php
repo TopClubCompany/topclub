@@ -30,7 +30,7 @@ class UsersController extends AdminController {
 
 	public function actionIndex() {
 		$this->breadcrumbs = array(
-			Yii::t('YcmModule.users', 'users')
+			Yii::t('YcmModule.users', 'Users')
 		);
 		$render = $_GET['ajax'] ? 'renderPartial' : 'render';
 		$this->$render('index');
@@ -43,15 +43,15 @@ class UsersController extends AdminController {
 	public function actionEdit() {
 		$actionId = strtolower(Yii::app()->controller->action->id);
 		$this->breadcrumbs = array(
-			Yii::t('YcmModule.users', 'users') => array('users/index'),
+			Yii::t('YcmModule.users', 'Users') => array('users/index'),
 		);
 		if ($actionId == 'add') {
 			$this->breadcrumbs = array_merge($this->breadcrumbs, array(
-				Yii::t('YcmModule.users', 'add_user')
+				Yii::t('YcmModule.users', 'Add user')
 			));
 		} else if ($actionId == 'edit') {
 			$this->breadcrumbs = array_merge($this->breadcrumbs, array(
-				Yii::t('YcmModule.users', 'edit_user')
+				Yii::t('YcmModule.users', 'Edit user')
 			));
 		}
 		if ($user_id = (int) $_GET['user_id'] ? : null) {

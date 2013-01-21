@@ -1,21 +1,21 @@
 <?php
 
 return array(
-	'user_id' => 'ID',
-	'role' => 'Роль',
-	'username' => 'Логин (EMail)',
-	'first_name' => 'Имя',
-	'last_name' => 'Фамилия',
-	'password' => 'Пароль',
-	'password_repeat' => 'Подтверждение пароля',
-	'location' => 'Местоположение',
-	'phone' => 'Телефон',
-	'vk_id' => 'Вконтакте ID',
-	'fb_id' => 'Фейсбук ID',
-	'tw_id' => 'Твиттер ID',
-	'users' => 'Пользователи',
-	'add_user' => 'Добавить пользователя',
-	'edit_user' => 'Редактировать пользователя',
-	'error_password' => 'Пароли не совпададют',
-	'mail_subject' => 'Регистрация на Topclub!'
+	'User id' => 'ID',
+	'Role' => 'Роль',
+	'Username' => 'Логин (EMail)',
+	'First name' => 'Имя',
+	'Last name' => 'Фамилия',
+	'Password' => 'Пароль',
+	'Password repeat' => 'Подтверждение пароля',
+	'Location' => 'Местоположение',
+	'Phone' => 'Телефон',
+	'Vk id' => 'Вконтакте ID',
+	'Fb id' => 'Фейсбук ID',
+	'Tw id' => 'Твиттер ID',
+	'Users' => 'Пользователи',
+	'Add user' => 'Добавить пользователя',
+	'Edit user' => 'Редактировать пользователя',
+	'Error password' => 'Пароли не совпададют',
+	'Mail subject' => 'Регистрация на Topclub!'
 );
