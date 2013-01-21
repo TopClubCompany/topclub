@@ -297,7 +297,7 @@ class ImportCommand extends CConsoleCommand {
 				'url_title' => $photo['url_title'],
 				'photoPath' => $photo['photoPath'],
 				'ip_address' => $photo['ip_address'],
-				'album_date' => $photo['year'] . "-" . $photo['month'] . "-" . $photo['day'],
+				//'album_date' => $photo['year'] . "-" . $photo['month'] . "-" . $photo['day'],
 				'status' => $photo['status']
 			));
 			$i++;
