@@ -45,7 +45,7 @@ class PhotosModel extends CActiveRecord {
 			if ($album_id = (int) $_GET['album_id'] ? : null) {
 				$this->album_id = $album_id;
 				$criteria->addCondition('album_id=:album_id');
-				$criteria->params = array_merge($criteria->params,				array(
+				$criteria->params = array_merge($criteria->params, array(
 					':album_id' => $album_id
 				));
 			}

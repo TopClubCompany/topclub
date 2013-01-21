@@ -1,4 +1,5 @@
 <?php
+
 $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider' => AlbumsModel::model()->search(),
 	'columns' => array(
