@@ -16,18 +16,18 @@ class UsersModel extends CActiveRecord {
 
 	public function attributeLabels() {
 		return array(
-			'user_id' => Yii::t('YcmModule.users', 'user_id'),
-			'role' => Yii::t('YcmModule.users', 'role'),
-			'username' => Yii::t('YcmModule.users', 'username'),
-			'first_name' => Yii::t('YcmModule.users', 'first_name'),
-			'last_name' => Yii::t('YcmModule.users', 'last_name'),
-			'password' => Yii::t('YcmModule.users', 'password'),
-			'password_repeat' => Yii::t('YcmModule.users', 'password_repeat'),
-			'location' => Yii::t('YcmModule.users', 'location'),
-			'phone' => Yii::t('YcmModule.users', 'phone'),
-			'vk_id' => Yii::t('YcmModule.users', 'vk_id'),
-			'fb_id' => Yii::t('YcmModule.users', 'fb_id'),
-			'tw_id' => Yii::t('YcmModule.users', 'tw_id')
+			'user_id' => Yii::t('YcmModule.users', 'User id'),
+			'role' => Yii::t('YcmModule.users', 'Role'),
+			'username' => Yii::t('YcmModule.users', 'Username'),
+			'first_name' => Yii::t('YcmModule.users', 'First name'),
+			'last_name' => Yii::t('YcmModule.users', 'Last name'),
+			'password' => Yii::t('YcmModule.users', 'Password'),
+			'password_repeat' => Yii::t('YcmModule.users', 'Password repeat'),
+			'location' => Yii::t('YcmModule.users', 'Location'),
+			'phone' => Yii::t('YcmModule.users', 'Phone'),
+			'vk_id' => Yii::t('YcmModule.users', 'Vk id'),
+			'fb_id' => Yii::t('YcmModule.users', 'Fb id'),
+			'tw_id' => Yii::t('YcmModule.users', 'Tw id')
 		);
 	}
 
@@ -52,13 +52,13 @@ class UsersModel extends CActiveRecord {
 			Yii::app()->mailer->FromName = 'TopCLub';
 			Yii::app()->mailer->AddReplyTo('info@topclub.com');
 			Yii::app()->mailer->AddAddress($this->username);
-			Yii::app()->mailer->Subject = Yii::t('YcmModule.users', 'mail_subject');
+			Yii::app()->mailer->Subject = Yii::t('YcmModule.users', 'Mail subject');
 			Yii::app()->mailer->Body = $message;
 			//Yii::app()->mailer->MsgHTML($message);
 			Yii::app()->mailer->Send();
 			
 			if($this->password !== $this->password_repeat)
-				throw new CHttpException(404, Yii::t('YcmModule.users', 'error_password'));	
+				throw new CHttpException(404, Yii::t('YcmModule.users', 'Error password'));	
 			else
 				$this->password = md5($this->password);
 		}

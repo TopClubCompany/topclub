@@ -44,16 +44,8 @@ $this->widget('xupload.XUpload', array(
 	'attribute' => 'file',
 	'multiple' => true,
 	'autoUpload' => true,
-	//'name' => 'file',
 	'htmlOptions' => array(
 		'class' => 'fileupload',
 	),
 ));
-/**
- * also add specified dropzone: html, css, js
- * $('.fileupload').each(function () {
-  $(this).fileupload({
-  dropZone: $(this)
-  });
-  });
- */?>
+?>

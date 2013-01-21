@@ -41,7 +41,7 @@ class PlacesController extends AdminController {
 
 	public function actionIndex() {
 		$this->breadcrumbs = array(
-			Yii::t('YcmModule.places', 'places'),
+			Yii::t('YcmModule.places', 'Places'),
 		);
 		$render = $_GET['ajax'] ? 'renderPartial' : 'render';
 		$this->$render('index');
