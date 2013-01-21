@@ -17,15 +17,15 @@
         <?php if ($this->multiple) { ?>
 		<button type="submit" class="btn btn-primary start">
 			<i class="icon-upload icon-white"></i>
-			<span>Start upload</span>
+			<span><?php echo $this->t('Start upload'); ?></span>
 		</button>
 		<button type="reset" class="btn btn-warning cancel">
 			<i class="icon-ban-circle icon-white"></i>
-			<span>Cancel upload</span>
+			<span><?php echo $this->t('Cancel upload'); ?></span>
 		</button>
 		<button type="button" class="btn btn-danger delete">
 			<i class="icon-trash icon-white"></i>
-			<span>Delete</span>
+			<span><?php echo $this->t('Delete'); ?></span>
 		</button>
 		<input type="checkbox" class="toggle">
         <?php } ?>

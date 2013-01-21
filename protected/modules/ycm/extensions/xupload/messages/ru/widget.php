@@ -10,6 +10,8 @@ return array(
     "Error" => 'Ошибка',
     "Start" => 'Загрузить',
     "Cancel" => 'Отменить',
-    "Delete" => 'Удалить'
-
+    "Delete" => 'Удалить',
+	"Start upload" => "Загрузить",
+	"Cancel upload" => "Отменить",
+	
 );
