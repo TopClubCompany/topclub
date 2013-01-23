@@ -36,6 +36,10 @@ return array(
 						'url' => array('FiltersValues/add'),
 					),
 				)
+			),
+			array(
+				'label' => 'Комментарии',
+				'url' => array('Comments/index')
 			)
 		)
 	),

@@ -5,7 +5,7 @@ $colorbox = $this->widget('application.extensions.colorpowered.JColorBox');
 //Call addInstance (chainable) from the widget generated.
 $colorbox->addInstance('.colorbox', array('maxHeight'=>'100%', 'maxWidth'=>'100%'));
 //show album cover
-echo CHtml::link(CHtml::image("/uploads/albums/".$model->album_id."/".$model->album_cover."", "image", array("width"=>150)), "/uploads/albums/".$model->album_id."/".$model->album_cover."", array("class"=>"colorbox"));
+echo CHtml::link(CHtml::image("/uploads/albums/".$model->album_id."/".$model->album_cover, Yii::t('YcmModule.albums', 'Album cover'), array("width"=>150)), "/uploads/albums/".$model->album_id."/".$model->album_cover."", array("class"=>"colorbox"));
 
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id' => get_class($model) . '-id-form',

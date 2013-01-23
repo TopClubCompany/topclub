@@ -104,7 +104,7 @@ class AlbumsController extends AdminController {
 		}
 		$AlbumsModel->delete();
 		if (!$_GET['ajax'])
-			$this->redirect(array('Filters/index'));
+			$this->redirect(array('Albums/index'));
 	}
 
 	public function actionShow() {
