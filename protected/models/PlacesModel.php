@@ -17,13 +17,9 @@ class PlacesModel extends CActiveRecord {
 		return array(
 			'address' => Yii::t('YcmModule.places', 'Address'),
 			'place_id' => Yii::t('YcmModule.places', 'Place id'),
-			//'title' => Yii::t('YcmModule.places', 'title'),
 			'url_title' => Yii::t('YcmModule.places', 'Url title'),
 			'status' => Yii::t('YcmModule.places', 'Status'),
-			//'name' => Yii::t('YcmModule.places', 'name'),
 			'schedule' => Yii::t('YcmModule.places', 'Schedule'),
-			//'place_desc' => Yii::t('YcmModule.places', 'place_desc'),
-			//'street' => Yii::t('YcmModule.places', 'street'),
 			'street_number' => Yii::t('YcmModule.places', 'Street number'),
 			'phone' => Yii::t('YcmModule.places', 'Phone'),
 			'phone2' => Yii::t('YcmModule.places', 'Phone2'),
@@ -35,15 +31,14 @@ class PlacesModel extends CActiveRecord {
 			'lng' => Yii::t('YcmModule.places', 'Lng'),
 			'order_discount' => Yii::t('YcmModule.places', 'Order discount'),
 			'order_discount_banket' => Yii::t('YcmModule.places', 'Order discount banket'),
-			//'search_mistakes' => Yii::t('YcmModule.places', 'search_mistakes'),
-			'closed' => Yii::t('YcmModule.places', 'Closed'),
+			'closed' => Yii::t('YcmModule.places', 'Place closed ?'),
 		);
 	}
 
 	public function rules() {
 		return array(
-			array('url_title, status, schedule, street_number, phone, lat, lng', 'required'),
-			array('phone2, email, admin_phone, website, cost, order_discount, order_discount_banket, closed', 'safe'),
+			array('url_title, status, schedule, street_number, phones, lat, lng', 'required'),
+			array('email, admin_phone, website, cost, order_discount, order_discount_banket, closed', 'safe'),
 		);
 	}
 
@@ -69,14 +64,21 @@ class PlacesModel extends CActiveRecord {
 			array('order_discount', 'textField'),
 			array('order_discount_banket', 'textField'),
 			//array('search_mistakes', 'textField'),
-			array('closed', 'textField'),
+			array('closed', 'dropDown'),
+		);
+	}
+
+	public function closedChoices() {
+		return array(
+			'0' => Yii::t('YcmModule.common', 'No'),
+			'1' => Yii::t('YcmModule.common', 'Yes'),
 		);
 	}
 
 	public function statusChoices() {
 		return array(
-			'open' => 'open',
-			'closed' => 'closed'
+			'0' => Yii::t('YcmModule.places', 'Closed'),
+			'1' => Yii::t('YcmModule.places', 'Open')
 		);
 	}
 
@@ -140,4 +142,5 @@ class PlacesModel extends CActiveRecord {
 		  )); */
 		return new CActiveDataProvider($this);
 	}
+
 }

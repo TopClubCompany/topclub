@@ -75,33 +75,20 @@ class PlacesController extends AdminController {
 			$PlacesModel->attributes = $_POST['PlacesModel'];
 			if ($PlacesModel->validate()) {
 				$PlacesModel->save(false);
-				//var_dump($_POST['PlacesModel']["place_id"]);die;
+				$i = 0;
 				foreach (LanguageModel::model()->enabled()->findAll() as $language) {
 					if (!$place_id) {
 						$PlacesDescModel = new PlacesDescModel;
 					} else {
-						$PlacesDescModel = PlacesDescModel::model()->find('place_id=:place_id AND language_id=:language_id', array(':place_id' => $PlacesModel->place_id, ':language_id' => $language->language_id));
+						if (!$PlacesDescModel = PlacesDescModel::model()->find('place_id=:place_id AND language_id=:language_id', array(':place_id' => $PlacesModel->place_id, ':language_id' => $language->language_id)))
+							$PlacesDescModel = new PlacesDescModel;
 					}
-					echo "<pre>";
-
-					/* var_dump($_POST[$language->code]);
-					  var_dump($language->language_id);
-					  var_dump($PlacesModel->place_id);
-					  var_dump($PlacesDescModel->attributes);
-					  var_dump($PlacesDescModel->attributes = array_merge($_POST[$language->code], array(
-					  'language_id' => $language->language_id,
-					  'place_id' => $PlacesModel->place_id,
-					  )));die; */
-					//var_dump($PlacesDescModel); die;
 					$PlacesDescModel->attributes = array_merge($_POST[$language->code], array(
 						'language_id' => $language->language_id,
 						'place_id' => $PlacesModel->place_id,
-							));
-					//var_dump($PlacesDescModel->attributes);
-
+						));
 					$PlacesDescModel->save(false);
 				}
-				//die;
 				if ($_POST['_save']) {
 					$redirect = array('places/index');
 				} else if ($_POST['_addanother']) {
@@ -124,7 +111,6 @@ class PlacesController extends AdminController {
 		}
 		Yii::import("xupload.models.XUploadForm");
 		$photos = new XUploadForm;
-		//var_dump($tabs);die;
 		$this->render('edit', array(
 			'model' => $PlacesModel,
 			'tabs' => $tabs,

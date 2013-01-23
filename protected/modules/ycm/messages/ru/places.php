@@ -25,6 +25,11 @@ return array(
 	'Order discount' => 'Скидка стола',
 	'Order discount banket' => 'Скидка банкета',
 	'Search mistakes' => 'Поисковые ошибки',
-	'Closed' => 'Закрыт?',
+	'Place closed ?' => 'Место закрыто ?',
 	'Place reference point' => 'Ориентир места',
+	'Closed' => 'Закрыт',
+	'Open' => 'Открыто',
+	'Without site' => 'Нет сайта',
+	'Places photos' => 'Фотографии места',
+	'Add photos' => 'Добавить фотографии'
 );
