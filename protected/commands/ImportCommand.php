@@ -1,6 +1,288 @@
 <?php
 
 class ImportCommand extends CConsoleCommand {
+	
+	public function actionHelp() {
+		echo $this->help;
+	}
+
+	public function actionIndex() {
+		echo "Insert tests languages ...\n";
+		
+		$command = Yii::app()->db->createCommand();
+		
+		$command->insert('languages', array(
+			'language_id' => 1,
+			'code' => 'ru',
+			'name' => 'Русский',
+			'default' => 1,
+			'enabled' => 1
+		));
+		
+		$command->insert('languages', array(
+			'language_id' => 2,
+			'code' => 'ua',
+			'name' => 'Українська',
+			'default' => 0,
+			'enabled' => 1
+		));
+		
+		$command->insert('languages', array(
+			'language_id' => 3,
+			'code' => 'en',
+			'name' => 'English',
+			'default' => 0,
+			'enabled' => 1
+		));
+		
+		echo "Insert tests filters ...\n";
+		$command->insert('filters', array(
+			'filter_id' => 1,
+			'url' => 'kitchens'
+		));
+		
+		$command->insert('filters', array(
+			'filter_id' => 2,
+			'url' => 'price'
+		));
+		
+		echo "Insert tests filters_desc ...\n";
+		$command->insert('filters_desc', array(
+			'filter_id' => 1,
+			'language_id' => 1,
+			'name' => 'Кухни',
+			'description' => 'Кухни'
+		));
+		
+		$command->insert('filters_desc', array(
+			'filter_id' => 1,
+			'language_id' => 2,
+			'name' => 'Кухні',
+			'description' => 'Кухні'
+		));
+		
+		$command->insert('filters_desc', array(
+			'filter_id' => 1,
+			'language_id' => 3,
+			'name' => 'Kitchens',
+			'description' => 'Kitchens'
+		));
+		
+		$command->insert('filters_desc', array(
+			'filter_id' => 2,
+			'language_id' => 1,
+			'name' => 'Цена',
+			'description' => 'Цена'
+		));
+		
+		$command->insert('filters_desc', array(
+			'filter_id' => 2,
+			'language_id' => 2,
+			'name' => 'Ціна',
+			'description' => 'Ціна'
+		));
+		
+		$command->insert('filters_desc', array(
+			'filter_id' => 2,
+			'language_id' => 3,
+			'name' => 'Price',
+			'description' => 'Price'
+		));
+				
+		echo "Insert tests filters_values ...\n";
+		$command->insert('filters_values', array(
+			'value_id' => 1,
+			'filter_id' => 1,
+			'url' => 'chinese'
+		));
+		
+		$command->insert('filters_values', array(
+			'value_id' => 2,
+			'filter_id' => 1,
+			'url' => 'italian'
+		));
+		
+		$command->insert('filters_values', array(
+			'value_id' => 3,
+			'filter_id' => 1,
+			'url' => 'ukrainian'
+		));
+		
+		$command->insert('filters_values', array(
+			'value_id' => 4,
+			'filter_id' => 1,
+			'url' => 'korean'
+		));
+		
+		$command->insert('filters_values', array(
+			'value_id' => 5,
+			'filter_id' => 2,
+			'url' => 'very-cheap'
+		));
+		
+		$command->insert('filters_values', array(
+			'value_id' => 6,
+			'filter_id' => 2,
+			'url' => 'cheap'
+		));
+		
+		$command->insert('filters_values', array(
+			'value_id' => 7,
+			'filter_id' => 2,
+			'url' => 'middle-price'
+		));
+		
+		$command->insert('filters_values', array(
+			'value_id' => 8,
+			'filter_id' => 2,
+			'url' => 'expensive'
+		));
+		
+		echo "Insert tests filters_values_desc ...\n";
+		$command->insert('filters_values_desc', array(
+			'value_id' => 1,
+			'language_id' => 1,
+			'name' => 'Китайская'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 1,
+			'language_id' => 2,
+			'name' => 'Китайська'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 1,
+			'language_id' => 3,
+			'name' => 'Chinese'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 2,
+			'language_id' => 1,
+			'name' => 'Итальянская'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 2,
+			'language_id' => 2,
+			'name' => 'Італіська'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 2,
+			'language_id' => 3,
+			'name' => 'Italian'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 3,
+			'language_id' => 1,
+			'name' => 'Украинская'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 3,
+			'language_id' => 2,
+			'name' => 'Українська'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 3,
+			'language_id' => 3,
+			'name' => 'Ukrainian'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 4,
+			'language_id' => 1,
+			'name' => 'Корейская'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 4,
+			'language_id' => 2,
+			'name' => 'Корейська'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 4,
+			'language_id' => 3,
+			'name' => 'Korean'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 5,
+			'language_id' => 1,
+			'name' => 'Очень дешево'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 5,
+			'language_id' => 2,
+			'name' => 'Дуже дешево'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 5,
+			'language_id' => 3,
+			'name' => 'Very cheap'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 6,
+			'language_id' => 1,
+			'name' => 'Дешево'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 6,
+			'language_id' => 2,
+			'name' => 'Дешево'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 6,
+			'language_id' => 3,
+			'name' => 'Сheap'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 7,
+			'language_id' => 1,
+			'name' => 'Середняя'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 7,
+			'language_id' => 2,
+			'name' => 'Средняя'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 7,
+			'language_id' => 3,
+			'name' => 'Middle price'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 8,
+			'language_id' => 1,
+			'name' => 'Дорого'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 8,
+			'language_id' => 2,
+			'name' => 'Дорого'
+		));
+		
+		$command->insert('filters_values_desc', array(
+			'value_id' => 8,
+			'language_id' => 3,
+			'name' => 'Expensive'
+		));
+	}
 
 	public function actionUsers() {
 		$q = "SELECT em.member_id, em.facebook_connect_user_id, em.vk_id, em.group_id,  em.password, em.email, em.location, em.bday_d, em.bday_m, em.bday_y, em.avatar_filename, em.photo_filename, em.ip_address, em.join_date, emd.m_field_id_1 AS twitter, emd.m_field_id_3 AS sex, emd.m_field_id_4 AS last_name, emd.m_field_id_6 AS about_tc, emd.m_field_id_7 AS status, emd.m_field_id_9 AS facebook, emd.m_field_id_10 AS city, emd.m_field_id_11 AS vkontakte, emd.m_field_id_12 AS phone, emd.m_field_id_15 AS first_name FROM  `exp_members` AS em JOIN exp_member_data AS emd ON em.member_id=emd.member_id WHERE rest_discounts != 1 ORDER BY em.member_id";
@@ -84,35 +366,41 @@ class ImportCommand extends CConsoleCommand {
 		echo "Begin importing places ...\n";
 		$command = Yii::app()->db->createCommand();
 		foreach ($places as $place) {
-			/* $command->insert('places', array(
-			  'place_id' => $place['entry_id'],
-			  //'title' => $place['title'],
-			  'url_title' => $place['url_title'],
-			  'status' => $place['status'],
-			  //'name' => $place['name'],
-			  'schedule' => $place['schedule'],
-			  //'place_desc' => $place['place_desc'],
-			  //'street' => $place['street'],
-			  'street_number' => $place['street_number'],
-			  //'place_orientir' => $place['place_orientir'],
-			  'phone' => $place['phone'],
-			  'phone2' => $place['phone2'],
-			  'admin_phone' => $place['admin_phone'],
-			  'website' => $place['website'],
-			  'email' => $place['email'],
-			  'cost' => $place['cost'],
-			  'lat' => $place['lat'],
-			  'lng' => $place['lng'],
-			  'order_discount' => $place['order_discount'],
-			  'order_discount_banket' => $place['order_discount_banket'],
-			  //'search_mistakes' => $place['search_mistakes'],
-			  'closed' => $place['closed']
-			  )); */
+			$place['phone'] = str_replace(array('(', ')', '-', ' ', '+'), '', $place['phone']);
+			$place['phone2'] = str_replace(array('(', ')', '-', ' ', '+'), '', $place['phone2']);
+			$phones = $place['phone'] ?: null;
+			if ($place['phone2'] && $phones) {
+				$phones .= ',' . $place['phone2'];
+			}
+			
+			$command->insert('places', array(
+				'place_id' => $place['entry_id'],
+				//'title' => $place['title'],
+				'url_title' => $place['url_title'],
+				'status' => $place['status'] == 'open' ? 1 : 0,
+				//'name' => $place['name'],
+				'schedule' => $place['schedule'],
+				//'place_desc' => $place['place_desc'],
+				//'street' => $place['street'],
+				'street_number' => $place['street_number'],
+				//'place_orientir' => $place['place_orientir'],
+				'phones' => $phones,
+				'admin_phone' => $place['admin_phone'],
+				'website' => $place['website'],
+				'email' => $place['email'],
+				'cost' => $place['cost'],
+				'lat' => $place['lat'],
+				'lng' => $place['lng'],
+				'order_discount' => $place['order_discount'],
+				'order_discount_banket' => $place['order_discount_banket'],
+					//'search_mistakes' => $place['search_mistakes'],
+				'closed' => $place['closed'] == 'yes' ? 1 : 0
+			));
 
 			$command->insert('places_desc', array(
 				'place_id' => $place['entry_id'],
 				'language_id' => 1,
-				'title' => $place['title'],
+				'title' => str_replace(array('(Закрыт)', 'Закрыт', 'закрыт'), '', $place['title']),
 				'name' => $place['name'],
 				'place_desc' => $place['place_desc'],
 				'street' => $place['street'],
@@ -123,23 +411,23 @@ class ImportCommand extends CConsoleCommand {
 			$command->insert('places_desc', array(
 				'place_id' => $place['entry_id'],
 				'language_id' => 2,
-				'title' => $place['title'],
-				'name' => $place['name'],
-				'place_desc' => $place['place_desc'],
-				'street' => $place['street'],
-				'place_orientir' => $place['place_orientir'],
-				'search_mistakes' => $place['search_mistakes']
+				'title' => '',
+				'name' => '',
+				'place_desc' => '',
+				'street' => '',
+				'place_orientir' => '',
+				'search_mistakes' => ''
 			));
 
 			$command->insert('places_desc', array(
 				'place_id' => $place['entry_id'],
 				'language_id' => 3,
-				'title' => $place['title'],
-				'name' => $place['name'],
-				'place_desc' => $place['place_desc'],
-				'street' => $place['street'],
-				'place_orientir' => $place['place_orientir'],
-				'search_mistakes' => $place['search_mistakes']
+				'title' => '',
+				'name' => '',
+				'place_desc' => '',
+				'street' => '',
+				'place_orientir' => '',
+				'search_mistakes' => ''
 			));
 
 			/* if ($place['photo1'] != '')
