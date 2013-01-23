@@ -16,7 +16,7 @@ class m130111_094451_create_table_places extends CDbMigration
 			'street_number' => 'VARCHAR(10)',
 			//'place_orientir' => 'VARCHAR(255)',
 			'phones' => 'VARCHAR(255)',
-			'admin_phone' => 'INT(10)',
+			'admin_phone' => 'INT(10) DEFAULT NULL',
 			'website' => 'VARCHAR(100)',
 			'email' => 'VARCHAR(100)',
 			'cost' => 'SMALLINT(4) DEFAULT 0',
