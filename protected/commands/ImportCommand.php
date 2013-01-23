@@ -84,31 +84,31 @@ class ImportCommand extends CConsoleCommand {
 		echo "Begin importing places ...\n";
 		$command = Yii::app()->db->createCommand();
 		foreach ($places as $place) {
-			/*$command->insert('places', array(
-				'place_id' => $place['entry_id'],
-				//'title' => $place['title'],
-				'url_title' => $place['url_title'],
-				'status' => $place['status'],
-				//'name' => $place['name'],
-				'schedule' => $place['schedule'],
-				//'place_desc' => $place['place_desc'],
-				//'street' => $place['street'],
-				'street_number' => $place['street_number'],
-				//'place_orientir' => $place['place_orientir'],
-				'phone' => $place['phone'],
-				'phone2' => $place['phone2'],
-				'admin_phone' => $place['admin_phone'],
-				'website' => $place['website'],
-				'email' => $place['email'],
-				'cost' => $place['cost'],
-				'lat' => $place['lat'],
-				'lng' => $place['lng'],
-				'order_discount' => $place['order_discount'],
-				'order_discount_banket' => $place['order_discount_banket'],
-				//'search_mistakes' => $place['search_mistakes'],
-				'closed' => $place['closed']
-			));*/
-			
+			/* $command->insert('places', array(
+			  'place_id' => $place['entry_id'],
+			  //'title' => $place['title'],
+			  'url_title' => $place['url_title'],
+			  'status' => $place['status'],
+			  //'name' => $place['name'],
+			  'schedule' => $place['schedule'],
+			  //'place_desc' => $place['place_desc'],
+			  //'street' => $place['street'],
+			  'street_number' => $place['street_number'],
+			  //'place_orientir' => $place['place_orientir'],
+			  'phone' => $place['phone'],
+			  'phone2' => $place['phone2'],
+			  'admin_phone' => $place['admin_phone'],
+			  'website' => $place['website'],
+			  'email' => $place['email'],
+			  'cost' => $place['cost'],
+			  'lat' => $place['lat'],
+			  'lng' => $place['lng'],
+			  'order_discount' => $place['order_discount'],
+			  'order_discount_banket' => $place['order_discount_banket'],
+			  //'search_mistakes' => $place['search_mistakes'],
+			  'closed' => $place['closed']
+			  )); */
+
 			$command->insert('places_desc', array(
 				'place_id' => $place['entry_id'],
 				'language_id' => 1,
@@ -119,7 +119,7 @@ class ImportCommand extends CConsoleCommand {
 				'place_orientir' => $place['place_orientir'],
 				'search_mistakes' => $place['search_mistakes']
 			));
-			
+
 			$command->insert('places_desc', array(
 				'place_id' => $place['entry_id'],
 				'language_id' => 2,
@@ -130,7 +130,7 @@ class ImportCommand extends CConsoleCommand {
 				'place_orientir' => $place['place_orientir'],
 				'search_mistakes' => $place['search_mistakes']
 			));
-			
+
 			$command->insert('places_desc', array(
 				'place_id' => $place['entry_id'],
 				'language_id' => 3,
@@ -141,58 +141,58 @@ class ImportCommand extends CConsoleCommand {
 				'place_orientir' => $place['place_orientir'],
 				'search_mistakes' => $place['search_mistakes']
 			));
-			
-			/*if ($place['photo1'] != '')
-				$command->insert('places_photo', array(
-					'place_id' => $place['entry_id'],
-					'filename' => $place['photo1'],
-				));
-			if ($place['photo2'] != '')
-				$command->insert('places_photo', array(
-					'place_id' => $place['entry_id'],
-					'filename' => $place['photo2'],
-				));
-			if ($place['photo3'] != '')
-				$command->insert('places_photo', array(
-					'place_id' => $place['entry_id'],
-					'filename' => $place['photo3'],
-				));
-			if ($place['photo4'] != '')
-				$command->insert('places_photo', array(
-					'place_id' => $place['entry_id'],
-					'filename' => $place['photo4'],
-				));
-			if ($place['photo5'] != '')
-				$command->insert('places_photo', array(
-					'place_id' => $place['entry_id'],
-					'filename' => $place['photo5'],
-				));
-			if ($place['photo6'] != '')
-				$command->insert('places_photo', array(
-					'place_id' => $place['entry_id'],
-					'filename' => $place['photo6'],
-				));
-			if ($place['photo7'] != '')
-				$command->insert('places_photo', array(
-					'place_id' => $place['entry_id'],
-					'filename' => $place['photo7'],
-				));
-			if ($place['photo8'] != '')
-				$command->insert('places_photo', array(
-					'place_id' => $place['entry_id'],
-					'filename' => $place['photo8'],
-				));
-			if ($place['photo9'] != '')
-				$command->insert('places_photo', array(
-					'place_id' => $place['entry_id'],
-					'filename' => $place['photo9'],
-				));
-			if ($place['photo10'] != '')
-				$command->insert('places_photo', array(
-					'place_id' => $place['entry_id'],
-					'filename' => $place['photo10'],
-				));
-*/
+
+			/* if ($place['photo1'] != '')
+			  $command->insert('places_photo', array(
+			  'place_id' => $place['entry_id'],
+			  'filename' => $place['photo1'],
+			  ));
+			  if ($place['photo2'] != '')
+			  $command->insert('places_photo', array(
+			  'place_id' => $place['entry_id'],
+			  'filename' => $place['photo2'],
+			  ));
+			  if ($place['photo3'] != '')
+			  $command->insert('places_photo', array(
+			  'place_id' => $place['entry_id'],
+			  'filename' => $place['photo3'],
+			  ));
+			  if ($place['photo4'] != '')
+			  $command->insert('places_photo', array(
+			  'place_id' => $place['entry_id'],
+			  'filename' => $place['photo4'],
+			  ));
+			  if ($place['photo5'] != '')
+			  $command->insert('places_photo', array(
+			  'place_id' => $place['entry_id'],
+			  'filename' => $place['photo5'],
+			  ));
+			  if ($place['photo6'] != '')
+			  $command->insert('places_photo', array(
+			  'place_id' => $place['entry_id'],
+			  'filename' => $place['photo6'],
+			  ));
+			  if ($place['photo7'] != '')
+			  $command->insert('places_photo', array(
+			  'place_id' => $place['entry_id'],
+			  'filename' => $place['photo7'],
+			  ));
+			  if ($place['photo8'] != '')
+			  $command->insert('places_photo', array(
+			  'place_id' => $place['entry_id'],
+			  'filename' => $place['photo8'],
+			  ));
+			  if ($place['photo9'] != '')
+			  $command->insert('places_photo', array(
+			  'place_id' => $place['entry_id'],
+			  'filename' => $place['photo9'],
+			  ));
+			  if ($place['photo10'] != '')
+			  $command->insert('places_photo', array(
+			  'place_id' => $place['entry_id'],
+			  'filename' => $place['photo10'],
+			  ));
+			 */
 			$i++;
 			echo "Place #{$i} imported\n";
 		}
@@ -306,30 +306,65 @@ class ImportCommand extends CConsoleCommand {
 		echo "END importing photos!!!\n";
 	}
 
-	/* public function actionComments() {
-	  $q = "SELECT entry_id, channel_id, author_id AS user_id, status, name, email, location, ip_address, comment_date, comment FROM exp_comments
-	  ORDER BY comment_id ASC";
-	  $comments = Yii::app()->db2->createCommand($q)->queryAll();
-	  $i = 0;
-	  echo "Begin importing comments ...\n";
-	  $command = Yii::app()->db->createCommand();
-	  foreach ($comments as $comment) {
-	  $command->insert('comments_place', array(
-	  'place_id' => $comment['entry_id'],
-	  'id_lang' => 1, //ru
-	  'channel_id' => $comment["channel_id"],
-	  'user_id' => $comment['user_id'],
-	  'name' => $comment['name'],
-	  'email' => $comment['email'],
-	  'location' => $comment['location'],
-	  'comment' => $comment['comment'],
-	  'ip_address' => $comment['ip_address'],
-	  'comment_date' => $comment['comment_date'],
-	  'status' => $comment['status']
-	  ));
-	  $i++;
-	  echo "Comment #{$i} imported\n";
-	  }
-	  echo "END importing comments!!!\n";
-	  } */
+	public function actionChannels() {
+		$q = "SELECT channel_id, channel_name, channel_title, channel_url FROM exp_channels WHERE channel_id in (1,2,4,6,11)";
+		$channels = Yii::app()->db2->createCommand($q)->queryAll();
+		$i = 0;
+		echo "Begin importing channels ...\n";
+		$command = Yii::app()->db->createCommand();
+		foreach ($channels as $channel) {
+			$command->insert('channels', array(
+				'channel_name' => $channel['channel_name'],
+				'channel_title' => $channel['channel_title'],
+				'channel_url' => $channel['channel_url']
+			));
+			$i++;
+			echo "Channel #{$i} imported\n";
+		}
+		echo "END importing channels!!!\n";
+	}
+
+	public function actionComments() {
+		$q = "SELECT entry_id, channel_id, author_id AS user_id, status, name, email, location, ip_address, comment_date, comment FROM exp_comments WHERE channel_id in (1,2,4,6,11) ORDER BY comment_id ASC";
+		$comments = Yii::app()->db2->createCommand($q)->queryAll();
+		$i = 0;
+		echo "Begin importing comments ...\n";
+		$command = Yii::app()->db->createCommand();
+		foreach ($comments as $comment) {
+			switch ($comment["channel_id"]) {
+				case 1:
+					$channel_id = 1;
+					break;
+				case 2:
+					$channel_id = 2;
+					break;
+				case 4:
+					$channel_id = 3;
+					break;
+				case 6:
+					$channel_id = 4;
+					break;
+				case 11:
+					$channel_id = 5;
+					break;
+			}
+			$command->insert('comments', array(
+				'place_id' => $comment['entry_id'],
+				'language_id' => 1, //ru
+				'channel_id' => $channel_id,
+				'user_id' => $comment['user_id'],
+				'name' => $comment['name'],
+				'email' => $comment['email'],
+				'location' => $comment['location'],
+				'comment' => $comment['comment'],
+				'ip_address' => $comment['ip_address'],
+				'comment_date' => $comment['comment_date'],
+				'status' => $comment['status']
+			));
+			$i++;
+			echo "Comment #{$i} imported\n";
+		}
+		echo "END importing comments!!!\n";
+	}
+
 }
