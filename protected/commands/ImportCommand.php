@@ -430,7 +430,7 @@ class ImportCommand extends CConsoleCommand {
 				'search_mistakes' => ''
 			));
 
-			/* if ($place['photo1'] != '')
+			 if ($place['photo1'] != '')
 			  $command->insert('places_photo', array(
 			  'place_id' => $place['entry_id'],
 			  'filename' => $place['photo1'],
@@ -480,7 +480,7 @@ class ImportCommand extends CConsoleCommand {
 			  'place_id' => $place['entry_id'],
 			  'filename' => $place['photo10'],
 			  ));
-			 */
+			 
 			$i++;
 			echo "Place #{$i} imported\n";
 		}
@@ -613,7 +613,7 @@ class ImportCommand extends CConsoleCommand {
 	}
 
 	public function actionComments() {
-		$q = "SELECT entry_id, channel_id, author_id AS user_id, status, name, email, location, ip_address, comment_date, comment FROM exp_comments WHERE channel_id in (1,2,4,6,11) ORDER BY comment_id ASC";
+		$q = "SELECT entry_id, channel_id, author_id AS user_id, status, ip_address, comment_date, comment FROM exp_comments WHERE channel_id in (1,2,4,6,11) ORDER BY comment_id ASC";
 		$comments = Yii::app()->db2->createCommand($q)->queryAll();
 		$i = 0;
 		echo "Begin importing comments ...\n";
@@ -641,13 +641,10 @@ class ImportCommand extends CConsoleCommand {
 				'language_id' => 1, //ru
 				'channel_id' => $channel_id,
 				'user_id' => $comment['user_id'],
-				'name' => $comment['name'],
-				'email' => $comment['email'],
-				'location' => $comment['location'],
 				'comment' => $comment['comment'],
 				'ip_address' => $comment['ip_address'],
 				'comment_date' => $comment['comment_date'],
-				'status' => $comment['status']
+				'status' => $comment['status'] == "o" ? 1 : 0
 			));
 			$i++;
 			echo "Comment #{$i} imported\n";

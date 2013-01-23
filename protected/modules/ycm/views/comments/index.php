@@ -5,12 +5,18 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 	'columns' => array(
 		'comment_id',
 		'place_id',
-		'channel_id',
-		'language_id',
-		/*array(
+		array( 
+			'name' => 'channel_id',
+			'value' => '$data->channel->channel_title'
+		),
+		array(
+			'name' => 'language_id',
+			'value' => '$data->language->name'
+		),
+		array(
 			'name' => 'user_id',
 			'value' => '$data->author->first_name . " " . $data->author->last_name'
-		),*/
+		),
 		'comment_date',
 		'status',
 		array(
