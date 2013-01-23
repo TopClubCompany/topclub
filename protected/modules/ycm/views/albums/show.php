@@ -2,9 +2,25 @@
 if($count_photos <= 0)
 	echo "<h3>Нет фоток</h3>";
 else {
+	//Create an instance of ColorBox
+	$colorbox = $this->widget('application.extensions.colorpowered.JColorBox');
+ 
+	//Call addInstance (chainable) from the widget generated.
+	$colorbox->addInstance('.colorbox', array('maxHeight'=>'100%', 'maxWidth'=>'100%'));
+   	
 	$this->widget('bootstrap.widgets.TbGridView', array(
 		'dataProvider' => PhotosModel::model()->search(),
 		'columns' => array(
+			array(
+				'name' => 'image',
+				'type' => 'html',
+				'htmlOptions'=>	array(
+					'width' => '100',
+					'height' => '100',
+				),
+				//'value' => '"/uploads/albums/".$data->album_id."/".$data->photoPath.""'
+				'value'=> 'CHtml::link(CHtml::image("/uploads/albums/".$data->album_id."/".$data->photoPath."", Yii::t(\'YcmModule.albums\', \'Album cover\'), array("width"=>30)), "/uploads/albums/".$data->album_id."/".$data->photoPath."", array("class"=>"colorbox"))'
+			),
 			'photo_id',
 			'title',
 			'url_title',
@@ -16,16 +32,15 @@ else {
 			),
 		)
 	));
-	$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
-		'id' => get_class($model) . '-id-form',
-		'type' => 'horizontal',
-		'inlineErrors' => false,
-		'htmlOptions' => array('enctype' => 'multipart/form-data'),
-	));
-	echo $this->module->getButtons();
-	$this->endWidget();
 }
-
+$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+	'id' => get_class($model) . '-id-form',
+	'type' => 'horizontal',
+	'inlineErrors' => false,
+	'htmlOptions' => array('enctype' => 'multipart/form-data'),
+));
+echo $this->module->getButtons();
+$this->endWidget();
 /**
  * Drag & Drop upload files
  */

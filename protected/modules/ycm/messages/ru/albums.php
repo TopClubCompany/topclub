@@ -14,4 +14,5 @@ return array(
 	'Edit album' => "Редактировать альбом",
 	"Photos from album: {name}, Add album: {author}" => 'Фото из альбома: "{name}", Добавил альбом: "{author}"',
 	"Add photos" => "Добавить фотки",
+	"Upload cover" => "Загрузить обложку",
 );

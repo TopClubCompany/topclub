@@ -1,18 +1,26 @@
 <?php
+//Create an instance of ColorBox
+$colorbox = $this->widget('application.extensions.colorpowered.JColorBox');
+ 
+//Call addInstance (chainable) from the widget generated.
+$colorbox->addInstance('.colorbox', array('maxHeight'=>'100%', 'maxWidth'=>'100%'));
+//show album cover
+
 
 $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider' => AlbumsModel::model()->search(),
 	'columns' => array(
 		array(
 			'name' => 'album_cover',
-			'type' => 'image',
+			'type' => 'html',
 			'htmlOptions'=>	array(
-				'width' => '50',
-				'height' => '50'
+				'width' => '100',
+				'height' => '100'
 			),
-			'value' => function ($data){
+			/*'value' => function ($data){
 				return preg_replace("/{filedir_1}/","http://topclub.ua/images/sized/images/uploads/", $data->album_cover);
-			}
+			}*/
+			'value' => 'CHtml::link(CHtml::image("/uploads/albums/".$data->album_id."/".$data->album_cover."", Yii::t(\'YcmModule.albums\', \'Album cover\'), array("width"=>100)), "/uploads/albums/".$data->album_id."/".$data->album_cover."", array("class"=>"colorbox"))'
 		),
 		'album_id',
 		array(

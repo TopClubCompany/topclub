@@ -1,7 +1,7 @@
 <?php
 
 class AlbumsModel extends CActiveRecord {
-
+	public $image;
 	/**
 	 * 
 	 * @param String $className
@@ -21,7 +21,8 @@ class AlbumsModel extends CActiveRecord {
 			'album_cover' => Yii::t('YcmModule.albums', 'Album cover'),
 			'albumEvent' => Yii::t('YcmModule.albums', 'Album event'),
 			'album_date' => Yii::t('YcmModule.albums', 'Album date'),
-			'status' => Yii::t('YcmModule.albums', 'Status')
+			'status' => Yii::t('YcmModule.albums', 'Status'),
+			'image' => Yii::t('YcmModule.albums', 'Upload cover')
 		);
 	}
 
@@ -31,6 +32,7 @@ class AlbumsModel extends CActiveRecord {
 			//array('url_title', 'textField'),
 			array('place_id', 'dropDown'),
 			array('album_cover', 'textField'),
+			array('image', 'file'),
 			array('albumEvent', 'textField'),
 			array('album_date', 'date'),
 			array('status', 'dropDown'),
@@ -52,10 +54,12 @@ class AlbumsModel extends CActiveRecord {
 	
 	public function rules() {
 		return array(
-			array('status', 'required'),
-			array('url_title', 'unique', 'attributeName' => 'url_title'),
-			array('title, url_title, place_id, album_cover, albumEvent, album_date, status', 'safe'),
-			array('url_title','ext.LocoTranslitFilter','translitAttribute'=>'title'),		);
+			array('status, title, place_id', 'required'),
+			array('url_title, title', 'unique', 'attributeName' => 'url_title'),
+			array('title, url_title, album_cover, place_id, albumEvent, album_date, status', 'safe'),
+			array('url_title','ext.LocoTranslitFilter','translitAttribute'=>'title'),
+			array('image', 'file', 'types'=> 'jpg, jpeg, png, gif','maxSize' => 1048576, 'allowEmpty' => true),
+		);
 	}
 	
 	public function beforeSave() {

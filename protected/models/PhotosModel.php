@@ -1,6 +1,6 @@
 <?php
 class PhotosModel extends CActiveRecord {
-	
+	public $image;
 	/**
 	 * 
 	 * @param string $className
