@@ -1,16 +1,22 @@
 <?php
 
 class ImportCommand extends CConsoleCommand {
-	
+
 	public function actionHelp() {
 		echo $this->help;
 	}
 
-	public function actionIndex() {
+	public function actionAll() {
+		$this->actionDefault();
+		$this->actionUsers();
+		$this->actionPlaces();
+	}
+
+	public function actionDefault() {
 		echo "Insert tests languages ...\n";
-		
+
 		$command = Yii::app()->db->createCommand();
-		
+
 		$command->insert('languages', array(
 			'language_id' => 1,
 			'code' => 'ru',
@@ -18,7 +24,7 @@ class ImportCommand extends CConsoleCommand {
 			'default' => 1,
 			'enabled' => 1
 		));
-		
+
 		$command->insert('languages', array(
 			'language_id' => 2,
 			'code' => 'ua',
@@ -26,7 +32,7 @@ class ImportCommand extends CConsoleCommand {
 			'default' => 0,
 			'enabled' => 1
 		));
-		
+
 		$command->insert('languages', array(
 			'language_id' => 3,
 			'code' => 'en',
@@ -34,18 +40,18 @@ class ImportCommand extends CConsoleCommand {
 			'default' => 0,
 			'enabled' => 1
 		));
-		
+
 		echo "Insert tests filters ...\n";
 		$command->insert('filters', array(
 			'filter_id' => 1,
 			'url' => 'kitchens'
 		));
-		
+
 		$command->insert('filters', array(
 			'filter_id' => 2,
 			'url' => 'price'
 		));
-		
+
 		echo "Insert tests filters_desc ...\n";
 		$command->insert('filters_desc', array(
 			'filter_id' => 1,
@@ -53,230 +59,230 @@ class ImportCommand extends CConsoleCommand {
 			'name' => 'Кухни',
 			'description' => 'Кухни'
 		));
-		
+
 		$command->insert('filters_desc', array(
 			'filter_id' => 1,
 			'language_id' => 2,
 			'name' => 'Кухні',
 			'description' => 'Кухні'
 		));
-		
+
 		$command->insert('filters_desc', array(
 			'filter_id' => 1,
 			'language_id' => 3,
 			'name' => 'Kitchens',
 			'description' => 'Kitchens'
 		));
-		
+
 		$command->insert('filters_desc', array(
 			'filter_id' => 2,
 			'language_id' => 1,
 			'name' => 'Цена',
 			'description' => 'Цена'
 		));
-		
+
 		$command->insert('filters_desc', array(
 			'filter_id' => 2,
 			'language_id' => 2,
 			'name' => 'Ціна',
 			'description' => 'Ціна'
 		));
-		
+
 		$command->insert('filters_desc', array(
 			'filter_id' => 2,
 			'language_id' => 3,
 			'name' => 'Price',
 			'description' => 'Price'
 		));
-				
+
 		echo "Insert tests filters_values ...\n";
 		$command->insert('filters_values', array(
 			'value_id' => 1,
 			'filter_id' => 1,
 			'url' => 'chinese'
 		));
-		
+
 		$command->insert('filters_values', array(
 			'value_id' => 2,
 			'filter_id' => 1,
 			'url' => 'italian'
 		));
-		
+
 		$command->insert('filters_values', array(
 			'value_id' => 3,
 			'filter_id' => 1,
 			'url' => 'ukrainian'
 		));
-		
+
 		$command->insert('filters_values', array(
 			'value_id' => 4,
 			'filter_id' => 1,
 			'url' => 'korean'
 		));
-		
+
 		$command->insert('filters_values', array(
 			'value_id' => 5,
 			'filter_id' => 2,
 			'url' => 'very-cheap'
 		));
-		
+
 		$command->insert('filters_values', array(
 			'value_id' => 6,
 			'filter_id' => 2,
 			'url' => 'cheap'
 		));
-		
+
 		$command->insert('filters_values', array(
 			'value_id' => 7,
 			'filter_id' => 2,
 			'url' => 'middle-price'
 		));
-		
+
 		$command->insert('filters_values', array(
 			'value_id' => 8,
 			'filter_id' => 2,
 			'url' => 'expensive'
 		));
-		
+
 		echo "Insert tests filters_values_desc ...\n";
 		$command->insert('filters_values_desc', array(
 			'value_id' => 1,
 			'language_id' => 1,
 			'name' => 'Китайская'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 1,
 			'language_id' => 2,
 			'name' => 'Китайська'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 1,
 			'language_id' => 3,
 			'name' => 'Chinese'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 2,
 			'language_id' => 1,
 			'name' => 'Итальянская'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 2,
 			'language_id' => 2,
 			'name' => 'Італіська'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 2,
 			'language_id' => 3,
 			'name' => 'Italian'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 3,
 			'language_id' => 1,
 			'name' => 'Украинская'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 3,
 			'language_id' => 2,
 			'name' => 'Українська'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 3,
 			'language_id' => 3,
 			'name' => 'Ukrainian'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 4,
 			'language_id' => 1,
 			'name' => 'Корейская'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 4,
 			'language_id' => 2,
 			'name' => 'Корейська'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 4,
 			'language_id' => 3,
 			'name' => 'Korean'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 5,
 			'language_id' => 1,
 			'name' => 'Очень дешево'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 5,
 			'language_id' => 2,
 			'name' => 'Дуже дешево'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 5,
 			'language_id' => 3,
 			'name' => 'Very cheap'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 6,
 			'language_id' => 1,
 			'name' => 'Дешево'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 6,
 			'language_id' => 2,
 			'name' => 'Дешево'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 6,
 			'language_id' => 3,
 			'name' => 'Сheap'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 7,
 			'language_id' => 1,
 			'name' => 'Середняя'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 7,
 			'language_id' => 2,
 			'name' => 'Средняя'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 7,
 			'language_id' => 3,
 			'name' => 'Middle price'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 8,
 			'language_id' => 1,
 			'name' => 'Дорого'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 8,
 			'language_id' => 2,
 			'name' => 'Дорого'
 		));
-		
+
 		$command->insert('filters_values_desc', array(
 			'value_id' => 8,
 			'language_id' => 3,
@@ -360,48 +366,48 @@ class ImportCommand extends CConsoleCommand {
 	}
 
 	public function actionPlaces() {
-		$q = "SELECT ecd.entry_id, title, url_title, status, field_id_1 AS name, field_id_2 AS schedule, field_id_3 AS place_desc, field_id_4 AS street, field_id_5 AS street_number, field_id_6 AS place_orientir, field_id_8 AS phone, field_id_9 AS phone2, field_id_11 AS website, field_id_12 AS email, field_id_13 AS cost, field_id_14 AS photo1, field_id_15 AS photo2, field_id_16 AS photo3, field_id_17 AS photo4, field_id_18 AS photo5, field_id_25 AS search_mistakes, field_id_89 AS closed, field_id_96 AS photo6, field_id_97 AS photo7, field_id_98 AS photo8, field_id_99 AS photo9, field_id_100 AS photo10, field_id_108 AS admin_phone,field_id_109 AS order_discount, field_id_110 AS order_discount_banket, field_id_111 AS lat, field_id_112 AS lng FROM exp_channel_data AS ecd JOIN exp_channel_titles AS ect ON ecd.entry_id = ect.entry_id WHERE ecd.channel_id = 1 ORDER BY ecd.entry_id";
+		$q = "SELECT ect.entry_date as created_at, author_id as author_id, ecd.entry_id, title, url_title, status, field_id_1 AS name, field_id_2 AS schedule, field_id_3 AS place_desc, field_id_4 AS street, field_id_5 AS street_number, field_id_6 AS place_orientir, field_id_8 AS phone, field_id_9 AS phone2, field_id_11 AS website, field_id_12 AS email, field_id_13 AS cost, field_id_14 AS photo1, field_id_15 AS photo2, field_id_16 AS photo3, field_id_17 AS photo4, field_id_18 AS photo5, field_id_25 AS search_mistakes, field_id_89 AS closed, field_id_96 AS photo6, field_id_97 AS photo7, field_id_98 AS photo8, field_id_99 AS photo9, field_id_100 AS photo10, field_id_108 AS admin_phone,field_id_109 AS order_discount, field_id_110 AS order_discount_banket, field_id_111 AS lat, field_id_112 AS lng FROM exp_channel_data AS ecd JOIN exp_channel_titles AS ect ON ecd.entry_id = ect.entry_id WHERE ecd.channel_id = 1 ORDER BY ecd.entry_id";
 		$places = Yii::app()->db2->createCommand($q)->queryAll();
 		$i = 0;
 		echo "Begin importing places ...\n";
 		$command = Yii::app()->db->createCommand();
 		foreach ($places as $place) {
+			if (!UsersModel::model()->findByPk($place['author_id']))
+				continue;
+			
 			$place['phone'] = str_replace(array('(', ')', '-', ' ', '+'), '', $place['phone']);
 			$place['phone2'] = str_replace(array('(', ')', '-', ' ', '+'), '', $place['phone2']);
-			$phones = $place['phone'] ?: null;
+			$phones = $place['phone'] ? : null;
 			if ($place['phone2'] && $phones) {
 				$phones .= ',' . $place['phone2'];
 			}
-			
+
 			$command->insert('places', array(
 				'place_id' => $place['entry_id'],
-				//'title' => $place['title'],
-				'url_title' => $place['url_title'],
+				'url' => $place['url_title'],
 				'status' => $place['status'] == 'open' ? 1 : 0,
-				//'name' => $place['name'],
 				'schedule' => $place['schedule'],
-				//'place_desc' => $place['place_desc'],
-				//'street' => $place['street'],
 				'street_number' => $place['street_number'],
-				//'place_orientir' => $place['place_orientir'],
 				'phones' => $phones,
-				'admin_phone' => $place['admin_phone'],
+				'admin_phone' => $place['admin_phone'] == 0 ? null : $place['admin_phone'],
 				'website' => $place['website'],
 				'email' => $place['email'],
-				'cost' => $place['cost'],
+				'cost' => (int) $place['cost'] ? : null,
 				'lat' => $place['lat'],
 				'lng' => $place['lng'],
-				'order_discount' => $place['order_discount'],
-				'order_discount_banket' => $place['order_discount_banket'],
-					//'search_mistakes' => $place['search_mistakes'],
-				'closed' => $place['closed'] == 'yes' ? 1 : 0
+				'order_discount' => (int) $place['order_discount'] ? : null,
+				'order_discount_banket' => (int) $place['order_discount_banket'] ? : null,
+				'closed' => $place['closed'] == 'yes' ? 1 : 0,
+				'created_at' => $created_at = date('Y-d-m h-i-s', $place['created_at']),
+				'updated_at' => $created_at,
+				'created_by' => $place['author_id'],
+				'updated_by' => $place['author_id'],
 			));
 
 			$command->insert('places_desc', array(
 				'place_id' => $place['entry_id'],
 				'language_id' => 1,
 				'title' => str_replace(array('(Закрыт)', 'Закрыт', 'закрыт'), '', $place['title']),
-				'name' => $place['name'],
 				'place_desc' => $place['place_desc'],
 				'street' => $place['street'],
 				'place_orientir' => $place['place_orientir'],
@@ -412,7 +418,6 @@ class ImportCommand extends CConsoleCommand {
 				'place_id' => $place['entry_id'],
 				'language_id' => 2,
 				'title' => '',
-				'name' => '',
 				'place_desc' => '',
 				'street' => '',
 				'place_orientir' => '',
@@ -423,64 +428,63 @@ class ImportCommand extends CConsoleCommand {
 				'place_id' => $place['entry_id'],
 				'language_id' => 3,
 				'title' => '',
-				'name' => '',
 				'place_desc' => '',
 				'street' => '',
 				'place_orientir' => '',
 				'search_mistakes' => ''
 			));
 
-			 if ($place['photo1'] != '')
-			  $command->insert('places_photo', array(
-			  'place_id' => $place['entry_id'],
-			  'filename' => $place['photo1'],
-			  ));
-			  if ($place['photo2'] != '')
-			  $command->insert('places_photo', array(
-			  'place_id' => $place['entry_id'],
-			  'filename' => $place['photo2'],
-			  ));
-			  if ($place['photo3'] != '')
-			  $command->insert('places_photo', array(
-			  'place_id' => $place['entry_id'],
-			  'filename' => $place['photo3'],
-			  ));
-			  if ($place['photo4'] != '')
-			  $command->insert('places_photo', array(
-			  'place_id' => $place['entry_id'],
-			  'filename' => $place['photo4'],
-			  ));
-			  if ($place['photo5'] != '')
-			  $command->insert('places_photo', array(
-			  'place_id' => $place['entry_id'],
-			  'filename' => $place['photo5'],
-			  ));
-			  if ($place['photo6'] != '')
-			  $command->insert('places_photo', array(
-			  'place_id' => $place['entry_id'],
-			  'filename' => $place['photo6'],
-			  ));
-			  if ($place['photo7'] != '')
-			  $command->insert('places_photo', array(
-			  'place_id' => $place['entry_id'],
-			  'filename' => $place['photo7'],
-			  ));
-			  if ($place['photo8'] != '')
-			  $command->insert('places_photo', array(
-			  'place_id' => $place['entry_id'],
-			  'filename' => $place['photo8'],
-			  ));
-			  if ($place['photo9'] != '')
-			  $command->insert('places_photo', array(
-			  'place_id' => $place['entry_id'],
-			  'filename' => $place['photo9'],
-			  ));
-			  if ($place['photo10'] != '')
-			  $command->insert('places_photo', array(
-			  'place_id' => $place['entry_id'],
-			  'filename' => $place['photo10'],
-			  ));
-			 
+			if ($place['photo1'] != '')
+				$command->insert('places_photo', array(
+					'place_id' => $place['entry_id'],
+					'filename' => $place['photo1'],
+				));
+			if ($place['photo2'] != '')
+				$command->insert('places_photo', array(
+					'place_id' => $place['entry_id'],
+					'filename' => $place['photo2'],
+				));
+			if ($place['photo3'] != '')
+				$command->insert('places_photo', array(
+					'place_id' => $place['entry_id'],
+					'filename' => $place['photo3'],
+				));
+			if ($place['photo4'] != '')
+				$command->insert('places_photo', array(
+					'place_id' => $place['entry_id'],
+					'filename' => $place['photo4'],
+				));
+			if ($place['photo5'] != '')
+				$command->insert('places_photo', array(
+					'place_id' => $place['entry_id'],
+					'filename' => $place['photo5'],
+				));
+			if ($place['photo6'] != '')
+				$command->insert('places_photo', array(
+					'place_id' => $place['entry_id'],
+					'filename' => $place['photo6'],
+				));
+			if ($place['photo7'] != '')
+				$command->insert('places_photo', array(
+					'place_id' => $place['entry_id'],
+					'filename' => $place['photo7'],
+				));
+			if ($place['photo8'] != '')
+				$command->insert('places_photo', array(
+					'place_id' => $place['entry_id'],
+					'filename' => $place['photo8'],
+				));
+			if ($place['photo9'] != '')
+				$command->insert('places_photo', array(
+					'place_id' => $place['entry_id'],
+					'filename' => $place['photo9'],
+				));
+			if ($place['photo10'] != '')
+				$command->insert('places_photo', array(
+					'place_id' => $place['entry_id'],
+					'filename' => $place['photo10'],
+				));
+
 			$i++;
 			echo "Place #{$i} imported\n";
 		}
@@ -505,7 +509,7 @@ class ImportCommand extends CConsoleCommand {
 				'video_type' => $article['video_type'],
 				'ip_address' => $article['ip_address'],
 				'pub_date' => $article['year'] . "-" . $article['month'] . "-" . $article['day'],
-				'status' => $article['status']
+				'status' => $article['status'],
 			));
 			$i++;
 			echo "Article #{$i} imported\n";
