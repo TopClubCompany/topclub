@@ -1,20 +1,14 @@
 <?php
 
-class m130111_094451_create_table_places extends CDbMigration
-{
-	public function up()
-	{
+class m130111_094451_create_table_places extends CDbMigration {
+
+	public function up() {
 		$this->createTable('places', array(
 			'place_id' => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
-			//'title' => 'VARCHAR(100)',
-			'url_title' => 'VARCHAR(100)',
+			'url' => 'VARCHAR(100)',
 			'status' => 'BOOLEAN NOT NULL DEFAULT 1',
-			//'name' => 'VARCHAR(50)',
 			'schedule' => 'VARCHAR(50)',
-			//'place_desc' => 'TEXT',
-			//'street' => 'VARCHAR(50)',
 			'street_number' => 'VARCHAR(10)',
-			//'place_orientir' => 'VARCHAR(255)',
 			'phones' => 'VARCHAR(255)',
 			'admin_phone' => 'INT(10) DEFAULT NULL',
 			'website' => 'VARCHAR(100)',
@@ -24,14 +18,23 @@ class m130111_094451_create_table_places extends CDbMigration
 			'lng' => 'FLOAT',
 			'order_discount' => 'TINYINT(3) UNSIGNED',
 			'order_discount_banket' => 'TINYINT(3) UNSIGNED',
-			//'search_mistakes' => 'VARCHAR(50)',
 			'closed' => 'BOOLEAN NOT NULL DEFAULT 0',
+			'created_at' => 'DATETIME NOT NULL',
+			'updated_at' => 'DATETIME NOT NULL',
+			'created_by' => 'INT UNSIGNED',
+			'updated_by' => 'INT UNSIGNED',
 				), 'ENGINE=InnoDB COLLATE=utf8_general_ci');
+
+		$this->createIndex('created_by', 'places', 'created_by');
+		$this->createIndex('updated_by', 'places', 'updated_by');
+		$this->createIndex('url', 'places', 'url', true);
+		$this->addForeignKey('created_by_fk', 'places', 'created_by', 'users', 'user_id', 'CASCADE', 'SET NULL');
+		$this->addForeignKey('updated_by_fk', 'places', 'updated_by', 'users', 'user_id', 'CASCADE', 'SET NULL');
 	}
 
-	public function down()
-	{
+	public function down() {
 		$this->dropTable('places');
 		return true;
 	}
+
 }
