@@ -10,7 +10,8 @@ return array(
 		'application.components.*',
 	),
 	'aliases' => array(
-		'xupload' => 'application.modules.ycm.extensions.xupload'
+		'xupload' => 'application.modules.ycm.extensions.xupload',
+		'ycm' => 'application.modules.ycm'
 	),
 	'modules' => array(
 		'ycm' => array(
