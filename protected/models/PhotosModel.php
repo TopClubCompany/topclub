@@ -20,21 +20,21 @@ class PhotosModel extends CActiveRecord {
 	
 	public function attributeLabels() {
 		return array(
-			'photo_id' => Yii::t('YcmModule.photos', 'photo_id'),
-			'album_id' => Yii::t('YcmModule.photos', 'album_id'),
-			'author_id' => Yii::t('YcmModule.photos', 'author_id'),
-			'title' => Yii::t('YcmModule.photos', 'title'),
-			'url_title' => Yii::t('YcmModule.photos', 'url_title'),
-			'photoPath' => Yii::t('YcmModule.photos', 'photoPath'),
-			'album_date' => Yii::t('YcmModule.photos', 'album_date'),
-			'status' => Yii::t('YcmModule.photos', 'status')
+			'photo_id' => Yii::t('YcmModule.photos', 'Photo id'),
+			'album_id' => Yii::t('YcmModule.photos', 'Album id'),
+			'user_id' => Yii::t('YcmModule.photos', 'User id'),
+			'title' => Yii::t('YcmModule.photos', 'Title'),
+			'url' => Yii::t('YcmModule.photos', 'Url'),
+			'photoPath' => Yii::t('YcmModule.photos', 'Photo Path'),
+			'album_date' => Yii::t('YcmModule.photos', 'Album date'),
+			'status' => Yii::t('YcmModule.photos', 'Status')
 		);
 	}
 	
 	public function relations() {
 		return array(
 			'Photos' => array(self::HAS_ONE, 'AlbumsModel', array('album_id' => 'album_id')),
-			'author' => array(self::HAS_ONE, 'UsersModel', array('user_id' => 'author_id')),
+			'author' => array(self::HAS_ONE, 'UsersModel', array('user_id' => 'user_id')),
 		);
 	}
 	
