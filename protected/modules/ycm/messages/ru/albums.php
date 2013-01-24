@@ -1,7 +1,7 @@
 <?php
 return array(
 	'Album id' => 'ID',
-	'Author id' => "Автор",
+	'User id' => "Автор",
 	'Title' => "Название альбома",
 	'Url title' => "Ссылка",
 	'Place id' => "Место проведения",
@@ -15,4 +15,6 @@ return array(
 	"Photos from album: {name}, Add album: {author}" => 'Фото из альбома: "{name}", Добавил альбом: "{author}"',
 	"Add photos" => "Добавить фотки",
 	"Upload cover" => "Загрузить обложку",
+	'Open' => "Открыт",
+	'Closed' => "Закрыт",
 );

@@ -58,27 +58,32 @@ class AlbumsController extends AdminController {
 				Yii::t('YcmModule.albums', 'Add album')
 			));
 		}
+		
 		if ($_POST['AlbumsModel']) {
 			$AlbumsModel->attributes = $_POST['AlbumsModel'];
+			
 			if ($AlbumsModel->validate()) {
 				if ($image = CUploadedFile::getInstance(AlbumsModel::model(), 'image')) {
 					$extName = $image->getExtensionName();
-					$path = Yii::app()->getBasePath() . "/../uploads/albums/$album_id/";
-					$filename = $AlbumsModel->url_title."_cover.".$extName;
+					$path = Yii::app()->getBasePath() . "/../uploads/albums/{$album_id}/";
+					$filename = $AlbumsModel->url."_cover.".$extName;
 					
 					if (!is_dir($path)) {
 						mkdir($path);
 						chmod($path, 0777);
 					}
-					
+					var_dump($filename);
 					if (is_file($image->getTempName())) {
 						if (rename($image->getTempName(), $path . $filename)) {
 							chmod($path . $filename, 0777);
 							$AlbumsModel->album_cover = $filename;
 							$AlbumsModel->save(false);
 						}
+					} else {
+						$AlbumsModel->save(false);
 					}
-					$AlbumsModel->save(false);
+					
+					$this->ordering($album_id);
 					if ($_POST['_save']) {
 						$redirect = array('albums/index');
 					} else if ($_POST["_continue"]) {
@@ -90,8 +95,28 @@ class AlbumsController extends AdminController {
 				}
 			}
 		}
+		//count photos
+		$n = PhotosModel::model()->count('album_id=:album_id', array(':album_id' => $album_id));
+
+		$data = AlbumsModel::model()->findByAttributes(array('album_id' => $album_id))->attributes;
+		/*$author = UsersModel::model()->find('user_id=:user_id', array(':user_id' => $data["user_id"]))->attributes;
+		//breadcrumbs
+		$this->breadcrumbs = array(
+			Yii::t('YcmModule.albums', 'Albums') => array('albums/index'),
+			Yii::t('YcmModule.albums', $data["title"]) => array('albums/edit', "album_id" => $album_id),
+			Yii::t('YcmModule.albums', 'Photos from album: {name}, Add album: {author}', array('{name}' => $data["title"], '{author}' => $author["first_name"] . " " . $author["last_name"])),
+		);*/
+		
+		Yii::import("xupload.models.XUploadForm");
+		$upload_photos = new XUploadForm;
+		
 		$this->render('edit', array(
-			'model' => $AlbumsModel
+			'model' => $AlbumsModel,
+			'upload_photos' => $upload_photos,
+			'count_photos' => $n,
+			'PhotosModel' => PhotosModel::model(),
+			'user_id' => $data["user_id"],
+			'url' => $url
 		));
 	}
 
@@ -105,47 +130,6 @@ class AlbumsController extends AdminController {
 		$AlbumsModel->delete();
 		if (!$_GET['ajax'])
 			$this->redirect(array('Albums/index'));
-	}
-
-	public function actionShow() {
-		if ($album_id = (int) $_GET['album_id'] ? : null) {
-			//count photos
-			$n = PhotosModel::model()->count('album_id=:album_id', array(':album_id' => $album_id));
-
-			$data = AlbumsModel::model()->findByAttributes(array('album_id' => $album_id))->attributes;
-			$author = UsersModel::model()->find('user_id=:user_id', array(':user_id' => $data["author_id"]))->attributes;
-			//breadcrumbs
-			$this->breadcrumbs = array(
-				Yii::t('YcmModule.albums', 'Albums') => array('albums/index'),
-				Yii::t('YcmModule.albums', $data["title"]) => array('albums/edit', "album_id" => $album_id),
-				Yii::t('YcmModule.albums', 'Photos from album: {name}, Add album: {author}', array('{name}' => $data["title"], '{author}' => $author["first_name"] . " " . $author["last_name"])),
-			);
-
-			//buttons
-			$this->buttons = array(
-				array(
-					'buttonType' => 'submit',
-					'label' => Yii::t('YcmModule.ycm', 'Update'),
-					'url' => array(Yii::app()->controller->id . '/edit'),
-					'htmlOptions' => array('name' => '_update_album', 'value' => '1', 'style' => 'margin-left:10px;')
-				)
-			);
-
-			if ($_POST['_update_album']) {
-				$this->ordering($_GET["album_id"]);
-			}
-			Yii::import("xupload.models.XUploadForm");
-			$upload_photos = new XUploadForm;
-			$this->render('show', array(
-				'upload_photos' => $upload_photos,
-				'count_photos' => $n,
-				'model' => PhotosModel::model(),
-				'author_id' => $data["author_id"],
-				'url_title' => $url_title
-			));
-		} else {
-			$this->redirect('albums/index');
-		}
 	}
 
 	public function actionDeleteImage() {
@@ -172,7 +156,7 @@ class AlbumsController extends AdminController {
 	public function ordering($_album_id) {
 		$data = PhotosModel::model()->findAll('album_id=:album_id', array(':album_id' => $_album_id));
 		$album = AlbumsModel::model()->findByAttributes(array('album_id' => $_album_id))->attributes;
-		$url_title_album = $album["url_title"];
+		$url_album = $album["url"];
 		$i = 1;
 		
 		foreach ($data as $photos) {
@@ -188,17 +172,19 @@ class AlbumsController extends AdminController {
 			preg_match("/(jpg|jpeg|png|gif)/", $PhotosModel->photoPath, $type_match);
 			$type = $type_match[0];
 			$new_file = realpath(Yii::app()->getBasePath() . 
-					"/../uploads/albums/{$_album_id}") . "/". $url_title_album."_".$c.".".$type;
-			$new_PhotoPath = $url_title_album."_".$c.".".$type;
+					"/../uploads/albums/{$_album_id}") . "/". $url_album."_".$c.".".$type;
+			$new_PhotoPath = $url_album."_".$c.".".$type;
 			if (is_file($file)) {
 				if (rename($file, $new_file)) {
 					chmod($new_file, 0777);
 					$PhotosModel->photoPath = $new_PhotoPath;
 				}
+			} else {
+				$PhotosModel->photoPath = $new_PhotoPath;
 			}
 			
 			$PhotosModel->title = "Фото " . $i;
-			$PhotosModel->url_title = "photo_" . $photos->attributes["photo_id"];
+			$PhotosModel->url = "photo_" . $photos->attributes["photo_id"];
 			$PhotosModel->save();
 			$i++;
 		}
@@ -270,9 +256,9 @@ class AlbumsController extends AdminController {
 					Yii::app()->user->setState('images', $userImages);
 
 					$album_id = $_GET["album_id"];
-					$author_id = $_GET["author_id"];
+					$user_id = $_GET["user_id"];
 					//Save uploaded files to appropriate directory
-					$photo_id = $this->addImages($album_id, $author_id);
+					$photo_id = $this->addImages($album_id, $user_id);
 
 					//Now we need to tell our widget that the upload was succesfull
 					//We do so, using the json structure defined in
@@ -289,7 +275,7 @@ class AlbumsController extends AdminController {
 								"name" => $model->name,
 								"album_id" => $album_id,
 								"photo_id" => $photo_id,
-								"author_id" => $author_id
+								"user_id" => $user_id
 							)),
 							"delete_type" => "POST"
 						)
@@ -308,7 +294,7 @@ class AlbumsController extends AdminController {
 		}
 	}
 
-	public function addImages($_album_id, $_author_id) {
+	public function addImages($_album_id, $_user_id) {
 		//If we have pending images
 		if (Yii::app()->user->hasState('images')) {
 			$userImages = Yii::app()->user->getState('images');
@@ -327,7 +313,7 @@ class AlbumsController extends AdminController {
 						$img = new PhotosModel( );
 						$img->photoPath = $image["name"];
 						$img->album_id = $_album_id;
-						$img->author_id = $_author_id;
+						$img->user_id = $_user_id;
 						$img->ip_address = Yii::app()->request->userHostAddress;
 
 						//$img->source = "/uploads/places/{$place_id}/" . $image["filename"];

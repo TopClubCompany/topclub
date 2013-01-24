@@ -1,4 +1,5 @@
 <?php
+
 //Create an instance of ColorBox
 $colorbox = $this->widget('application.extensions.colorpowered.JColorBox');
  
@@ -14,15 +15,29 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 ));
 $this->module->createActiveWidget($form, $model, 'title');
-//$this->module->createActiveWidget($form, $model, 'url_title');
 $this->module->createActiveWidget($form, $model, 'place_id');
 $this->module->createActiveWidget($form, $model, 'image');
 $this->module->createActiveWidget($form, $model, 'albumEvent');
 $this->module->createActiveWidget($form, $model, 'album_date');
 $this->module->createActiveWidget($form, $model, 'status');
 
-echo "<a href='".CHtml::normalizeUrl(array(
+/*echo "<a href='".CHtml::normalizeUrl(array(
 	"albums/show", "album_id" => $_GET["album_id"]
-	))."'>".Yii::t('YcmModule.albums', 'Add photos')."</a>";
+	))."'>".Yii::t('YcmModule.albums', 'Add photos')."</a>";*/
 echo $this->module->getButtons();
+$this->renderPartial('_upload_photos', array(
+	'upload_photos' => $upload_photos,
+	'count_photos' => $count_photos,
+	'model' => $PhotosModel,
+	'user_id' => $user_id,
+	'url' => $url
+));
 $this->endWidget();
+/*
+$this->renderPartial('_upload_photos', array(
+	'upload_photos' => $upload_photos,
+	'count_photos' => $count_photos,
+	'model' => $PhotosModel,
+	'user_id' => $user_id,
+	'url' => $url
+));*/

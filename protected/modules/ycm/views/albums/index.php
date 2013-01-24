@@ -24,7 +24,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 		),
 		'album_id',
 		array(
-			'name' => 'author_id',
+			'name' => 'user_id',
 			'value' => '$data->author->first_name . " " . $data->author->last_name'
 		),
 		array(
@@ -39,7 +39,10 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 		),
 		'albumEvent',
 		'album_date',
-		'status',
+		array(
+			'name' => 'status',
+			'value' => '$data->getStatus();',
+		),
 		array(
 			'class'=>'CButtonColumn',
 			'template' => '{update}{delete}',
