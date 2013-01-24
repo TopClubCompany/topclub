@@ -10,6 +10,7 @@ else {
    	
 	$this->widget('bootstrap.widgets.TbGridView', array(
 		'dataProvider' => PhotosModel::model()->search(),
+		'id' => 'album_photo',
 		'columns' => array(
 			array(
 				'name' => 'image',
@@ -19,11 +20,11 @@ else {
 					'height' => '100',
 				),
 				//'value' => '"/uploads/albums/".$data->album_id."/".$data->photoPath.""'
-				'value'=> 'CHtml::link(CHtml::image("/uploads/albums/".$data->album_id."/".$data->photoPath."", Yii::t(\'YcmModule.albums\', \'Album cover\'), array("width"=>30)), "/uploads/albums/".$data->album_id."/".$data->photoPath."", array("class"=>"colorbox"))'
+				'value'=> 'CHtml::link(CHtml::image("/uploads/albums/".$data->album_id."/".$data->photoPath."", Yii::t(\'YcmModule.albums\', \'Album cover\'), array("width"=>100)), "/uploads/albums/".$data->album_id."/".$data->photoPath."", array("class"=>"colorbox"))'
 			),
 			'photo_id',
 			'title',
-			'url_title',
+			'url',
 			'photoPath',
 			array(
 				'class'=>'CButtonColumn',
@@ -44,6 +45,13 @@ $this->endWidget();
 /**
  * Drag & Drop upload files
  */
+Yii::app()->clientScript->registerScript('xupload-album-images', "jQuery('#xupload-album-images').bind('fileuploadcompleted', function(e, data) {
+	jQuery('#album_photo').yiiGridView('update');
+});
+jQuery('#xupload-album-images').bind('fileuploaddestroyed', function(e, data) {
+	jQuery('#album_photo').yiiGridView('update');
+});
+", CClientScript::POS_READY);
 $this->widget('xupload.XUpload', array(
 	'url' => CHtml::normalizeUrl(array("albums/upload", "album_id" => $_GET["album_id"], "author_id" => $author_id)),
 	'model' => $upload_photos,
@@ -52,6 +60,7 @@ $this->widget('xupload.XUpload', array(
 	'autoUpload' => true,
 	'htmlOptions' => array(
 		'class' => 'fileupload',
+		'id' => 'xupload-album-images'
 	),
 ));
 ?>

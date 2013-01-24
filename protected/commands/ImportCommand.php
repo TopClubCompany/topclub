@@ -502,14 +502,15 @@ class ImportCommand extends CConsoleCommand {
 				'article_id' => $article['entry_id'],
 				'author_id' => $article['author_id'],
 				'title' => $article['title'],
-				'url_title' => $article['url_title'],
+				'url' => $article['url_title'],
 				'pub_txt' => $article['pub_txt'],
 				'pub_image' => $article['pub_image'],
 				'sub_header' => $article['sub_header'],
 				'video_type' => $article['video_type'],
 				'ip_address' => $article['ip_address'],
 				'pub_date' => $article['year'] . "-" . $article['month'] . "-" . $article['day'],
-				'status' => $article['status'],
+				'status' => $article['status'] == "open" ? 1 : 0
+
 			));
 			$i++;
 			echo "Article #{$i} imported\n";
@@ -528,7 +529,7 @@ class ImportCommand extends CConsoleCommand {
 				'event_id' => $event['entry_id'],
 				'author_id' => $event['author_id'],
 				'title' => $event['title'],
-				'url_title' => $event['url_title'],
+				'url' => $event['url_title'],
 				'event_desc' => $event['event_desc'],
 				'event_place' => $event['event_place'],
 				'event_alternative_place' => $event['event_alternative_place'],
@@ -538,7 +539,7 @@ class ImportCommand extends CConsoleCommand {
 				'event_img' => $event['event_img'],
 				'ip_address' => $event['ip_address'],
 				'event_date' => $event['year'] . "-" . $event['month'] . "-" . $event['day'],
-				'status' => $event['status']
+				'status' => $event['status'] == "open" ? 1 : 0
 			));
 			$i++;
 			echo "Event #{$i} imported\n";
@@ -553,17 +554,18 @@ class ImportCommand extends CConsoleCommand {
 		echo "Begin importing albums ...\n";
 		$command = Yii::app()->db->createCommand();
 		foreach ($albums as $album) {
+			$album_cover = preg_replace("/{filedir_\d+}/", "", $album['album_cover']);
 			$command->insert('albums', array(
 				'album_id' => $album['entry_id'],
-				'author_id' => $album['author_id'],
+				'user_id' => $album['author_id'],
 				'title' => $album['title'],
-				'url_title' => $album['url_title'],
+				'url' => $album['url_title'],
 				'place_id' => $album['place_id'],
-				'album_cover' => $album['album_cover'],
+				'album_cover' => $album_cover,
 				'albumEvent' => $album['albumEvent'],
 				'ip_address' => $album['ip_address'],
 				'album_date' => $album['year'] . "-" . $album['month'] . "-" . $album['day'],
-				'status' => $album['status']
+				'status' => $album['status'] == "open" ? 1 : 0
 			));
 			//create directory for each album
 			//mkdir("../uploads/albums/".$album['url_title'], 0644);
@@ -581,39 +583,22 @@ class ImportCommand extends CConsoleCommand {
 		echo "Begin importing photos ...\n";
 		$command = Yii::app()->db->createCommand();
 		foreach ($photos as $photo) {
+			$photoPath = preg_replace("/{filedir_\d+}/", "", $photo['photoPath']);
 			$command->insert('photos', array(
 				'photo_id' => $photo['entry_id'],
 				'album_id' => $photo['album_id'],
-				'author_id' => $photo['author_id'],
+				'user_id' => $photo['author_id'],
 				'title' => $photo['title'],
-				'url_title' => $photo['url_title'],
-				'photoPath' => $photo['photoPath'],
+				'url' => $photo['url_title'],
+				'photoPath' => $photoPath,
 				'ip_address' => $photo['ip_address'],
 				//'album_date' => $photo['year'] . "-" . $photo['month'] . "-" . $photo['day'],
-				'status' => $photo['status']
+				'status' => $photo['status'] == "open" ? 1 : 0
 			));
 			$i++;
 			echo "Photo #{$i} imported\n";
 		}
 		echo "END importing photos!!!\n";
-	}
-
-	public function actionChannels() {
-		$q = "SELECT channel_id, channel_name, channel_title, channel_url FROM exp_channels WHERE channel_id in (1,2,4,6,11)";
-		$channels = Yii::app()->db2->createCommand($q)->queryAll();
-		$i = 0;
-		echo "Begin importing channels ...\n";
-		$command = Yii::app()->db->createCommand();
-		foreach ($channels as $channel) {
-			$command->insert('channels', array(
-				'channel_name' => $channel['channel_name'],
-				'channel_title' => $channel['channel_title'],
-				'channel_url' => $channel['channel_url']
-			));
-			$i++;
-			echo "Channel #{$i} imported\n";
-		}
-		echo "END importing channels!!!\n";
 	}
 
 	public function actionComments() {
