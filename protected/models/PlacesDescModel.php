@@ -17,7 +17,8 @@ class PlacesDescModel extends CActiveRecord {
 	
 	public function rules() {
 		return array(
-			array('place_id, language_id, title, name, place_desc, street, place_orientir, search_mistakes', 'safe'),
+			array('place_id, language_id, street, place_orientir, search_mistakes', 'safe'),
+			array('title, place_desc', 'required')
 		);
 	}
 	

@@ -12,6 +12,19 @@ class PlacesModel extends CActiveRecord {
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
+	
+	public function behaviors() {
+		return array(
+			'CTimestampBehavior' => array(
+				'class' => 'system.zii.behaviors.CTimestampBehavior',
+				'createAttribute' => 'created_at',
+				'updateAttribute' => 'updated_at',
+			),
+			'OwnerBehaviour' => array(
+				'class' => 'ycm.behaviors.OwnerBehavior'
+			)
+		);
+	}
 
 	public function attributeLabels() {
 		return array(
@@ -32,30 +45,27 @@ class PlacesModel extends CActiveRecord {
 			'order_discount' => Yii::t('YcmModule.places', 'Order discount'),
 			'order_discount_banket' => Yii::t('YcmModule.places', 'Order discount banket'),
 			'closed' => Yii::t('YcmModule.places', 'Place closed ?'),
+			'phones' => self::t('Phones')
 		);
 	}
 
 	public function rules() {
 		return array(
-			array('url_title, status, schedule, street_number, phones, lat, lng', 'required'),
-			array('email, admin_phone, website, cost, order_discount, order_discount_banket, closed', 'safe'),
+			array('url, status, schedule, street_number, phones', 'required'),
+			array('email, admin_phone, website, cost, order_discount, order_discount_banket, closed, lat, lng', 'safe'),
 		);
 	}
 
 	public function attributeWidgets() {
 		return array(
-			//array('title', 'textField'),
 			array('url_title', 'textField'),
 			array('status', 'dropDown'),
-			//array('name', 'textField'),
 			array('schedule', 'textField'),
-			//array('place_desc', 'wysiwyg'),
-			//array('street', 'textField'),
 			array('street_number', 'textField'),
 			array('phone', 'textField'),
 			array('phone2', 'textField'),
 			array('admin_phone', 'textField'),
-			array('url_title', 'textField'),
+			array('url', 'textField'),
 			array('website', 'textField'),
 			array('email', 'textField'),
 			array('cost', 'textField'),
@@ -63,7 +73,6 @@ class PlacesModel extends CActiveRecord {
 			array('lng', 'textField'),
 			array('order_discount', 'textField'),
 			array('order_discount_banket', 'textField'),
-			//array('search_mistakes', 'textField'),
 			array('closed', 'dropDown'),
 		);
 	}
@@ -141,6 +150,10 @@ class PlacesModel extends CActiveRecord {
 		  'criteria' => $criteria
 		  )); */
 		return new CActiveDataProvider($this);
+	}
+	
+	public static function t($translate) {
+		return Yii::t('YcmModule.' . self::tableName(), $translate);
 	}
 
 }
