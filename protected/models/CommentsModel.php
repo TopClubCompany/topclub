@@ -1,6 +1,7 @@
 <?php
 
 class CommentsModel extends CActiveRecord {
+
 	/**
 	 * 
 	 * @param String $className
@@ -9,21 +10,53 @@ class CommentsModel extends CActiveRecord {
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
-	
+
+	public function afterFind() {
+		$md = $this->getMetaData();
+		switch ($this->type) {
+			case 'articles':
+				$entryModel = 'ArticlesModel';
+				$entry_model_pk = 'article_id';
+				break;
+			case 'events':
+				$entryModel = 'EventsModel';
+				$entry_model_pk = 'event_id';
+				break;
+			case 'photos':
+				$entryModel = 'PhotosModel';
+				$entry_model_pk = 'photo_id';
+				break;
+			case 'albums':
+				$entryModel = 'AlbumsModel';
+				$entry_model_pk = 'album_id';
+				break;
+
+			case 'places':
+			default:
+				$entryModel = 'PlacesDescModel';
+				$entry_model_pk = 'place_id';
+				break;
+		}
+		$md->addRelation('entry', array(
+			self::BELONGS_TO,
+			$entryModel,
+			array('entry_id' => $entry_model_pk)
+		));
+		return parent::afterFind();
+	}
+
 	public function relations() {
 		return array(
-			'author' => array(self::HAS_ONE, 'UsersModel', array('user_id' => 'user_id')),
-			'place_title' => array(self::HAS_ONE, 'PlacesDescModel', array('place_id' => 'place_id')),
+			'user' => array(self::HAS_ONE, 'UsersModel', array('user_id' => 'user_id')),
 			'language' => array(self::HAS_ONE, 'LanguageModel', array('language_id' => 'language_id')),
-			'channel' => array(self::HAS_ONE, 'ChannelsModel', array('channel_id' => 'channel_id')),
 		);
 	}
-	
+
 	public function attributeLabels() {
 		return array(
 			'comment_id' => Yii::t('YcmModule.comments', 'Comment id'),
-			'place_id' => Yii::t('YcmModule.comments', 'Place id'),
-			'channel_id' => Yii::t('YcmModule.comments', 'Channel'),
+			'entry_id' => Yii::t('YcmModule.comments', 'Entry id'),
+			'type' => Yii::t('YcmModule.comments', 'Type'),
 			'language_id' => Yii::t('YcmModule.comments', 'Language id'),
 			'user_id' => Yii::t('YcmModule.comments', 'User id'),
 			'comment' => Yii::t('YcmModule.comments', 'Comment'),
@@ -31,59 +64,63 @@ class CommentsModel extends CActiveRecord {
 			'status' => Yii::t('YcmModule.comments', 'Status'),
 		);
 	}
-	
+
 	public function attributeWidgets() {
 		return array(
-			array('channel_id', 'dropDown'),
-			array('place_id', 'dropDown'),
 			array('comment', 'textArea'),
 			array('status', 'dropDown'),
 			array('language_id', 'dropDown'),
 		);
 	}
-	
+
 	public function statusChoices() {
 		return array(
-			'1' => 'open',
-			'0' => 'closed'
+			'1' => Yii::t('YcmModule.comments', 'Open'),
+			'0' => Yii::t('YcmModule.comments', 'Closed')
 		);
 	}
 
-	public function place_idChoices() {
-		return CHtml::listData(
-			PlacesDescModel::model()->findAll(), 'place_id', 'title'
-		);
-	}
-	
 	public function language_idChoices() {
 		return CHtml::listData(
 			LanguageModel::model()->enabled()->findAll(), 'language_id', 'name'
 		);
 	}
-	
-	public function channel_idChoices() {
-		return CHtml::listData(
-			ChannelsModel::model()->findAll(), 'channel_id', 'channel_title'
+
+	public function typeChoices() {
+		return array(
+			"places" => Yii::t('YcmModule.comments', 'Places'),
+			"articles" => Yii::t('YcmModule.comments', 'Articles'),
+			"events" => Yii::t('YcmModule.comments', 'Events'),
+			"photos" => Yii::t('YcmModule.comments', 'Photos'),
+			"albums" => Yii::t('YcmModule.comments', 'Albums')
 		);
 	}
-	
+
+	public function getTypeChoice() {
+		$typeChoices = $this->typeChoices();
+		return $typeChoices[$this->type];
+	}
+
+	public function getStatus() {
+		$status = $this->statusChoices();
+		return $status[$this->status];
+	}
+
 	public function rules() {
 		return array(
 			array('place_id, language_id, channel_id, user_id, comment, ip_address, comment_date, status', 'safe'),
 			array('status, language_id', 'required'),
 		);
 	}
-	
-	/*public function beforeSave() {
-		if ($this->getIsNewRecord()){
-			$this->author_id = Yii::app()->user->id;
-			$this->ip_address = Yii::app()->request->userHostAddress;
-		
-		}
-		return parent::beforeSave();
-	}*/
-	
-	
+
+	/* public function beforeSave() {
+	  if ($this->getIsNewRecord()){
+	  $this->author_id = Yii::app()->user->id;
+	  $this->ip_address = Yii::app()->request->userHostAddress;
+
+	  }
+	  return parent::beforeSave();
+	  } */
 
 	public function tableName() {
 		return 'comments';
@@ -94,7 +131,36 @@ class CommentsModel extends CActiveRecord {
 	}
 
 	public function search() {
-		return new CActiveDataProvider($this);
+		$criteria = new CDbCriteria;
+		if ($_GET['CommentsModel']) {
+			if ($comment_id = (int) $_GET['CommentsModel']['comment_id'] ? : null) {
+				$criteria->addCondition('comment_id=:comment_id');
+				$criteria->params = array_merge($criteria->params, array(
+					':comment_id' => $comment_id
+				));
+			}
+			if($type = $_GET['CommentsModel']['type']){
+				$criteria->addCondition('type=:type');
+				$criteria->params = array_merge($criteria->params, array(
+					':type' => $type
+				));
+			}
+			if($language_id = $_GET['CommentsModel']['language_id']){
+				$criteria->addCondition('language_id=:language_id');
+				$criteria->params = array_merge($criteria->params, array(
+					':language_id' => $language_id
+				));
+			}
+			if($status = $_GET['CommentsModel']['status']){
+				$criteria->addCondition('status=:status');
+				$criteria->params = array_merge($criteria->params, array(
+					':status' => $status
+				));
+			}
+		}
+		return new CActiveDataProvider($this, array(
+					'criteria' => $criteria
+				));
 	}
 
 }

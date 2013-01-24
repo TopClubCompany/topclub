@@ -5,9 +5,9 @@ class m130122_160025_create_table_comments extends CDbMigration {
 	public function up() {
 		$this->createTable("comments", array(
 			'comment_id' => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
-			'place_id' => 'INT UNSIGNED',
+			'entry_id' => 'INT UNSIGNED NOT NULL',
 			'language_id' => 'TINYINT UNSIGNED NOT NULL',
-			'channel_id' => 'TINYINT UNSIGNED NOT NULL',
+			'type' => 'ENUM("places", "articles", "events", "photos", "albums") NOT NULL',
 			'user_id' => 'INT UNSIGNED NOT NULL',
 			'comment' => 'TEXT',
 			'ip_address' => 'VARCHAR(15)',

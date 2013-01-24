@@ -1,8 +1,8 @@
 <?php
 return array(
 	'Comment id' => 'ID',
-	'Place id' => "Место проведения",
-	'Channel' => "Канал",
+	'Entry id' => "Где",
+	'Type' => "Тип",
 	'User id' => "Автор",
 	'Comment' => "Комментарий",
 	'Comment date' => "Дата",
@@ -11,4 +11,11 @@ return array(
 	'Add comment' => "Добавить комментарий",
 	'Edit comment' => "Редактировать комментарий",
 	'Language id' => "Язык",
+	'Places' => "Места",
+	'Articles' => "Публикации",
+	'Events' => "События",
+	'Photos' => "Фото",
+	'Albums' => "Альбомы",
+	'Open' => "Открыт",
+	'Closed' => "Закрыт",
 );

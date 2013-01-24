@@ -1,66 +1,49 @@
 <?php
 
 $this->widget('bootstrap.widgets.TbGridView', array(
-	'dataProvider' => CommentsModel::model()->search(),
+	'dataProvider' => $CommentsModel->search(),
+	'filter' => $CommentsModel,
 	'columns' => array(
 		'comment_id',
-		'place_id',
-		array( 
-			'name' => 'channel_id',
-			'value' => '$data->channel->channel_title'
+		array(
+			'name' => 'entry_id',
+			'filter' => false,
+			'value' => '$data->entry->title'
+		),
+		array(
+			'name' => 'type',
+			'value' => '$data->getTypeChoice();',
+			'filter' => CHtml::activeDropDownList($CommentsModel, 'type', $CommentsModel->typeChoices())
 		),
 		array(
 			'name' => 'language_id',
-			'value' => '$data->language->name'
+			'value' => '$data->language->name',
+			'filter' => CHtml::activeDropDownList($CommentsModel, 'language_id', $CommentsModel->language_idChoices())
 		),
 		array(
 			'name' => 'user_id',
-			'value' => '$data->author->first_name . " " . $data->author->last_name'
+			'value' => '$data->user->first_name . " " . $data->user->last_name',
+			'filter' => false
 		),
-		'comment_date',
-		'status',
 		array(
-			'class'=>'CButtonColumn',
+			'name' => 'comment_date',
+			'value' => function($data){
+				$date = date('Y', $data->comment_date)."-".date('m', $data->comment_date)."-".date('d', $data->comment_date);
+				return $date;
+			},
+			'filter' => false
+		),
+		array(
+			'name' => 'status',
+			'value' => '$data->getStatus();',
+			'filter' => CHtml::activeDropDownList($CommentsModel, 'status', $CommentsModel->statusChoices())
+		),
+		array(
+			'class' => 'CButtonColumn',
 			'template' => '{update}{delete}',
 			'updateButtonUrl' => 'CHtml::normalizeUrl(array("comments/edit", "comment_id" => $data->comment_id))',
 			'deleteButtonUrl' => 'CHtml::normalizeUrl(array("comments/delete", "comment_id" => $data->comment_id))',
 		),
-		/*array(
-			'name' => 'album_cover',
-			'type' => 'html',
-			'htmlOptions'=>	array(
-				'width' => '100',
-				'height' => '100'
-			),
-			/*'value' => function ($data){
-				return preg_replace("/{filedir_1}/","http://topclub.ua/images/sized/images/uploads/", $data->album_cover);
-			}*/
-			/*'value' => 'CHtml::link(CHtml::image("/uploads/albums/".$data->album_id."/".$data->album_cover."", Yii::t(\'YcmModule.albums\', \'Album cover\'), array("width"=>100)), "/uploads/albums/".$data->album_id."/".$data->album_cover."", array("class"=>"colorbox"))'
-		),
-		'album_id',
-		array(
-			'name' => 'author_id',
-			'value' => '$data->author->first_name . " " . $data->author->last_name'
-		),
-		array(
-			'name' => 'title',
-			'type' => 'raw',
-			'value' => 'CHtml::link($data->title, array("albums/show", "album_id" => $data->album_id))'
-		),
-		array(
-			'name' => 'place_id',
-			'type' => 'raw',
-			'value' => '$data->place_title->title'
-		),
-		'albumEvent',
-		'album_date',
-		'status',
-		array(
-			'class'=>'CButtonColumn',
-			'template' => '{update}{delete}',
-			'updateButtonUrl' => 'CHtml::normalizeUrl(array("albums/edit", "album_id" => $data->album_id))',
-			'deleteButtonUrl' => 'CHtml::normalizeUrl(array("albums/delete", "album_id" => $data->album_id))',
-		),*/
 	)
 ));
 echo $this->module->getButtons();
