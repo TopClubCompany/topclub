@@ -7,7 +7,7 @@ class m130111_094451_create_table_places extends CDbMigration
 		$this->createTable('places', array(
 			'place_id' => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
 			//'title' => 'VARCHAR(100)',
-			'url_title' => 'VARCHAR(100)',
+			'url' => 'VARCHAR(100)',
 			'status' => 'BOOLEAN NOT NULL DEFAULT 1',
 			//'name' => 'VARCHAR(50)',
 			'schedule' => 'VARCHAR(50)',
