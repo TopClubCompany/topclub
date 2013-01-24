@@ -133,25 +133,26 @@ class CommentsModel extends CActiveRecord {
 	public function search() {
 		$criteria = new CDbCriteria;
 		if ($_GET['CommentsModel']) {
+			$this->attributes = $_GET['CommentsModel'];
 			if ($comment_id = (int) $_GET['CommentsModel']['comment_id'] ? : null) {
 				$criteria->addCondition('comment_id=:comment_id');
 				$criteria->params = array_merge($criteria->params, array(
 					':comment_id' => $comment_id
 				));
 			}
-			else if($type = $_GET['CommentsModel']['type'] ? : null){
+			if($type = $_GET['CommentsModel']['type'] ? : null){
 				$criteria->addCondition('type=:type');
 				$criteria->params = array_merge($criteria->params, array(
 					':type' => $type
 				));
 			}
-			else if($language_id = $_GET['CommentsModel']['language_id'] ? : null){
+			if($language_id = $_GET['CommentsModel']['language_id'] ? : null){
 				$criteria->addCondition('language_id=:language_id');
 				$criteria->params = array_merge($criteria->params, array(
 					':language_id' => $language_id
 				));
 			}
-			else if($status = $_GET['CommentsModel']['status'] ? : null){
+			if($status = $_GET['CommentsModel']['status'] ? : null){
 				$criteria->addCondition('status=:status');
 				$criteria->params = array_merge($criteria->params, array(
 					':status' => $status

@@ -1,30 +1,8 @@
 <?php
-$ajaxUrl = CHtml::normalizeUrl(array('Comments/index'));
-$addUrl = CHtml::normalizeUrl(array('Comments/add'));
+
 $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider' => $CommentsModel->search(),
 	'filter' => $CommentsModel,
-	'ajaxUrl' => $ajaxUrl,
-	'beforeAjaxUpdate' => 'js: function(id,options){
-		var url = decodeURIComponent(options.url);
-		var indexUrl = \'' . $ajaxUrl . '\';
-		var addUrl = \'' . $addUrl . '\';
-		if (matches = url.match(/CommentsModel\[comment_id\]=([^&]+)/)) {
-			var comment_id = matches[1];
-			window.history.pushState(null, null, indexUrl  + \'/CommentsModel[comment_id]/\' + comment_id);
-		} else if (matches = url.match(/CommentsModel\[type\]=([^&]+)/)) { 
-			var type = matches[1];
-			window.history.pushState(null, null, indexUrl  + \'/CommentsModel[type]/\' + type);
-		} else if (matches = url.match(/CommentsModel\[language_id\]=([^&]+)/)) { 
-			var language_id = matches[1];
-			window.history.pushState(null, null, indexUrl  + \'/CommentsModel[language_id]/\' + language_id);
-		} else if (matches = url.match(/CommentsModel\[status\]=([^&]+)/)) { 
-			var status = matches[1];
-			window.history.pushState(null, null, indexUrl  + \'/CommentsModel[status]/\' + status);
-		} else {
-			window.history.pushState(null, null, indexUrl);
-		}
-	}',
 	'columns' => array(
 		'comment_id',
 		array(
@@ -38,9 +16,9 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 			'filter' => CHtml::activeDropDownList(
 					$CommentsModel, 
 					'type', 
-					array_merge(array(	
+					array(	
 						"" => Yii::t('YcmModule.comments', 'Select Type')
-						), $CommentsModel->typeChoices()))
+						) + $CommentsModel->typeChoices())
 		),
 		array(
 			'name' => 'language_id',
@@ -69,11 +47,12 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 			'name' => 'status',
 			'value' => '$data->getStatus();',
 			'filter' => CHtml::activeDropDownList(
-					$CommentsModel, 
-					'status', 
-					array(	
-						"" => Yii::t('YcmModule.comments', 'Select Status')
-						) + $CommentsModel->statusChoices())
+				$CommentsModel, 
+				'status', 
+				array(
+					"" => Yii::t('YcmModule.comments', 'Select Status')
+					) + $CommentsModel->statusChoices()
+			)
 		),
 		array(
 			'class' => 'CButtonColumn',
