@@ -1,21 +1,21 @@
 <?php
 
-class ChannelsModel extends CActiveRecord {
+class EventsModel extends CActiveRecord {
 	/**
 	 * 
 	 * @param String $className
-	 * @return Channels
+	 * @return Events
 	 */
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
 	
 	public function tableName() {
-		return 'channels';
+		return 'events';
 	}
 
 	public function primaryKey() {
-		return 'channel_id';
+		return 'event_id';
 	}
 
 	public function search() {

@@ -18,4 +18,7 @@ return array(
 	'Albums' => "Альбомы",
 	'Open' => "Открыт",
 	'Closed' => "Закрыт",
+	'Select Type' => "Выберите тип",
+	'Select Language' => "Выберите язык",
+	'Select Status' => "Выберите статус",
 );

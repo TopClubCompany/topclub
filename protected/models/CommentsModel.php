@@ -139,19 +139,19 @@ class CommentsModel extends CActiveRecord {
 					':comment_id' => $comment_id
 				));
 			}
-			if($type = $_GET['CommentsModel']['type']){
+			else if($type = $_GET['CommentsModel']['type'] ? : null){
 				$criteria->addCondition('type=:type');
 				$criteria->params = array_merge($criteria->params, array(
 					':type' => $type
 				));
 			}
-			if($language_id = $_GET['CommentsModel']['language_id']){
+			else if($language_id = $_GET['CommentsModel']['language_id'] ? : null){
 				$criteria->addCondition('language_id=:language_id');
 				$criteria->params = array_merge($criteria->params, array(
 					':language_id' => $language_id
 				));
 			}
-			if($status = $_GET['CommentsModel']['status']){
+			else if($status = $_GET['CommentsModel']['status'] ? : null){
 				$criteria->addCondition('status=:status');
 				$criteria->params = array_merge($criteria->params, array(
 					':status' => $status
@@ -160,7 +160,7 @@ class CommentsModel extends CActiveRecord {
 		}
 		return new CActiveDataProvider($this, array(
 					'criteria' => $criteria
-				));
+		));
 	}
 
 }
