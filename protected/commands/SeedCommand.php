@@ -45,7 +45,7 @@ class SeedCommand extends CConsoleCommand {
 		$command = Yii::app()->db->createCommand();
 
 		$command->insert('users', array(
-			'role' => 'root',
+			'role' => 'administrator',
 			'username' => 'root@root.ua',
 			'password' => md5('root'),
 			'first_name' => 'root',

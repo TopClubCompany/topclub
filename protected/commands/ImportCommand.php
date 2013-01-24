@@ -621,25 +621,25 @@ class ImportCommand extends CConsoleCommand {
 		foreach ($comments as $comment) {
 			switch ($comment["channel_id"]) {
 				case 1:
-					$channel_id = 1;
+					$type = "places";
 					break;
 				case 2:
-					$channel_id = 2;
+					$type = "articles";
 					break;
 				case 4:
-					$channel_id = 3;
+					$type = "events";
 					break;
 				case 6:
-					$channel_id = 4;
+					$type = "photos";
 					break;
 				case 11:
-					$channel_id = 5;
+					$type = "albums";
 					break;
 			}
 			$command->insert('comments', array(
-				'place_id' => $comment['entry_id'],
+				'entry_id' => $comment['entry_id'],
 				'language_id' => 1, //ru
-				'channel_id' => $channel_id,
+				'type' => $type,
 				'user_id' => $comment['user_id'],
 				'comment' => $comment['comment'],
 				'ip_address' => $comment['ip_address'],
