@@ -31,5 +31,7 @@ return array(
 	'Open' => 'Открыто',
 	'Without site' => 'Нет сайта',
 	'Places photos' => 'Фотографии места',
-	'Add photos' => 'Добавить фотографии'
+	'Add photos' => 'Добавить фотографии',
+	'Phones' => 'Телефоны',
+	'Please fix the following errors (tab: {language})' => 'Исправте следующие ошибки (вкладка: {language}):'
 );

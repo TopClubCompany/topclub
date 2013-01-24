@@ -228,6 +228,15 @@ class YcmModule extends CWebModule {
 
 			case 'textField':
 			default:
+				if ($params['model'] && $params['model']->getError($params['attribute'])) {
+					$params['htmlOptions'] = array(
+						'class' => 'span5 error'
+					);
+				} else {
+					$params['htmlOptions'] = array(
+						'class' => 'span5'
+					);
+				}
 				if ($params['return'])
 					return Yii::app()->controller->renderPartial($this->name . '.views._module._textField', $params, $params['return']);
 				else
@@ -438,7 +447,7 @@ class YcmModule extends CWebModule {
 
 			case 'dropDown':
 				echo $form->dropDownListRow($model, $attribute, $this->getAttributeChoices($model, $attribute), array(
-						'empty' => Yii::t('YcmModule.ycm', 'Choose {name}', array('{name}' => $model->getAttributeLabel($attribute))
+					'empty' => Yii::t('YcmModule.ycm', 'Choose {name}', array('{name}' => $model->getAttributeLabel($attribute))
 					),
 					'class' => 'span5')
 				);
@@ -791,4 +800,5 @@ class YcmModule extends CWebModule {
 			return Yii::app()->controller->renderPartial($this->name . '.views._module._buttons', array('html' => $html), true);
 		}
 	}
+
 }

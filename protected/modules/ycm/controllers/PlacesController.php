@@ -73,21 +73,16 @@ class PlacesController extends AdminController {
 		}
 		if ($_POST['PlacesModel']) {
 			$PlacesModel->attributes = $_POST['PlacesModel'];
-			if ($PlacesModel->validate()) {
+			$submodelsValid = true;
+			foreach ($languages = LanguageModel::model()->enabled()->findAll() as $language) {
+				$PlacesModel->{$language->code}->attributes = $_POST[$language->code];
+				if (!$PlacesModel->{$language->code}->validate())
+					$submodelsValid = false;
+			}
+			if ($PlacesModel->validate() && $submodelsValid) {
 				$PlacesModel->save(false);
-				$i = 0;
-				foreach (LanguageModel::model()->enabled()->findAll() as $language) {
-					if (!$place_id) {
-						$PlacesDescModel = new PlacesDescModel;
-					} else {
-						if (!$PlacesDescModel = PlacesDescModel::model()->find('place_id=:place_id AND language_id=:language_id', array(':place_id' => $PlacesModel->place_id, ':language_id' => $language->language_id)))
-							$PlacesDescModel = new PlacesDescModel;
-					}
-					$PlacesDescModel->attributes = array_merge($_POST[$language->code], array(
-						'language_id' => $language->language_id,
-						'place_id' => $PlacesModel->place_id,
-						));
-					$PlacesDescModel->save(false);
+				foreach ($languages as $language) {
+					$PlacesModel->{$language->code}->save(false);
 				}
 				if ($_POST['_save']) {
 					$redirect = array('places/index');
@@ -288,14 +283,13 @@ class PlacesController extends AdminController {
 		 * add refresh view "_places_photo"
 		 * 
 		 * if ($_place_id = (int) $_GET['place_id'] ? : null) {
-			$PlacesModel = PlacesModel::model()->findByPk($_place_id);
-			$PlacesModel->setScenario('formsubmit');
-		}
-		$this->renderPartial('_places_photos', array(
-			'model' => $PlacesModel,
-		));
+		  $PlacesModel = PlacesModel::model()->findByPk($_place_id);
+		  $PlacesModel->setScenario('formsubmit');
+		  }
+		  $this->renderPartial('_places_photos', array(
+		  'model' => $PlacesModel,
+		  ));
 		 */
-		
 		return $photo_id;
 	}
 

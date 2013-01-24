@@ -1,4 +1,5 @@
 <?php
+
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id' => get_class($model) . '-id-form',
 	'type' => 'horizontal',
@@ -6,7 +7,12 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 		));
 
-$this->module->createActiveWidget($form, $model, 'url_title');
+echo $form->errorSummary($model);
+foreach (LanguageModel::model()->enabled()->findAll() as $language) {
+	echo $form->errorSummary($model->{$language->code}, static::t('Please fix the following errors (tab: {language})', array('{language}' => $language->name)));
+}
+
+$this->module->createActiveWidget($form, $model, 'url');
 $this->module->createActiveWidget($form, $model, 'status');
 $this->module->createActiveWidget($form, $model, 'schedule');
 $this->module->createActiveWidget($form, $model, 'street_number');
@@ -30,6 +36,7 @@ $this->renderPartial('_places_photos', array(
 	'model' => $model,
 ));
 echo $this->module->getButtons();
+
 $this->endWidget();
 
 $this->renderPartial('_image_uploader', array(

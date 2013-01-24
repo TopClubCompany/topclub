@@ -61,13 +61,17 @@ class AdminController extends CController {
 			),
 		);
 	}
-	
+
 	public function init() {
 		$cs = Yii::app()->clientScript;
 		$baseUrl = $this->module->assetsUrl;
 		$cs->registerCoreScript('jquery');
 		$cs->registerCssFile($baseUrl . '/css/styles.css');
 		parent::init();
+	}
+
+	public static function t($message, $params = null, $source = null, $language = null) {
+		return Yii::t('YcmModule.' . Yii::app()->controller->id, $message, $params, $source, $language);
 	}
 
 }

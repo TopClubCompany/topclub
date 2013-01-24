@@ -1,23 +1,23 @@
 <?php
 $this->module->createWidget(array(
-	'formElementName' => $langCode . '[name]',
-	'value' => $model->name,
-	'attribute' => 'name',
-	'model' => 'PlacesDescModel'
+	'formElementName' => $langCode . '[title]',
+	'value' => $model->title,
+	'attribute' => 'title',
+	'model' => $model
 ));
 
 $this->module->createWidget(array(
 	'formElementName' => $langCode . '[street]',
 	'value' => $model->street,
 	'attribute' => 'street',
-	'model' => 'PlacesDescModel'
+	'model' => $model
 ));
 
 $this->module->createWidget(array(
 	'formElementName' => $langCode . '[place_desc]',
 	'value' => $model->place_desc,
 	'attribute' => 'place_desc',
-	'model' => 'PlacesDescModel',
+	'model' => $model,
 	'type' => 'wysiwyg'
 ));
 
@@ -25,13 +25,13 @@ $this->module->createWidget(array(
 	'formElementName' => $langCode . '[search_mistakes]',
 	'value' => $model->search_mistakes,
 	'attribute' => 'search_mistakes',
-	'model' => 'PlacesDescModel',
+	'model' => $model,
 ));
 
 $this->module->createWidget(array(
 	'formElementName' => $langCode . '[place_orientir]',
 	'value' => $model->place_orientir,
 	'attribute' => 'place_orientir',
-	'model' => 'PlacesDescModel',
+	'model' => $model,
 	'type' => 'wysiwyg'
 ));
