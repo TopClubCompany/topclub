@@ -210,8 +210,9 @@ class YcmModule extends CWebModule {
 			case 'wysiwyg':
 				$params['options'] = array(
 					'name' => $params['formElementName'],
+					'value' => $params['value'],
 					'options' => array(
-						'lang' => Yii::app()->getLanguage(),
+						'lang' => 'en', //Yii::app()->getLanguage(),
 						'buttons' => array(
 							'formatting', '|', 'bold', 'italic', 'deleted', '|',
 							'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
