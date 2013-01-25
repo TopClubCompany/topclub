@@ -56,10 +56,10 @@ class UsersController extends AdminController {
 		}
 		if ($user_id = (int) $_GET['user_id'] ? : null) {
 			$UsersModel = UsersModel::model()->findByPk($user_id);
-			$UsersModel->setScenario('formsubmit');
+			$UsersModel->setScenario('users_update');
 			unset($UsersModel->password);
 		} else {
-			$UsersModel = new UsersModel('formsubmit');
+			$UsersModel = new UsersModel('users_update');
 		}
 		if ($_POST['UsersModel']) {
 			$UsersModel->attributes = $_POST['UsersModel'];

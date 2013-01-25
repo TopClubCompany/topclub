@@ -21,8 +21,8 @@ class UserIdentity extends CUserIdentity {
 			$this->errorCode = self::ERROR_USERNAME_INVALID;
 			return !$this->errorCode;
 		}
-
-		if ($dbUser->password != md5(trim($this->password))) {
+		
+		if ($dbUser->password != sha1(trim($this->password))) {
 			$this->errorCode = self::ERROR_PASSWORD_INVALID;
 		} else {
 			$this->_id = $dbUser->user_id;

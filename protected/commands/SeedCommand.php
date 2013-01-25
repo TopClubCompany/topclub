@@ -47,7 +47,7 @@ class SeedCommand extends CConsoleCommand {
 		$command->insert('users', array(
 			'role' => 'administrator',
 			'username' => 'root@root.ua',
-			'password' => md5('root'),
+			'password' => sha1('root'),
 			'first_name' => 'root',
 			'last_name' => 'root',
 			'sex' => 'm',
@@ -56,7 +56,7 @@ class SeedCommand extends CConsoleCommand {
 		$command->insert('users', array(
 			'role' => 'editor',
 			'username' => 'editor@root.ua',
-			'password' => md5('editor'),
+			'password' => sha1('editor'),
 			'first_name' => 'editor',
 			'last_name' => 'editor',
 			'sex' => 'm',

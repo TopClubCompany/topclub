@@ -398,7 +398,7 @@ class ImportCommand extends CConsoleCommand {
 				'order_discount' => (int) $place['order_discount'] ? : null,
 				'order_discount_banket' => (int) $place['order_discount_banket'] ? : null,
 				'closed' => $place['closed'] == 'yes' ? 1 : 0,
-				'created_at' => $created_at = date('Y-d-m h-i-s', $place['created_at']),
+				'created_at' => $created_at = date('Y-d-m h:i:s', $place['created_at']),
 				'updated_at' => $created_at,
 				'created_by' => $place['author_id'],
 				'updated_by' => $place['author_id'],
