@@ -91,12 +91,6 @@ class PlacesModel extends CActiveRecord {
 		);
 	}
 
-	/* public function relations() {
-	  return array(
-	  'places_photo' => array(self::HAS_MANY, 'PlacesPhotoModel', array('place_id' => 'place_id'))
-	  );
-	  } */
-
 	public function relations() {
 		$languageRelations = array();
 		$languages = LanguageModel::model()->enabled()->findAll();
