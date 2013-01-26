@@ -7,3 +7,4 @@
 !/protected/runtime/.gitignore
 /themes/classic/views/
 /protected/config/_main_db.php
+/protected/config/_test_db.php
