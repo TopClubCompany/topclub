@@ -47,7 +47,7 @@ class SeedCommand extends CConsoleCommand {
 		$command->insert('users', array(
 			'role' => 'administrator',
 			'username' => 'root@root.ua',
-			'password' => md5('root'),
+			'password' => sha1('root'),
 			'first_name' => 'root',
 			'last_name' => 'root',
 			'sex' => 'm',
@@ -56,7 +56,7 @@ class SeedCommand extends CConsoleCommand {
 		$command->insert('users', array(
 			'role' => 'editor',
 			'username' => 'editor@root.ua',
-			'password' => md5('editor'),
+			'password' => sha1('editor'),
 			'first_name' => 'editor',
 			'last_name' => 'editor',
 			'sex' => 'm',
@@ -315,5 +315,120 @@ class SeedCommand extends CConsoleCommand {
 			'name' => 'Expensive'
 		));
 	}
+	
+	public function actionPlacesCategories() {
+		$command = Yii::app()->db->createCommand();
 
+		$command->insert('places_categories', array(
+			'url' => 'club'
+		));
+
+		$command->insert('places_categories', array(
+			'url' => 'restaraunt'
+		));
+		
+		$command->insert('places_categories', array(
+			'url' => 'pub'
+		));
+	}
+	
+	public function actionPlacesCategoriesDesc() {
+		$command = Yii::app()->db->createCommand();
+
+		$command->insert('places_categories_desc', array(
+			'category_id' => '1',
+			'language_id' => '1',
+			'name' => 'Клуб',
+			'description' => 'Клуб - место, где можно потанцевать.'
+		));
+
+		$command->insert('places_categories_desc', array(
+			'category_id' => '1',
+			'language_id' => '2',
+			'name' => 'Клуб',
+			'description' => 'Клуб - мiсце, де можна потрясти жирком.'
+		));
+		
+		$command->insert('places_categories_desc', array(
+			'category_id' => '1',
+			'language_id' => '3',
+			'name' => 'Club',
+			'description' => "Club it's place, where you can dance."
+		));
+		
+		$command->insert('places_categories_desc', array(
+			'category_id' => '2',
+			'language_id' => '1',
+			'name' => 'Ресторан',
+			'description' => 'Ресторан - место, где можно похавать.'
+		));
+
+		$command->insert('places_categories_desc', array(
+			'category_id' => '2',
+			'language_id' => '2',
+			'name' => 'Ресторан',
+			'description' => 'Ресторан - мiсце, де можна поiсти.'
+		));
+		
+		$command->insert('places_categories_desc', array(
+			'category_id' => '2',
+			'language_id' => '3',
+			'name' => 'Restaraunt',
+			'description' => "Restaraunt it's place, where you can eat."
+		));
+		
+		$command->insert('places_categories_desc', array(
+			'category_id' => '3',
+			'language_id' => '1',
+			'name' => 'Паб',
+			'description' => 'Паб - место, где можно побухать.'
+		));
+
+		$command->insert('places_categories_desc', array(
+			'category_id' => '3',
+			'language_id' => '2',
+			'name' => 'Паб',
+			'description' => 'Паб - мiсце, де можна побухати.'
+		));
+		
+		$command->insert('places_categories_desc', array(
+			'category_id' => '3',
+			'language_id' => '3',
+			'name' => 'Pub',
+			'description' => "Pub it's place, where you can drink."
+		));
+	}	
+	public function actionPlacesCategoriesToFilters() {
+		$command = Yii::app()->db->createCommand();
+
+		$command->insert('places_categories_to_filters', array(
+			'category_id' => 1,
+			'filter_id' => 1
+		));
+
+		$command->insert('places_categories_to_filters', array(
+			'category_id' => 1,
+			'filter_id' => 2
+		));
+
+		$command->insert('places_categories_to_filters', array(
+			'category_id' => 2,
+			'filter_id' => 1
+		));
+
+		$command->insert('places_categories_to_filters', array(
+			'category_id' => 2,
+			'filter_id' => 2
+		));
+
+		$command->insert('places_categories_to_filters', array(
+			'category_id' => 3,
+			'filter_id' => 1
+		));
+
+		$command->insert('places_categories_to_filters', array(
+			'category_id' => 3,
+			'filter_id' => 2
+		));
+	}
 }	

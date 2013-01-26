@@ -7,11 +7,11 @@ class m121227_161112_create_table_users extends CDbMigration {
 			'user_id' => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
 			'role' => "ENUM('guest', 'user', 'moderator', 'editor', 'maineditor', 'administrator') NOT NULL DEFAULT 'guest'",
 			'username' => 'VARCHAR(50) NOT NULL UNIQUE', // username == email
-			'password' => 'CHAR(32) NOT NULL',
+			'password' => 'CHAR(40) NOT NULL',
 			'first_name' => 'VARCHAR(50) NOT NULL',
 			'last_name' => 'VARCHAR(50) NOT NULL',
 			'location' => 'VARCHAR(50)',
-			'photo_file_name' => 'CHAR(100)', // md5(microtime()) . '.' . $extension
+			'photo_file_name' => 'CHAR(100)', // sha1(microtime()) . '.' . $extension
 			'phone' => 'VARCHAR(15)',
 			'vk_id' => 'BIGINT UNSIGNED UNIQUE',
 			'fb_id' => 'BIGINT UNSIGNED UNIQUE',

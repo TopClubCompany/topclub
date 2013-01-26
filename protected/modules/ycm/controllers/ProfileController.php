@@ -17,29 +17,16 @@ class ProfileController extends AdminController {
 		return array(
 			array(
 				'allow',
-				'actions' => array('index', 'edit'),
+				'actions' => array('edit'),
 				'roles' => array('administrator','maineditor', 'editor', 'moderator', 'user')
 			)
 		);
 	}
 	
-	
-	/*public function actionIndex() {
-		$this->breadcrumbs = array(
-			Yii::t('YcmModule.profile', 'my_profile')
-		);
-		
-		$model = new ProfileModel('search');
-		$render = $_GET['ajax'] ? 'renderPartial' : 'render';
-		$this->$render('index', array(
-				'model'=>$model,
-		));
-	}*/
-
 	public function actionEdit() {
 		
 		$this->breadcrumbs = array(
-			Yii::t('YcmModule.profile', 'my_profile') => array('profile/edit'),
+			Yii::t('YcmModule.profile', 'My profile') => array('profile/edit'),
 		);
 		
 		$this->buttons = array(
@@ -53,21 +40,23 @@ class ProfileController extends AdminController {
 		
 		$user_id = Yii::app()->user->id;
 		$UsersModel = UsersModel::model()->findByPk($user_id);
-		$UsersModel->setScenario('formupdate');
-		unset($UsersModel->password);
+		$UsersModel->setScenario('profile_update');
 		if ($_POST['UsersModel']) {
 			$UsersModel->attributes = $_POST['UsersModel'];
-
+			if($_POST['UsersModel']["password"] != '' || $_POST['UsersModel']["password_repeat"] != '')
+				$UsersModel->password = $_POST['UsersModel']["password"];
+			else{
+				unset($UsersModel->password);
+			}
 			if ($UsersModel->validate()) {
-				
 				$UsersModel->save(false);
-				var_dump($_POST['_update']);
 				if ($_POST['_update']) {
 					$redirect = array('profile/edit');
 				}
 				$this->redirect($redirect);
 			}
 		}
+		unset($UsersModel->password);
 		$this->render('edit', array(
 			'model' => $UsersModel
 		));

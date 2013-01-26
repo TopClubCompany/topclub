@@ -60,10 +60,10 @@ class UsersModel extends CActiveRecord {
 			if($this->password !== $this->password_repeat)
 				throw new CHttpException(404, Yii::t('YcmModule.users', 'Error password'));	
 			else
-				$this->password = md5($this->password);
+				$this->password = sha1(trim($this->password));
 		}
 		if (isset($this->password) && $this->password != '') {
-			$this->password = md5($this->password);
+			$this->password = sha1(trim($this->password));
 		}
 		return parent::beforeSave();
 	}
@@ -98,14 +98,15 @@ class UsersModel extends CActiveRecord {
 
 	public function rules() {
 		return array(
-			array('role, first_name, last_name, username', 'required'),
-			array('password, password_repeat', 'required', 'on' => array('formsubmit')),
+			array('first_name, last_name, username', 'required'),
+			array('password, password_repeat, role', 'required', 'on' => array('users_update')),
 			array('username', 'unique', 'attributeName' => 'username'),
 			array('phone', 'match', 'pattern' => '/\d{12}/'),
 			array('last_name, location', 'match', 'pattern' => '/[a-zа-я_-]/i'),
 			array('username', 'email'),
 			array('vk_id, fb_id, tw_id', 'match', 'pattern' => '/\d+/'),
-			array('password_repeat', 'compare', 'compareAttribute'=>'password', 'on'=> 'formsubmit')
+			array('password_repeat', 'compare', 'compareAttribute'=>'password', 'on'=> 'users_update'),
+			array('password_repeat', 'compare', 'compareAttribute'=>'password', 'on'=> 'profile_update'),
 		);
 	}
 
