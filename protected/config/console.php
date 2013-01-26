@@ -15,7 +15,10 @@ return array(
 		'db' => array_merge(array(
 			'emulatePrepare' => true,
 			'charset' => 'utf8',
-			), include(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_main_db.php')),
+				), include(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_main_db.php')),
+		'testdb' => CMap::mergeArray(array(
+			'class' => 'CDbConnection',
+				), require(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_test_db.php')),
 		'db2' => array(
 			'class' => 'CDbConnection',
 			'connectionString' => 'mysql:host=89.184.69.32;dbname=topclub_3',
