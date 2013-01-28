@@ -11,7 +11,8 @@ return array(
 	),
 	'aliases' => array(
 		'xupload' => 'application.modules.ycm.extensions.xupload',
-		'ycm' => 'application.modules.ycm'
+		'ycm' => 'application.modules.ycm',
+		'chosen' => 'application.modules.ycm.extensions.chosen',
 	),
 	'modules' => array(
 		'ycm' => array(
