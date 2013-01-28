@@ -76,8 +76,8 @@ class UsersModel extends CActiveRecord {
 			array('first_name', 'textField'),
 			array('last_name', 'textField'),
 			array('location', 'textField'),
-			array('password', 'textField'),
-			array('password_repeat', 'textField'),
+			array('password', 'password'),
+			array('password_repeat', 'password'),
 			array('phone', 'textField'),
 			array('vk_id', 'textField'),
 			array('fb_id', 'textField'),
@@ -105,8 +105,8 @@ class UsersModel extends CActiveRecord {
 			array('last_name, location', 'match', 'pattern' => '/[a-zа-я_-]/i'),
 			array('username', 'email'),
 			array('vk_id, fb_id, tw_id', 'match', 'pattern' => '/\d+/'),
-			array('password_repeat', 'compare', 'compareAttribute'=>'password', 'on'=> 'users_update'),
-			array('password_repeat', 'compare', 'compareAttribute'=>'password', 'on'=> 'profile_update'),
+			array('password_repeat', 'compare', 'compareAttribute'=>'password', 'on'=> 'users_update', 'message' => Yii::t('YcmModule.profile', 'Password must be repeated exactly.')),
+			array('password_repeat', 'compare', 'compareAttribute'=>'password', 'on'=> 'profile_update', 'message' => Yii::t('YcmModule.profile', 'Password must be repeated exactly.')),
 		);
 	}
 

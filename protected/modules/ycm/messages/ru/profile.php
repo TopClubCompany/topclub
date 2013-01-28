@@ -16,5 +16,6 @@ return array(
 	'My profile' => 'Мой профиль',
 	'Edit profile' => 'Редактировать профиль',
 	'Error password' => 'Пароли не совпададют',
-	'Mail subject' => 'Регистрация на Topclub!'
+	'Mail subject' => 'Регистрация на Topclub!',
+	'Password must be repeated exactly.' => 'Пароль должен быть повторен в точности',
 );
