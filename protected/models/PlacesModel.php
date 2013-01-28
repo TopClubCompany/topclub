@@ -146,7 +146,7 @@ class PlacesModel extends CActiveRecord {
 		return new CActiveDataProvider($this);
 	}
 	
-	public static function t($translate) {
+	public function t($translate) {
 		return Yii::t('YcmModule.' . self::tableName(), $translate);
 	}
 

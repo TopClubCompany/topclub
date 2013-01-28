@@ -1,6 +1,7 @@
 <?php
 
 class PlacesCategoriesModel extends CActiveRecord {
+	public $filters;
 	/**
 	 * 
 	 * @param String $className
@@ -14,9 +15,10 @@ class PlacesCategoriesModel extends CActiveRecord {
 		return array(
 			'url' => 'URL',
 			'category_id' => 'ID',
+			'filters' => Yii::t('YcmModule.placesCategories', 'Filters'),
 		);
 	}
-	
+		
 	public function relations() {
 		$languages = LanguageModel::model()->enabled()->findAll();
 		$_lang_relations = array();
@@ -34,7 +36,7 @@ class PlacesCategoriesModel extends CActiveRecord {
 			);
 		}
 		return array_merge(array(
-			'filter' => array(self::HAS_ONE, 'PlacesCategoriesToFiltersModel', array('filter_id' => 'filter_id')),
+			'filters' => array(self::HAS_MANY, 'PlacesCategoriesToFiltersModel', array('category_id' => 'category_id')),
 		), $_lang_relations);
 	}
 	

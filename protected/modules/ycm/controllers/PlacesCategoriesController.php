@@ -1,7 +1,7 @@
 <?php
 
 class PlacesCategoriesController extends AdminController {
-	
+
 	public function placesCategories() {
 		return array(
 			'accessControl'
@@ -30,11 +30,11 @@ class PlacesCategoriesController extends AdminController {
 		$render = $_GET['ajax'] ? 'renderPartial' : 'render';
 		$this->$render('index');
 	}
-	
+
 	public function actionAdd() {
 		$this->actionEdit();
 	}
-	
+
 	public function actionEdit() {
 		$actionName = strtolower($this->action->id);
 		if ($category_id = (int) $_GET['category_id'] ? : null) {
@@ -54,6 +54,7 @@ class PlacesCategoriesController extends AdminController {
 			$PlacesCategoriesModel->attributes = $_POST['PlacesCategoriesModel'];
 			if ($PlacesCategoriesModel->validate()) {
 				$PlacesCategoriesModel->save(false);
+				//save places desc
 				foreach (LanguageModel::model()->enabled()->findAll() as $language) {
 					if (!$category_id) {
 						$PlacesCategoriesDescModel = new PlacesCategoriesDescModel;
@@ -65,6 +66,18 @@ class PlacesCategoriesController extends AdminController {
 						'category_id' => $PlacesCategoriesModel->category_id,
 							));
 					$PlacesCategoriesDescModel->save(false);
+				}
+				
+				//save places filter
+				$filters = $_POST["Filters"];
+				PlacesCategoriesToFiltersModel::model()->deleteAll('category_id=:category_id', array(':category_id' => $category_id));
+				for($i = 0; $i < count($filters); $i++){
+					$PlacesCategoriesToFiltersModel = new PlacesCategoriesToFiltersModel;
+					$PlacesCategoriesToFiltersModel->category_id = $category_id;
+					$PlacesCategoriesToFiltersModel->filter_id = $filters[$i];
+					$PlacesCategoriesToFiltersModel->save(false);
+					echo $filters[$i];
+					
 				}
 			}
 
@@ -88,10 +101,11 @@ class PlacesCategoriesController extends AdminController {
 				'content' => $this->renderPartial('_edit_desc', array('langCode' => $language->code, 'model' => $PlacesCategoriesModel->{$language->code}), true),
 			);
 		}
-
+		//var_dump($PlacesCategoriesToFiltersModel);
 		$this->render('edit', array(
 			'PlacesCategoriesModel' => $PlacesCategoriesModel,
-			'tabs' => $tabs
+			'tabs' => $tabs//,
+				//'PlacesCategoriesToFiltersModel' => $PlacesCategoriesToFiltersModel
 		));
 	}
 
@@ -106,4 +120,5 @@ class PlacesCategoriesController extends AdminController {
 		if (!$_GET['ajax'])
 			$this->redirect(array('PlacesCategories/index'));
 	}
+
 }

@@ -1,6 +1,5 @@
 <?php
 $lang = Yii::app()->getLanguage();
-
 $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider' => PlacesCategoriesModel::model()->search(),
 	'columns' => array(
@@ -8,7 +7,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 		array(
 			'name' => $lang . '.name',
 			'type' => 'raw',
-			'value' => 'CHtml::link($data->' . $lang . '->name, array("PlacesCategoriesValues/index", "PlacesCategoriesValuesModel[category_id]" => $data->category_id))'
+			'value' => '$data->' . $lang . '->name'
 		),
 		array(
 			'name' => $lang . '.description',

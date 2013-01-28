@@ -10,10 +10,14 @@ class PlacesCategoriesToFiltersModel extends CActiveRecord {
 		return parent::model($className);
 	}
 
+	public function rules() {
+		 array('category_id, filter_id', 'safe');
+	}
+	
 	public function tableName() {
 		return 'places_categories_to_filters';
 	}
-	
+
 	public function search() {
 		return new CActiveDataProvider($this);
 	}
