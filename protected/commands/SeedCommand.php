@@ -10,6 +10,9 @@ class SeedCommand extends CConsoleCommand {
 		$this->actionLanguages();
 		$this->actionUsers();
 		$this->actionFilters();
+		$this->actionPlacesCategories();
+		$this->actionPlacesCategoriesDesc();
+		$this->actionPlacesCategoriesToFilters();
 	}
 
 	public function actionLanguages() {
@@ -317,6 +320,7 @@ class SeedCommand extends CConsoleCommand {
 	}
 	
 	public function actionPlacesCategories() {
+		echo "Insert tests placesCategories ...\n";
 		$command = Yii::app()->db->createCommand();
 
 		$command->insert('places_categories', array(
@@ -333,6 +337,7 @@ class SeedCommand extends CConsoleCommand {
 	}
 	
 	public function actionPlacesCategoriesDesc() {
+		echo "Insert tests placesCategoriesDesc ...\n";
 		$command = Yii::app()->db->createCommand();
 
 		$command->insert('places_categories_desc', array(
@@ -399,6 +404,7 @@ class SeedCommand extends CConsoleCommand {
 		));
 	}	
 	public function actionPlacesCategoriesToFilters() {
+		echo "Insert tests placesCategoriesToFilters ...\n";
 		$command = Yii::app()->db->createCommand();
 
 		$command->insert('places_categories_to_filters', array(

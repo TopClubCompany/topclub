@@ -101,11 +101,28 @@ class PlacesCategoriesController extends AdminController {
 				'content' => $this->renderPartial('_edit_desc', array('langCode' => $language->code, 'model' => $PlacesCategoriesModel->{$language->code}), true),
 			);
 		}
-		//var_dump($PlacesCategoriesToFiltersModel);
+		
+		//FILTERS DATA
+		//array of selected filters of current category
+		$selectedFilters = array();
+		$categories = PlacesCategoriesToFiltersModel::model()->findAll('category_id=:category_id', array(':category_id' => $PlacesCategoriesModel->category_id));
+		foreach($categories as $filters){
+			$selectedFilters[$filters->filter_id] = array('selected' => 'selected');
+		}
+		//current language
+		$language_id = LanguageModel::model()->find('code=:code', array(':code' => Yii::app()->language))->language_id;
+		//return all localize filters
+		$filtersArray = CHtml::listData(
+				FiltersDescModel::model()->findAll('language_id=:language_id', array(':language_id' => $language_id)),
+				"filter_id", 
+				'name'
+		);
+		
 		$this->render('edit', array(
 			'PlacesCategoriesModel' => $PlacesCategoriesModel,
-			'tabs' => $tabs//,
-				//'PlacesCategoriesToFiltersModel' => $PlacesCategoriesToFiltersModel
+			'tabs' => $tabs,
+			'selectedFilters' => $selectedFilters,
+			'filtersArray' => $filtersArray,
 		));
 	}
 

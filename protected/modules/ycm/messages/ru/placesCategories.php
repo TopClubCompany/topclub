@@ -7,4 +7,5 @@ return array(
 	'Add category place' => 'Добавить категорию мест',
 	'Edit category place' => 'Редактировать категорию мест',
 	'Filters' => 'Фильтры',
+	'Choose filters' => 'Выберите фильтры',
 );

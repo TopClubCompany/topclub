@@ -30,6 +30,7 @@ class PlacesModel extends CActiveRecord {
 		return array(
 			'address' => Yii::t('YcmModule.places', 'Address'),
 			'place_id' => Yii::t('YcmModule.places', 'Place id'),
+			'category_id' => Yii::t('YcmModule.places', 'Category id'),
 			'url_title' => Yii::t('YcmModule.places', 'Url title'),
 			'status' => Yii::t('YcmModule.places', 'Status'),
 			'schedule' => Yii::t('YcmModule.places', 'Schedule'),
@@ -52,12 +53,13 @@ class PlacesModel extends CActiveRecord {
 	public function rules() {
 		return array(
 			array('url, status, schedule, street_number, phones', 'required'),
-			array('email, admin_phone, website, cost, order_discount, order_discount_banket, closed, lat, lng', 'safe'),
+			array('category_id, email, admin_phone, website, cost, order_discount, order_discount_banket, closed, lat, lng', 'safe'),
 		);
 	}
 
 	public function attributeWidgets() {
 		return array(
+			array('category_id', 'dropDown'),
 			array('url_title', 'textField'),
 			array('status', 'dropDown'),
 			array('schedule', 'textField'),
@@ -82,6 +84,15 @@ class PlacesModel extends CActiveRecord {
 			'0' => Yii::t('YcmModule.common', 'No'),
 			'1' => Yii::t('YcmModule.common', 'Yes'),
 		);
+	}
+	
+	public function category_idChoices() {
+		$language_id = LanguageModel::model()->find('code=:code', array(':code' => Yii::app()->language))->language_id;
+		return CHtml::listData(
+						PlacesCategoriesDescModel::model()->findAll('language_id=:language_id', array(':language_id' => $language_id)),
+				"category_id", 
+				'name'
+		);;
 	}
 
 	public function statusChoices() {

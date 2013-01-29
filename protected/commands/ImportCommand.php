@@ -384,6 +384,7 @@ class ImportCommand extends CConsoleCommand {
 
 			$command->insert('places', array(
 				'place_id' => $place['entry_id'],
+				'category_id' => null,
 				'url' => $place['url_title'],
 				'status' => $place['status'] == 'open' ? 1 : 0,
 				'schedule' => $place['schedule'],

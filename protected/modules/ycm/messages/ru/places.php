@@ -33,5 +33,6 @@ return array(
 	'Places photos' => 'Фотографии места',
 	'Add photos' => 'Добавить фотографии',
 	'Phones' => 'Телефоны',
-	'Please fix the following errors (tab: {language})' => 'Исправте следующие ошибки (вкладка: {language}):'
+	'Please fix the following errors (tab: {language})' => 'Исправте следующие ошибки (вкладка: {language}):',
+	'Category id' => 'Категория',
 );
