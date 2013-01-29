@@ -25,7 +25,7 @@ class PhotosModel extends CActiveRecord {
 			'user_id' => Yii::t('YcmModule.photos', 'User id'),
 			'title' => Yii::t('YcmModule.photos', 'Title'),
 			'url' => Yii::t('YcmModule.photos', 'Url'),
-			'photoPath' => Yii::t('YcmModule.photos', 'Photo Path'),
+			'filename' => Yii::t('YcmModule.photos', 'Photo Path'),
 			'album_date' => Yii::t('YcmModule.photos', 'Album date'),
 			'status' => Yii::t('YcmModule.photos', 'Status')
 		);
