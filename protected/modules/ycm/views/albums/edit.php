@@ -25,19 +25,13 @@ $this->module->createActiveWidget($form, $model, 'status');
 	"albums/show", "album_id" => $_GET["album_id"]
 	))."'>".Yii::t('YcmModule.albums', 'Add photos')."</a>";*/
 echo $this->module->getButtons();
-$this->renderPartial('_upload_photos', array(
-	'upload_photos' => $upload_photos,
-	'count_photos' => $count_photos,
-	'model' => $PhotosModel,
-	'user_id' => $user_id,
-	'url' => $url
-));
+	if($_GET["album_id"] && $_GET["album_id"] != ''){
+	$this->renderPartial('_upload_photos', array(
+		'upload_photos' => $upload_photos,
+		'count_photos' => $count_photos,
+		'model' => $PhotosModel,
+		'user_id' => $user_id,
+		'url' => $url
+	));
+}
 $this->endWidget();
-/*
-$this->renderPartial('_upload_photos', array(
-	'upload_photos' => $upload_photos,
-	'count_photos' => $count_photos,
-	'model' => $PhotosModel,
-	'user_id' => $user_id,
-	'url' => $url
-));*/

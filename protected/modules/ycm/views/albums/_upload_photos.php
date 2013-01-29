@@ -1,7 +1,4 @@
 <?php
-if($count_photos <= 0)
-	echo "<h3>Нет фоток</h3>";
-else {
 	//Create an instance of ColorBox
 	$colorbox = $this->widget('application.extensions.colorpowered.JColorBox');
  
@@ -19,13 +16,13 @@ else {
 					'width' => '100',
 					'height' => '100',
 				),
-				//'value' => '"/uploads/albums/".$data->album_id."/".$data->photoPath.""'
-				'value'=> 'CHtml::link(CHtml::image("/uploads/albums/".$data->album_id."/".$data->photoPath."", Yii::t(\'YcmModule.albums\', \'Album cover\'), array("width"=>100)), "/uploads/albums/".$data->album_id."/".$data->photoPath."", array("class"=>"colorbox"))'
+				//'value' => '"/uploads/albums/".$data->album_id."/".$data->filename.""'
+				'value'=> 'CHtml::link(CHtml::image("/uploads/albums/".$data->album_id."/".$data->filename."", Yii::t(\'YcmModule.albums\', \'Album cover\'), array("width"=>100)), "/uploads/albums/".$data->album_id."/".$data->filename."", array("class"=>"colorbox"))'
 			),
 			'photo_id',
 			'title',
 			'url',
-			'photoPath',
+			'filename',
 			array(
 				'class'=>'CButtonColumn',
 				'template' => '{delete}',
@@ -33,7 +30,7 @@ else {
 			),
 		)
 	));
-}
+
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id' => get_class($model) . '-id-form',
 	'type' => 'horizontal',
@@ -53,7 +50,7 @@ jQuery('#xupload-album-images').bind('fileuploaddestroyed', function(e, data) {
 });
 ", CClientScript::POS_READY);
 $this->widget('xupload.XUpload', array(
-	'url' => CHtml::normalizeUrl(array("albums/upload", "album_id" => $_GET["album_id"], "author_id" => $author_id)),
+	'url' => CHtml::normalizeUrl(array("albums/upload", "ID" => $_GET["album_id"], "user_id" => $user_id)),
 	'model' => $upload_photos,
 	'attribute' => 'file',
 	'multiple' => true,

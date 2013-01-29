@@ -13,7 +13,7 @@ class OwnerBehavior extends CActiveRecordBehavior {
 	public function beforeSave($event) {
 		if ($this->owner->getIsNewRecord()) {
 			$this->owner->{$this->created_by} = Yii::app()->user->id;
-		} {
+		} else {
 			$this->owner->{$this->updated_by} = Yii::app()->user->id;
 		}
 

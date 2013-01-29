@@ -13,7 +13,7 @@ $selectedValues = array();
 $categories = PlacesCategoriesToFiltersModel::model()->findAll('category_id=:category_id', array(':category_id' => $PlacesCategoriesModel->category_id));
 
 foreach($categories as $filters){
-	$selectedValues[$filters->filter_id] = Array('selected' => 'selected');
+	$selectedValues[$filters->filter_id] = array('selected' => 'selected');
 }
 
 

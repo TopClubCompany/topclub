@@ -12,8 +12,7 @@ class m130104_150041_create_table_filters_values extends CDbMigration {
 		$this->createIndex('filter_id', 'filters_values', 'filter_id');
 		$this->createIndex('filter_id_url', 'filters_values', 'filter_id,url', true);
 
-		//error find wtf?
-		//$this->addForeignKey('filter_id_fk', 'filters_values', 'filter_id', 'filters', 'filter_id', 'CASCADE', 'CASCADE');
+		$this->addForeignKey('filter_id_fk', 'filters_values', 'filter_id', 'filters', 'filter_id', 'CASCADE', 'CASCADE');
 	}
 
 	public function down() {
