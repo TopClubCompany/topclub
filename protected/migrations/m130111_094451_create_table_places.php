@@ -28,7 +28,7 @@ class m130111_094451_create_table_places extends CDbMigration {
 
 		$this->createIndex('created_by', 'places', 'created_by');
 		$this->createIndex('updated_by', 'places', 'updated_by');
-		$this->createIndex('category_id', 'places', 'category_id', true);
+		$this->createIndex('category_id', 'places', 'category_id');
 		$this->createIndex('url', 'places', 'url', true);
 		$this->addForeignKey('created_by_fk', 'places', 'created_by', 'users', 'user_id', 'CASCADE', 'SET NULL');
 		$this->addForeignKey('updated_by_fk', 'places', 'updated_by', 'users', 'user_id', 'CASCADE', 'SET NULL');

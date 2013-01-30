@@ -1,10 +1,4 @@
 <?php
-
-Yii::app()->clientScript->registerScript('category-filters', "jQuery('#PlacesModel_category_id').change(function(data) {
-		  console.log($(this).val());
-		  });
-		  ", CClientScript::POS_READY);
-
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id' => get_class($model) . '-id-form',
 	'type' => 'horizontal',
@@ -18,6 +12,9 @@ foreach (LanguageModel::model()->enabled()->findAll() as $language) {
 }
 
 $this->module->createActiveWidget($form, $model, 'category_id');
+/* filters block */
+$this->renderPartial('_chosen_filters');
+/* END filters block */
 $this->module->createActiveWidget($form, $model, 'url');
 $this->module->createActiveWidget($form, $model, 'status');
 $this->module->createActiveWidget($form, $model, 'schedule');
@@ -29,6 +26,9 @@ $this->module->createActiveWidget($form, $model, 'email');
 $this->module->createActiveWidget($form, $model, 'cost');
 $this->module->createActiveWidget($form, $model, 'lat');
 $this->module->createActiveWidget($form, $model, 'lng');
+/* MAP */
+$this->renderPartial('_map');
+/* END MAP */
 $this->module->createActiveWidget($form, $model, 'order_discount');
 $this->module->createActiveWidget($form, $model, 'order_discount_banket');
 $this->module->createActiveWidget($form, $model, 'closed');

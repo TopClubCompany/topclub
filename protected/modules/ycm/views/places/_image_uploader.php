@@ -15,7 +15,6 @@
 		$this->widget('xupload.XUpload', array(
 			'url' => CHtml::normalizeUrl(array("places/upload", "ID" => $model->place_id)),
 			'model' => $photos,
-			'id' => 'pizda',
 			'attribute' => 'file',
 			'multiple' => true,
 			//'showForm' => false,

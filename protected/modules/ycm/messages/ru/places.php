@@ -35,4 +35,6 @@ return array(
 	'Phones' => 'Телефоны',
 	'Please fix the following errors (tab: {language})' => 'Исправте следующие ошибки (вкладка: {language}):',
 	'Category id' => 'Категория',
+	'Choose {name}'  => 'Выберите {name}',
+	'Map' => 'Карта',
 );
