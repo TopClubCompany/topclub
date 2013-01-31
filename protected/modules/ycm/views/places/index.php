@@ -14,7 +14,9 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 		),
 		array(
 			'class'=>'CButtonColumn',
-			'template' => '{update}{delete}',
+			'template' => '{view}{update}{delete}',
+			'viewButtonUrl' => 'CHtml::normalizeUrl(array("places/showComments", "place_id" => $data->place_id))',
+			'viewButtonLabel' => Yii::t('YcmModule.places', 'Look comments'),
 			'updateButtonUrl' => 'CHtml::normalizeUrl(array("places/edit", "place_id" => $data->place_id))',
 			'deleteButtonUrl' => 'CHtml::normalizeUrl(array("places/delete", "place_id" => $data->place_id))',
 		),

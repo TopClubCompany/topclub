@@ -32,7 +32,9 @@ $this->renderPartial('_map');
 $this->module->createActiveWidget($form, $model, 'order_discount');
 $this->module->createActiveWidget($form, $model, 'order_discount_banket');
 $this->module->createActiveWidget($form, $model, 'closed');
-
+/* MAP */
+$this->renderPartial('_timetable');
+/* END MAP */
 $this->widget('bootstrap.widgets.TbTabs', array(
 	'type' => 'tabs',
 	'tabs' => $tabs,

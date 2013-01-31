@@ -1,7 +1,7 @@
 <div id="category_filters">
 	<div class="control-group">
-		<label class="control-label" for="PlacesCategoriesModel_filters">
-			<?php echo Yii::t('YcmModule.placesCategories', 'Filters') ?>
+		<label class="control-label" for="PlacesModel_filters">
+			<?php echo Yii::t('YcmModule.places', 'Filters') ?>
 		</label>
 		<div class="controls"></div>
 	</div>
@@ -10,6 +10,7 @@
 $this->widget('chosen.EChosenWidget');
 
 $url = CHtml::normalizeUrl(array('places/showFilters/place_id/'.$_GET["place_id"]));
+
 Yii::app()->clientScript->registerScript('category-filters', 
 		'
 		url = "'.$url.'/category_id/";
