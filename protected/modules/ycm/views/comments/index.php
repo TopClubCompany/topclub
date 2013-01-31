@@ -11,6 +11,10 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 			'value' => '$data->entry->title'
 		),
 		array(
+			'name' => 'comment',
+			'value' => '$data->comment',
+		),
+		array(
 			'name' => 'type',
 			'value' => '$data->getTypeChoice();',
 			'filter' => CHtml::activeDropDownList(

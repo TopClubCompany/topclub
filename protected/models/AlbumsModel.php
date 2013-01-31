@@ -31,7 +31,6 @@ class AlbumsModel extends CActiveRecord {
 	public function attributeWidgets() {
 		return array(
 			array('title', 'textField'),
-			//array('url', 'textField'),
 			array('place_id', 'dropDown'),
 			array('album_cover', 'textField'),
 			array('image', 'file'),

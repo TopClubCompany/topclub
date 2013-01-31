@@ -17,9 +17,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 				'width' => '100',
 				'height' => '100'
 			),
-			/*'value' => function ($data){
-				return preg_replace("/{filedir_1}/","http://topclub.ua/images/sized/images/uploads/", $data->album_cover);
-			}*/
 			'value' => 'CHtml::link(CHtml::image("/uploads/albums/".$data->album_id."/".$data->album_cover."", Yii::t(\'YcmModule.albums\', \'Album cover\'), array("width"=>100)), "/uploads/albums/".$data->album_id."/".$data->album_cover."", array("class"=>"colorbox"))'
 		),
 		'album_id',

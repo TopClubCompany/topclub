@@ -1,9 +1,6 @@
 <?php
 
 class PlacesModel extends CActiveRecord {
-
-	public $address;
-
 	/**
 	 * 
 	 * @param string $className
@@ -28,7 +25,6 @@ class PlacesModel extends CActiveRecord {
 
 	public function attributeLabels() {
 		return array(
-			'address' => Yii::t('YcmModule.places', 'Address'),
 			'place_id' => Yii::t('YcmModule.places', 'Place id'),
 			'category_id' => Yii::t('YcmModule.places', 'Category id'),
 			'url_title' => Yii::t('YcmModule.places', 'Url title'),
@@ -140,20 +136,6 @@ class PlacesModel extends CActiveRecord {
 	}
 
 	public function search() {
-		/* $criteria = new CDbCriteria();
-		  var_dump($_GET);die;
-		  if ($_GET['PlacesModel']) {
-		  if ($place_id = (int) $_GET['PlacesModel']['place_id'] ? : null) {
-		  $this->place_id = $place_id;
-		  $criteria->addCondition('place_id=:place_id');
-		  $criteria->params = array_merge($criteria->params, array(
-		  ':place_id' => $place_id
-		  ));
-		  }
-		  }
-		  return new CActiveDataProvider($this, array(
-		  'criteria' => $criteria
-		  )); */
 		return new CActiveDataProvider($this);
 	}
 	

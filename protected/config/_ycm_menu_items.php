@@ -38,6 +38,10 @@ return array(
 				)
 			),
 			array(
+				'label' => 'Публикации',
+				'url' => array('Articles/index')
+			),
+			array(
 				'label' => 'Комментарии',
 				'url' => array('Comments/index')
 			)

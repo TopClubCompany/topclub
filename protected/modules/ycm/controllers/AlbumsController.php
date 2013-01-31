@@ -67,34 +67,35 @@ class AlbumsController extends AdminController {
 					$extName = $image->getExtensionName();
 					$path = Yii::app()->getBasePath() . "/../uploads/albums/{$album_id}/";
 					$filename = $AlbumsModel->url . "_cover." . $extName;
-
+					
 					if (!is_dir($path)) {
 						mkdir($path);
 						chmod($path, 0777);
 					}
-					var_dump($filename);
+
 					if (is_file($image->getTempName())) {
 						if (rename($image->getTempName(), $path . $filename)) {
 							chmod($path . $filename, 0777);
 							$AlbumsModel->album_cover = $filename;
 							$AlbumsModel->save(false);
 						}
-					} else {
-						$AlbumsModel->save(false);
 					}
-
-					$this->ordering($album_id);
-					if ($_POST['_save']) {
-						$redirect = array('albums/index');
-					} else if ($_POST["_continue"]) {
-						$redirect = array('albums/edit', 'album_id' => $AlbumsModel->album_id);
-					} else if ($_POST['_addanother']) {
-						$redirect = array('albums/add');
-					}
-					$this->redirect($redirect);
+				} else {
+					$AlbumsModel->save(false);
 				}
+
+				$this->ordering($album_id);
+				if ($_POST['_save']) {
+					$redirect = array('albums/index');
+				} else if ($_POST["_continue"]) {
+					$redirect = array('albums/edit', 'album_id' => $AlbumsModel->album_id);
+				} else if ($_POST['_addanother']) {
+					$redirect = array('albums/add');
+				}
+				$this->redirect($redirect);
 			}
 		}
+
 		//count photos
 		$n = PhotosModel::model()->count('album_id=:album_id', array(':album_id' => $album_id));
 

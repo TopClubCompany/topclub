@@ -139,8 +139,9 @@ class CommentsModel extends CActiveRecord {
 				$criteria->params = array_merge($criteria->params, array(
 					':comment_id' => $comment_id
 				));
+				//$criteria->compare('comment_id', '=:'.$comment_id);
 			}
-			if($type = $_GET['CommentsModel']['type'] ? : null){
+			if($this->type = $type = $_GET['CommentsModel']['type'] ?: null){
 				$criteria->addCondition('type=:type');
 				$criteria->params = array_merge($criteria->params, array(
 					':type' => $type
@@ -152,12 +153,26 @@ class CommentsModel extends CActiveRecord {
 					':language_id' => $language_id
 				));
 			}
-			if($status = $_GET['CommentsModel']['status'] ? : null){
+			if($_GET['CommentsModel']['status'] !== ""){
+				$status = $_GET['CommentsModel']['status'];
 				$criteria->addCondition('status=:status');
 				$criteria->params = array_merge($criteria->params, array(
 					':status' => $status
 				));
 			}
+			/*if($comment = $_GET['CommentsModel']['comment'] ? : null){
+				$criteria->addCondition('comment LIKE "%:comment%"');
+				$criteria->params = array_merge($criteria->params, array(
+					':comment' => $comment
+				));
+			}*/
+		}
+		
+		if($place_id = $_GET["place_id"]){
+			$criteria->addCondition('entry_id=:entry_id');
+				$criteria->params = array_merge($criteria->params, array(
+					':entry_id' => $place_id
+				));
 		}
 		return new CActiveDataProvider($this, array(
 					'criteria' => $criteria

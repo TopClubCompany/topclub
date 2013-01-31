@@ -5,7 +5,7 @@
  *
  * @author tolyamba
  */
-class CommentsController extends AdminController {
+class ArticlesController extends AdminController {
 
 	public function filters() {
 		return array(
@@ -30,12 +30,12 @@ class CommentsController extends AdminController {
 
 	public function actionIndex() {
 		$this->breadcrumbs = array(
-			Yii::t('YcmModule.comments', 'Comments')
+			Yii::t('YcmModule.articles', 'Articles')
 		);
 		$render = $_GET['ajax'] ? 'renderPartial' : 'render';
-		$CommentsModel = new CommentsModel;
+		$ArticlesModel = new ArticlesModel;
 		$this->$render('index', array(
-			'CommentsModel' => $CommentsModel
+			'ArticlesModel' => $ArticlesModel
 		));
 	}
 
@@ -44,65 +44,77 @@ class CommentsController extends AdminController {
 	}
 
 	public function actionEdit() {
-		$comment_id = (int) $_GET['comment_id'] ? : null;
+		$article_id = (int) $_GET['article_id'] ? : null;
 		$this->breadcrumbs = array(
-			Yii::t('YcmModule.comments', 'Comments') => array('comments/index'),
+			Yii::t('YcmModule.articles', 'Articles') => array('articles/index'),
 		);
-		$this->buttons = $this->getFormButtons();
-
-		if ($comment_id) {
-			$this->buttons = array_merge($this->buttons, array(
-				array(
-					'buttonType' => 'link',
-					'label' => Yii::t('YcmModule.ycm', 'Delete'),
-					'url' => array(Yii::app()->controller->id . '/delete', 'comment_id' => $comment_id),
-					'htmlOptions' => array('name' => '_delete', 'value' => '1', 'style' => 'margin-left:10px;', 'class' => 'btn btn-danger')
-				)
-			));
-		}
-		if ($comment_id = (int) $_GET['comment_id'] ? : null) {
-			$CommentsModel = CommentsModel::model()->findByPk($comment_id);
-			$CommentsModel->setScenario('formupdate');
+		
+		if ($article_id = (int) $_GET['article_id'] ? : null) {
+			$ArticlesModel = ArticlesModel::model()->findByPk($article_id);
 			$this->breadcrumbs = array_merge($this->breadcrumbs, array(
-				Yii::t('YcmModule.comments', 'Edit comment')
+				Yii::t('YcmModule.articles', 'Edit article')
 					));
 		} else {
-			$CommentsModel = new CommentsModel('formupdate');
+			$ArticlesModel = new ArticlesModel();
 			$this->breadcrumbs = array_merge($this->breadcrumbs, array(
-				Yii::t('YcmModule.comments', 'Add comment')
-					));
+				Yii::t('YcmModule.articles', 'Add article')
+			));
 		}
-		if ($_POST['CommentsModel']) {
-			$CommentsModel->attributes = $_POST['CommentsModel'];
-			if ($CommentsModel->validate()) {
-				$CommentsModel->save(false);
-				if ($_POST['_save']) {
-					$redirect = array('comments/index');
-				} else if ($_POST['_addanother']) {
-					$redirect = array('comments/add');
-				} else if ($_POST['_continue']) {
-					$redirect = array('comments/edit', 'comment_id' => $CommentsModel->comment_id);
+		if ($_POST['ArticlesModel']) {
+			$ArticlesModel->attributes = $_POST['ArticlesModel'];
+			if ($ArticlesModel->validate()) {
+				if ($image = CUploadedFile::getInstance(ArticlesModel::model(), 'image')) {
+					$articleDir = $path = Yii::app()->getBasePath() . "/../uploads/articles/";
+					if (!is_dir($path)) {
+						mkdir($path);
+						chmod($path, 0777);
+					}
+					$extName = $image->getExtensionName();
+					$path = Yii::app()->getBasePath() . "/../uploads/articles/{$article_id}/";
+					$filename = $ArticlesModel->url . "_cover." . $extName;
+					
+					if (!is_dir($path)) {
+						mkdir($path);
+						chmod($path, 0777);
+					}
+
+					if (is_file($image->getTempName())) {
+						if (rename($image->getTempName(), $path . $filename)) {
+							chmod($path . $filename, 0777);
+							$ArticlesModel->pub_cover = $filename;
+							$ArticlesModel->save(false);
+						}
+					}
 				} else {
-					$redirect = array('comments/index');
+					$ArticlesModel->save(false);
+				}
+				if ($_POST['_save']) {
+					$redirect = array('articles/index');
+				} else if ($_POST['_addanother']) {
+					$redirect = array('articles/add');
+				} else if ($_POST['_continue']) {
+					$redirect = array('articles/edit', 'article_id' => $ArticlesModel->article_id);
+				} else {
+					$redirect = array('articles/index');
 				}
 				$this->redirect($redirect);
 			}
 		}
 		$this->render('edit', array(
-			'model' => $CommentsModel
+			'model' => $ArticlesModel,
 		));
 	}
 
 	public function actionDelete() {
-		if (!$comment_id = (int) $_GET['comment_id'] ? : null) {
+		if (!$article_id = (int) $_GET['article_id'] ? : null) {
 			throw new CHttpException(404);
 		}
-		if (!$CommentsModel = CommentsModel::model()->findByPk($comment_id)) {
+		if (!$ArticlesModel = ArticlesModel::model()->findByPk($article_id)) {
 			throw new CHttpException(404);
 		}
-		$CommentsModel->delete();
+		$ArticlesModel->delete();
 		if (!$_GET['ajax'])
-			$this->redirect(array('Comments/index'));
+			$this->redirect(array('Articles/index'));
 	}
 
 }

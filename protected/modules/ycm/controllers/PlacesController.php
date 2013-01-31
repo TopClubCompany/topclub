@@ -117,6 +117,19 @@ class PlacesController extends AdminController {
 			'photos' => $photos
 		));
 	}
+	
+	public function actionTimetablePopup(){
+		$this->renderPartial('_timetable_popup');
+	}
+
+	public function actionShowComments() {
+		$this->breadcrumbs = array(
+			Yii::t('YcmModule.places', 'Places') => array('places/index'),
+			Yii::t('YcmModule.places', 'Comments')
+		);
+		
+		$this->render('showComments');
+	}
 
 	public function actionShowFilters() {
 		if ($category_id = $_GET["category_id"]) {
@@ -167,7 +180,7 @@ class PlacesController extends AdminController {
 	private function selectedFilters($_filterId, $_place_id) {
 		$selectedFilters = array();
 		$filterPlace = PlacesCategoriesToFiltersValuesModel::model()->findAll('filter_id=:filter_id AND place_id=:place_id', array(':filter_id' => $_filterId, ':place_id' => $_place_id));
-		foreach($filterPlace as $filter){
+		foreach ($filterPlace as $filter) {
 			$selectedFilters[$filter->value_id] = array('selected' => 'selected');
 		}
 		return $selectedFilters;

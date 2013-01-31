@@ -493,7 +493,7 @@ class ImportCommand extends CConsoleCommand {
 	}
 
 	public function actionArticles() {
-		$q = "SELECT ecd.entry_id, author_id, title, url_title, ecd.field_id_20 AS pub_txt, ecd.field_id_21 AS pub_image, ecd.field_id_22 AS sub_header, ecd.field_id_34 AS video_type, ip_address, ect.status, year, month, day FROM exp_channel_data AS ecd JOIN exp_channel_titles AS ect ON ecd.entry_id = ect.entry_id WHERE ecd.channel_id = 2 ORDER BY ecd.entry_id";
+		$q = "SELECT ecd.entry_id, author_id, title, url_title, ecd.field_id_20 AS pub_txt, ecd.field_id_21 AS pub_image, ecd.field_id_22 AS sub_header, ip_address, ect.status, year, month, day, entry_date FROM exp_channel_data AS ecd JOIN exp_channel_titles AS ect ON ecd.entry_id = ect.entry_id WHERE ecd.channel_id = 2 ORDER BY ecd.entry_id";
 		$articles = Yii::app()->db2->createCommand($q)->queryAll();
 		$i = 0;
 		echo "Begin importing articles ...\n";
@@ -501,15 +501,16 @@ class ImportCommand extends CConsoleCommand {
 		foreach ($articles as $article) {
 			$command->insert('articles', array(
 				'article_id' => $article['entry_id'],
-				'author_id' => $article['author_id'],
 				'title' => $article['title'],
 				'url' => $article['url_title'],
 				'pub_txt' => $article['pub_txt'],
-				'pub_image' => $article['pub_image'],
+				'pub_cover' => preg_replace("/{filedir_\d+}/", "", $article['pub_image']),
 				'sub_header' => $article['sub_header'],
-				'video_type' => $article['video_type'],
 				'ip_address' => $article['ip_address'],
-				'pub_date' => $article['year'] . "-" . $article['month'] . "-" . $article['day'],
+				'created_at' => $created_at = date('Y-d-m h:i:s', $article['entry_date']),
+				'updated_at' => $created_at,
+				'created_by' => $article['author_id'],
+				'updated_by' => $article['author_id'],
 				'status' => $article['status'] == "open" ? 1 : 0
 
 			));
