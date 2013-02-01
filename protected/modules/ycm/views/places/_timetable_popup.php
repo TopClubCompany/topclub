@@ -1,27 +1,43 @@
-<div class="modal hide">
+<div class="modal hide" style="width: 300px">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3><p>Edit timetable ...</p></h3>
+    <h3><p><?php echo Yii::t('YcmModule.places', 'Edit timetable'); ?> ...</p></h3>
   </div>
   <div class="modal-body">
-    <p><table class="table table-striped table-bordered">
+    <p><table class="table table-striped table-bordered" data-json-update='<? if($timetable) echo true; else echo false; ?>'>
 	<thead>
-		<th>Day</th>
-		<th>Time period</th>
+		<th><?php echo Yii::t('YcmModule.places', 'Day'); ?></th>
+		<th><?php echo Yii::t('YcmModule.places', 'Schedule'); ?></th>
 	</thead>
 	<tbody>
-		<tr data-day="monday"><td><?php echo Yii::t('YcmModule.places', 'Monday'); ?></td><td name="edit_run">Running all day</td></tr>
-		<tr data-day="tuesday"><td><?php echo Yii::t('YcmModule.places', 'Tuesday'); ?></td><td name="edit_run">Running all day</td></tr>
-		<tr data-day="wednesday"><td><?php echo Yii::t('YcmModule.places', 'Wednesday'); ?></td><td name="edit_run">Running all day</td></tr>
-		<tr data-day="thursday"><td><?php echo Yii::t('YcmModule.places', 'Thursday'); ?></td><td name="edit_run">Running all day</td></tr>
-		<tr data-day="friday"><td><?php echo Yii::t('YcmModule.places', 'Friday'); ?></td><td name="edit_run">Running all day</td></tr>
-		<tr data-day="saturday"><td><?php echo Yii::t('YcmModule.places', 'Saturday'); ?></td><td name="edit_run">Running all day</td></tr>
-		<tr data-day="sunday"><td><?php echo Yii::t('YcmModule.places', 'Sunday'); ?></td><td name="edit_run">Running all day</td></tr>
+		<?php
+		$weekArr = array(
+			'monday' => 'Monday',
+			'tuesday' => 'Tuesday',
+			'wednesday' => 'Wednesday',
+			'thursday' => 'Thursday',
+			'friday' => 'Friday',
+			'saturday' => 'Saturday',
+			'sunday' => 'Sunday'
+		);
+		foreach ($weekArr as $key => $value) {
+			echo '<tr data-day="'.$key.'">
+				<td>'.Yii::t('YcmModule.places', $value).'</td>
+				<td name="edit_run">';
+				if(!$timetable[$key]['day_and_night']){
+					$time_to = $timetable[$key]["time_to"] == "Last client" ? "Last client" : preg_replace("/:00$/", "", $timetable[$key]["time_to"]);
+					echo preg_replace("/:00$/", "", $timetable[$key]["time_from"])." - ".$time_to;
+				} else { 
+					echo "24/7";
+				}
+			echo '</td></tr>';
+		}
+		?>
 	</tbody>
 </table></p>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn close">Close</a>
-    <a href="#" class="btn btn-primary">Save changes</a>
+    <a href="#" class="btn btn-primary" id="save_changes">Save changes</a>
   </div>
 </div>

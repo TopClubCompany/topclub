@@ -117,9 +117,72 @@ class PlacesController extends AdminController {
 			'photos' => $photos
 		));
 	}
-	
-	public function actionTimetablePopup(){
-		$this->renderPartial('_timetable_popup');
+
+	public function actionTimetablePopup() {
+		$place_id = $_POST["place_id"];
+		$placeTimetable = PlacesTimetableModel::model()->findAll('place_id=:place_id', array(':place_id' => $place_id));
+		if($placeTimetable){
+			$timetable = array();
+			foreach($placeTimetable as $placeSchedule){
+				$timetable[$placeSchedule->day] = array();
+				if($placeSchedule->day_and_night == 1)
+					$timetable[$placeSchedule->day]['day_and_night'] = "24/7";
+				else{
+					$timetable[$placeSchedule->day]['time_from'] = $placeSchedule->from;
+					$timetable[$placeSchedule->day]['time_to'] = $placeSchedule->to ? $placeSchedule->to : 'Last client';
+				}
+			}
+		} else {
+			$timetable = null;
+		}
+		$this->renderPartial('_timetable_popup', array(
+			'timetable' => $timetable
+		));
+	}
+
+	public function actionTimetableSave() {
+		$timetable = $_POST["timetable"]; //array
+		$place_id = $_POST["place_id"];
+		$weekArr = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
+		
+		$answer = "yes";
+		$this->clearPlaceTimetable($place_id);
+		for ($i = 0; $i < count($weekArr); $i++) {
+			if($timetable[$weekArr[$i]]["day_and_night"]){
+				$day_and_night = 1;
+				$from = null;
+				$to = null;
+				echo "Petro45";
+			} else if($timetable[$weekArr[$i]]["time_from"] && $timetable[$weekArr[$i]]["time_to"]){
+				$day_and_night = 0;
+				$from = $timetable[$weekArr[$i]]["time_from"].":00";
+				if($timetable[$weekArr[$i]]["time_to"] == "Last client")
+					$to = null;
+				else
+					$to = $timetable[$weekArr[$i]]["time_to"].":00";
+			} else {
+				$day_and_night = 1;
+				$from = null;
+				$to = null;
+			}
+			
+			$PlacesTimetableModel = new PlacesTimetableModel();
+			$PlacesTimetableModel->place_id = $place_id;
+			$PlacesTimetableModel->day = $weekArr[$i];
+			$PlacesTimetableModel->from = $from;
+			$PlacesTimetableModel->to = $to;
+			$PlacesTimetableModel->day_and_night = $day_and_night;
+			if(!$PlacesTimetableModel->save(false))
+				$answer = "no";
+		}
+		echo $answer;
+	}
+
+	public function clearPlaceTimetable($_place_id) {
+		$deletePlaceTimetable = PlacesTimetableModel::model()->findAll('place_id=:place_id', array(':place_id' => $_place_id));
+		if ($deletePlaceTimetable) {
+			PlacesTimetableModel::model()->deleteAll('place_id=:place_id', array(':place_id' => $_place_id));
+		}
 	}
 
 	public function actionShowComments() {
@@ -127,7 +190,7 @@ class PlacesController extends AdminController {
 			Yii::t('YcmModule.places', 'Places') => array('places/index'),
 			Yii::t('YcmModule.places', 'Comments')
 		);
-		
+
 		$this->render('showComments');
 	}
 

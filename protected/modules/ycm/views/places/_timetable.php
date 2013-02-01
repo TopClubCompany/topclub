@@ -4,7 +4,7 @@
 			<?php echo Yii::t('YcmModule.places', 'Timetable') ?>
 		</label>
 		<div class="controls">
-			<button class="btn btn-primary" data-toggle="modal" data-target="#show_popup_timetable"><?php echo Yii::t('YcmModule.places', 'Edit'); ?></button>
+			<button class="btn btn-primary" data-toggle="modal" data-target="#show_popup_timetable" data-place-id="<?php echo $_GET["place_id"]; ?>"><?php echo Yii::t('YcmModule.places', 'Edit'); ?></button>
 			<div id="timetable"></div>
 		</div>
 	</div>
