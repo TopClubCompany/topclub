@@ -75,6 +75,7 @@ class CDbCommand extends CComponent
 	private $_paramLog=array();
 	private $_query;
 	private $_fetchMode = array(PDO::FETCH_ASSOC);
+	public $_cacheKey;
 
 	/**
 	 * Constructor.
@@ -108,7 +109,7 @@ class CDbCommand extends CComponent
 		else
 			$this->setText($query);
 	}
-
+	
 	/**
 	 * Set the statement to null when serializing.
 	 * @return array
@@ -117,6 +118,15 @@ class CDbCommand extends CComponent
 	{
 		$this->_statement=null;
 		return array_keys(get_object_vars($this));
+	}
+	
+	/**
+	 * Rrturns query cache keys if that exists
+	 * @return mixed Returns query cache key or null
+	 */
+	public function getCacheKey() 
+	{
+		return $this->_cacheKey;
 	}
 
 	/**
@@ -489,6 +499,7 @@ class CDbCommand extends CComponent
 			$this->_connection->queryCachingCount--;
 			$cacheKey='yii:dbquery'.$this->_connection->connectionString.':'.$this->_connection->username;
 			$cacheKey.=':'.$this->getText().':'.serialize(array_merge($this->_paramLog,$params));
+			$this->_cacheKey = $cacheKey;
 			if(($result=$cache->get($cacheKey))!==false)
 			{
 				Yii::trace('Query result found in cache','system.db.CDbCommand');
