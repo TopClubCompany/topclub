@@ -69,13 +69,12 @@ class CDbCommand extends CComponent
 	 */
 	public $params=array();
 
-	private $_connection;
+	protected $_connection;
 	private $_text;
-	private $_statement;
-	private $_paramLog=array();
+	protected $_statement;
+	protected $_paramLog=array();
 	private $_query;
 	private $_fetchMode = array(PDO::FETCH_ASSOC);
-	public $_cacheKey;
 
 	/**
 	 * Constructor.
@@ -118,15 +117,6 @@ class CDbCommand extends CComponent
 	{
 		$this->_statement=null;
 		return array_keys(get_object_vars($this));
-	}
-	
-	/**
-	 * Rrturns query cache keys if that exists
-	 * @return mixed Returns query cache key or null
-	 */
-	public function getCacheKey() 
-	{
-		return $this->_cacheKey;
 	}
 
 	/**
@@ -475,7 +465,7 @@ class CDbCommand extends CComponent
 	 * their real data types, you have to use {@link bindParam} or {@link bindValue} instead.
 	 * @return mixed the method execution result
 	 */
-	private function queryInternal($method,$mode,$params=array())
+	protected function queryInternal($method,$mode,$params=array())
 	{
 		$params=array_merge($this->params,$params);
 
@@ -499,7 +489,6 @@ class CDbCommand extends CComponent
 			$this->_connection->queryCachingCount--;
 			$cacheKey='yii:dbquery'.$this->_connection->connectionString.':'.$this->_connection->username;
 			$cacheKey.=':'.$this->getText().':'.serialize(array_merge($this->_paramLog,$params));
-			$this->_cacheKey = $cacheKey;
 			if(($result=$cache->get($cacheKey))!==false)
 			{
 				Yii::trace('Query result found in cache','system.db.CDbCommand');
