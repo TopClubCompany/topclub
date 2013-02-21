@@ -21,10 +21,10 @@ return array(
 				), require(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_test_db.php')),
 		'db2' => array(
 			'class' => 'CDbConnection',
-			'connectionString' => 'mysql:host=89.184.69.32;dbname=topclub_3',
+			'connectionString' => 'mysql:host=88.198.11.137;dbname=topclub', //topclubuaimport:3HSDA3hJwTmREHCX@88.198.11.137
 			'emulatePrepare' => true,
-			'username' => 'u_sequel_pro',
-			'password' => '900dBrPP',
+			'username' => 'topclubuatm',
+			'password' => 'BY9EV4WhvADdyGfX',
 			'charset' => 'utf8',
 		),
 		'log' => array(
