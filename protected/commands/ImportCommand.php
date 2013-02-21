@@ -642,5 +642,25 @@ class ImportCommand extends CConsoleCommand {
 		}
 		echo "END importing comments!!!\n";
 	}
-
+	
+	public function actionRating() {
+		$q = "SELECT * FROM exp_starsrating ORDER BY starsrating_id ASC";
+		$ratings = Yii::app()->db2->createCommand($q)->queryAll();
+		$i = 0;
+		echo "Begin importing rating ...\n";
+		$command = Yii::app()->db->createCommand();
+		foreach ($ratings as $rating) {
+			$command->insert('starsrating', array(
+				'rating_id' => $rating['starsrating_id'],
+				'entry_id' => $rating['entry_id'],
+				'rating' => $rating['rating'],
+				'user_id' => $rating['member_id'],
+				'date' => $rating['date'],
+				'ip_address' => $rating['ip_address'],
+			));
+			$i++;
+			echo "Rating #{$i} imported\n";
+		}
+		echo "END importing rating!!!\n";
+	}
 }
