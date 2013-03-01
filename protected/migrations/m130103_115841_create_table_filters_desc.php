@@ -14,9 +14,9 @@ class m130103_115841_create_table_filters_desc extends CDbMigration {
 		$this->createIndex('filter_id', 'filters_desc', 'filter_id');
 		$this->createIndex('language_id', 'filters_desc', 'language_id');
 
-		$this->addForeignKey('filter_id_fk', 'filters_desc', 'filter_id', 'filters', 'filter_id', 'CASCADE', 'CASCADE');
+		$this->addForeignKey('filter_id_fd_fk', 'filters_desc', 'filter_id', 'filters', 'filter_id', 'CASCADE', 'CASCADE');
 
-		$this->addForeignKey('language_id_fk', 'filters_desc', 'language_id', 'languages', 'language_id', 'CASCADE', 'CASCADE');
+		$this->addForeignKey('language_id_fd_fk', 'filters_desc', 'language_id', 'languages', 'language_id', 'CASCADE', 'CASCADE');
 	}
 
 	public function down() {

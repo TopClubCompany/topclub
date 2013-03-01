@@ -12,7 +12,7 @@ class m130110_102238_create_table_filters_values_desc extends CDbMigration {
 		
 		$this->createIndex('value_id', 'filters_values_desc', 'value_id');
 		$this->createIndex('language_id', 'filters_values_desc', 'language_id');
-		$this->addForeignKey('filter_values_id_fk', 'filters_values_desc', 'value_id', 'filters_values', 'value_id', 'CASCADE', 'CASCADE');
+		$this->addForeignKey('filter_values_id_fvd_fk', 'filters_values_desc', 'value_id', 'filters_values', 'value_id', 'CASCADE', 'CASCADE');
 	}
 
 	public function down() {

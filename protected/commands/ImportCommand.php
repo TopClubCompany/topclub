@@ -592,7 +592,7 @@ class ImportCommand extends CConsoleCommand {
 				'user_id' => $photo['author_id'],
 				'title' => $photo['title'],
 				'url' => $photo['url_title'],
-				'photoPath' => $photoPath,
+				'filename' => $photoPath,
 				'ip_address' => $photo['ip_address'],
 				//'album_date' => $photo['year'] . "-" . $photo['month'] . "-" . $photo['day'],
 				'status' => $photo['status'] == "open" ? 1 : 0

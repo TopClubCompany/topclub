@@ -7,9 +7,9 @@ class SeedCommand extends CConsoleCommand {
 	}
 
 	public function actionIndex() {
-		$this->actionLanguages();
+		//$this->actionLanguages();
 		$this->actionUsers();
-		$this->actionFilters();
+		//$this->actionFilters();
 		$this->actionPlacesCategories();
 		$this->actionPlacesCategoriesDesc();
 		$this->actionPlacesCategoriesToFilters();
