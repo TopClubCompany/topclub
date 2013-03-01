@@ -21,7 +21,7 @@ return array(
 				), require(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_test_db.php')),
 		'db2' => array(
 			'class' => 'CDbConnection',
-			'connectionString' => 'mysql:host=88.198.11.137;dbname=topclub',
+			'connectionString' => 'mysql:host=88.198.11.137;dbname=topclub', //topclubuaimport:3HSDA3hJwTmREHCX@88.198.11.137
 			'emulatePrepare' => true,
 			'username' => 'topclubuatm',
 			'password' => 'BY9EV4WhvADdyGfX',

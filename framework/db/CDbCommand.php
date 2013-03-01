@@ -69,10 +69,10 @@ class CDbCommand extends CComponent
 	 */
 	public $params=array();
 
-	private $_connection;
+	protected $_connection;
 	private $_text;
-	private $_statement;
-	private $_paramLog=array();
+	protected $_statement;
+	protected $_paramLog=array();
 	private $_query;
 	private $_fetchMode = array(PDO::FETCH_ASSOC);
 
@@ -108,7 +108,7 @@ class CDbCommand extends CComponent
 		else
 			$this->setText($query);
 	}
-
+	
 	/**
 	 * Set the statement to null when serializing.
 	 * @return array
@@ -465,7 +465,7 @@ class CDbCommand extends CComponent
 	 * their real data types, you have to use {@link bindParam} or {@link bindValue} instead.
 	 * @return mixed the method execution result
 	 */
-	private function queryInternal($method,$mode,$params=array())
+	protected function queryInternal($method,$mode,$params=array())
 	{
 		$params=array_merge($this->params,$params);
 

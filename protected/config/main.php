@@ -43,6 +43,7 @@ return array(
 				'charset' => 'utf8',
 				'enableProfiling' => true,
 				'enableParamLogging' => true,
+				//'schemaCachingDuration' => 3600
 			), 
 			include(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_main_db.php')
 		),
